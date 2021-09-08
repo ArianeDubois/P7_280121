@@ -1,8 +1,8 @@
 <template>
 	<header>
 		<h1>{{ titleTxt }}</h1>
+		<router-link to="/login"> login </router-link>
 		<Button text="inscription" />
-		<Button @btn-click="$emit('show-form-connection')" text="connection" />
 	</header>
 </template>
 
@@ -21,6 +21,9 @@ export default {
 </script>
 
 <style scoped>
+a {
+	color: black;
+}
 header {
 	display: flex;
 	justify-content: center;
