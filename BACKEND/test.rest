@@ -18,13 +18,8 @@ Content-Type: application/json
 ###
 POST http://localhost:3000/auth/login
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXJzIjoyMCwiaWF0IjoxNjMxMTQyMjQ0LCJleHAiOjE2MzEyMjg2NDR9.X_l8mxxpFNvUCgjoqaoAmopovmAVrTAJQi9A-1V5sZY
-
 
 {
-    "idUsers":20,
-    "firstName": "jean",
-    "lastName": "michel",
     "email": "jm@orange.fr",
     "password": "jeanjean"
 } 
@@ -33,11 +28,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXJzIjoyMCwia
 ###
 POST http://localhost:3000/home/post
 Content-Type: application/json 
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXJzIjoyMCwiaWF0IjoxNjMxMTQyMjQ0LCJleHAiOjE2MzEyMjg2NDR9.X_l8mxxpFNvUCgjoqaoAmopovmAVrTAJQi9A-1V5sZY
 
 {     
-        "idUser": 10,
- 		"content": "salut la planète"
+        "idUser": 5,
+ 		"content": "salut Jean !"
 } 
 
 

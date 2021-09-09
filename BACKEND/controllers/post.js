@@ -14,6 +14,12 @@ exports.createPost = (req, res, next) => {
 		imageUrl: image,
 	};
 
+	// Post.findAll({
+	// 	include: [{ model: User }],
+	// })
+	// 	.then(() => res.status(201).json({ message: 'associations créee' }))
+	// 	.catch((error) => res.status(400).json({ error }));
+
 	Post.create(post)
 		.then(() => res.status(201).json({ message: 'Message envoyé!' }))
 		.catch((error) => res.status(400).json({ error }));
@@ -38,7 +44,7 @@ exports.deletePost = (req, res, next) => {
 exports.likePost = (req, res, next) => {
 	Post.findOne({ where: { idPost: req.params.id } })
 		.then((post) => {
-			Post.increment(post.likes);
+			if (!user) Post.increment(post.likes);
 		})
 		.then(() => res.status(200).json({ message: 'Post liké' }));
 };

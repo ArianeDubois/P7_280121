@@ -4,16 +4,37 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const User = require('./models/User');
+const Post = require('./models/Post');
+const Comment = require('./models/Comment');
 const sequelize = require('./models/dbConnection');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
+
+//ASSOCIATION
+
+Post.belongsTo(User, { foreignKey: 'idUsers', as: 'idUser' });
+
+Post.hasMany(Comment, { foreignKey: 'idComment' });
+
+User.hasMany(Post, { foreignKey: 'idPost' });
+
+User.hasMany(Comment, { foreignKey: 'idComment' });
+
+// Post.belongsTo(sequelize.models.User, { foreignKey: 'idUser' });
+Comment.belongsTo(User, { foreignKey: 'idUsers' });
+
+// Post.belongsTo(sequelize.User, { foreignKey: 'idUser' });
+Comment.belongsTo(Post, { foreignKey: 'idPost' });
 
 // test de connection sequelize
 sequelize
 	.authenticate()
 	.then(() => {
 		console.log('Connection has been established successfully.');
+	})
+	.then(() => {
+		sequelize.sync({ force: true });
 	})
 	.catch((err) => {
 		console.error('Unable to connect to the database:', err);

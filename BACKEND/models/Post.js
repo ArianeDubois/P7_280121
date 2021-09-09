@@ -3,34 +3,15 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 const User = require('./User');
 const Comment = require('./Comment');
 class Post extends Model {
-	// getFullname() {
-	// 	return [this.firstname, this.lastname].join(' ');
-	// }
+	static associate(models) {
+		models.Post.belongsTo(models.User, { foreignKey: 'idUsers', as: 'idUser' });
+	}
 }
 Post.init(
 	{
-		idPost: {
-			type: DataTypes.INTEGER,
-			primaryKey: true,
-			autoIncrement: true,
-		},
-		idUser: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-			references: {
-				model: 'User',
-				key: 'usersId',
-			},
-		},
-
 		content: {
 			type: DataTypes.TEXT,
 			allowNull: false,
-		},
-
-		likes: {
-			type: DataTypes.INTEGER,
-			defaultValue: 5,
 		},
 
 		imageUrl: {
@@ -50,15 +31,6 @@ Post.init(
 
 // User.hasMany(Post, {foreignKey: 'user_id'}) Post.belongsTo(User, {foreignKey: 'user_id'}) Post.find({ where: { ...}, include: [User]})
 
-Post.associate = (models) => {
-	// Post.belongsTo(sequelize.models.User, { foreignKey: 'idUser' });
-	Post.belongsTo(models.User, { foreignKey: 'idUsers' });
-};
-
-Post.associate = (models) => {
-	// Post.belongsTo(sequelize.models.User, { foreignKey: 'idUser' });
-	Post.hasMany(models.Comment, { foreignKey: 'idComment' });
-};
 // Post.findAll({
 // 	include: [
 // 		{

@@ -8,12 +8,6 @@ class User extends Model {
 }
 User.init(
 	{
-		idUsers: {
-			type: DataTypes.INTEGER,
-			primaryKey: true,
-			autoIncrement: true,
-		},
-
 		firstName: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -47,16 +41,6 @@ User.init(
 
 module.exports = User;
 
-const Post = require('./Post');
-const Comment = require('./Comment');
-
-User.associate = (models) => {
-	User.hasMany(models.Post, { foreignKey: 'idPost' });
-};
-
-User.associate = (models) => {
-	User.hasMany(models.Comment, { foreignKey: 'idComment' });
-};
 // User.findAll({
 // 	include: [
 // 		{
