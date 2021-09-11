@@ -32,23 +32,11 @@ User.init(
 			type: DataTypes.TEXT,
 			// allowNull defaults to true
 		},
+		isAdmin: {
+			type: DataTypes.BOOLEAN,
+		},
 	},
 	{ modelName: 'User', sequelize }
 );
 
-// Example:
-// Post.build({ firstname: 'foo', lastname: 'bar' }).getFullname(); // 'foo bar'
-
 module.exports = User;
-
-// User.findAll({
-// 	include: [
-// 		{
-// 			model: Post,
-// 		},
-// 	],
-// })
-// 	.then((user) => {
-// 		console.log(user);
-// 	})
-// 	.catch((error) => res.status(400).json({ error }));

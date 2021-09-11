@@ -1,17 +1,13 @@
-GET http://localhost:3000/home/post
-Content-Type: application/json
-
-
 
 ###
 POST http://localhost:3000/auth/signup
 Content-Type: application/json 
 
 {
-    "firstName": "jean",
-    "lastName": "michel",
-    "email": "jm@orange.fr",
-    "password": "jeanjean"
+    "firstName": "john",
+    "lastName": "doe",
+    "email": "jid@mail.fr",
+    "password": "hey"
 } 
 
 
@@ -20,45 +16,94 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "jm@orange.fr",
-    "password": "jeanjean"
+      "email": "test@mail.fr",
+    "password": "mariemarie"
 } 
+
+// POST
+###
+GET http://localhost:3000/home/post
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
 
 
 ###
 POST http://localhost:3000/home/post
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXJzIjoyMCwiaWF0IjoxNjMxMTQyMjQ0LCJleHAiOjE2MzEyMjg2NDR9.X_l8mxxpFNvUCgjoqaoAmopovmAVrTAJQi9A-1V5sZY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
 
-{     
-        "idUser": 5,
- 		"content": "salut Jean !"
+{       
+        "idUser": 4,
+ 		"content": "cio!"
 } 
 
 
 ###
-DELETE  http://localhost:3000/home/post/31
+DELETE  http://localhost:3000/home/post/23
 Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
 
+{
+    "idUser": 4
+}
 
 
 // COMMENTS
 
 ###
-POST  http://localhost:3000/home/post/1
+POST  http://localhost:3000/home/post/22
 Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
 
 {     
-        "idUser": 12,
- 		"content": "Bienvenue"
+        "idUser": 4,
+ 		"content": "je commente ce post"
 } 
 
 ###
-GET  http://localhost:3000/home/post/10/comment
+GET  http://localhost:3000/home/post/22/comment
 Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
 
 
 
 ###
-DELETE  http://localhost:3000/home/comment/7
+DELETE  http://localhost:3000/home/comment/10
 Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+{
+    "idUser": 4
+}
+
+
+//PROFIL
+###
+GET  http://localhost:3000/home/profil
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+###
+GET  http://localhost:3000/home/profil/4
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+
+###
+PUT  http://localhost:3000/home/profil/2
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+{
+        "idUser": 2,
+        "lastName": "jean"
+} 
+
+###
+DELETE  http://localhost:3000/home/profil/2
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+{
+    "idUser": 2
+} 

@@ -13,19 +13,12 @@ const commentRoutes = require('./routes/comment');
 
 //ASSOCIATION
 
-Post.belongsTo(User, { foreignKey: 'idUsers', as: 'idUser' });
-
-Post.hasMany(Comment, { foreignKey: 'idComment' });
-
 User.hasMany(Post, { foreignKey: 'idPost' });
-
 User.hasMany(Comment, { foreignKey: 'idComment' });
-
-// Post.belongsTo(sequelize.models.User, { foreignKey: 'idUser' });
-Comment.belongsTo(User, { foreignKey: 'idUsers' });
-
-// Post.belongsTo(sequelize.User, { foreignKey: 'idUser' });
-Comment.belongsTo(Post, { foreignKey: 'idPost' });
+Post.belongsTo(User, { foreignKey: { name: 'idUser', allowNull: false }, onDelete: 'CASCADE' });
+Post.hasMany(Comment, { foreignKey: 'idComment' });
+Comment.belongsTo(User, { foreignKey: { name: 'idUser', allowNull: false } });
+Comment.belongsTo(Post, { foreignKey: { name: 'idPost', allowNull: false }, onDelete: 'CASCADE' }); // si on supriome Post on suprrime ses commentaire
 
 // test de connection sequelize
 sequelize
@@ -33,9 +26,9 @@ sequelize
 	.then(() => {
 		console.log('Connection has been established successfully.');
 	})
-	.then(() => {
-		sequelize.sync({ force: true });
-	})
+	// .then(() => {
+	// 	sequelize.sync({ force: true }); //synchronisation db
+	// })
 	.catch((err) => {
 		console.error('Unable to connect to the database:', err);
 	});
@@ -57,6 +50,7 @@ app.use(bodyParser.json());
 app.use('/auth', userRoutes);
 app.use('/home', postRoutes);
 app.use('/home', commentRoutes);
+app.use('/home', userRoutes);
 
 //IMAGES
 app.use('/images', express.static(path.join(__dirname, 'images'))); // gère les req images.

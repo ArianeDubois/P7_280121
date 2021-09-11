@@ -9,6 +9,15 @@ class Post extends Model {
 }
 Post.init(
 	{
+		idUser: {
+			type: DataTypes.INTEGER,
+			references: {
+				model: User,
+				key: 'id',
+			},
+			allowNull: false,
+		},
+
 		content: {
 			type: DataTypes.TEXT,
 			allowNull: false,
@@ -17,30 +26,7 @@ Post.init(
 		imageUrl: {
 			type: DataTypes.STRING,
 		},
-
-		date: {
-			type: DataTypes.DATE,
-			// allowNull defaults to true
-		},
 	},
 	{ modelName: 'Post', sequelize }
 );
-
-// Example:
-// Post.build({ content: 'hello', lastname: 'bar' }).getFullname(); // 'foo bar'
-
-// User.hasMany(Post, {foreignKey: 'user_id'}) Post.belongsTo(User, {foreignKey: 'user_id'}) Post.find({ where: { ...}, include: [User]})
-
-// Post.findAll({
-// 	include: [
-// 		{
-// 			model: User,
-// 		},
-// 	],
-// })
-// 	.then((user) => {
-// 		res.status(200).json(user);
-// 	})
-// 	.catch((error) => res.status(400).json({ error }));
-
 module.exports = Post;
