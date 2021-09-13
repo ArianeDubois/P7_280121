@@ -1,12 +1,11 @@
 <template>
-	<!-- ici le v-bind sert à poser une condition et rendre dynamique la classe -->
-	<!-- ? si la conditoin est vrai applique la classe reminder sinon rien, applqie dans tout les cas la classe post  -->
-	<div :class="[post.reminder ? 'like' : '', 'post']">
-		<h3>
-			{{ post.text }}
-			<i @click="onLike(post.id)" class="far fa-thumbs-up"></i>
-		</h3>
-		<p>{{ post.day }}</p>
+	<!-- si l'user id du post = user id de la demande => v-show cross  -->
+	<div class="post">
+		<h2>
+			{{ post.userId }}
+		</h2>
+		<p>{{ post.content }}</p>
+		<i @click="onDelete(post.id)" class="fas fa-times"></i>
 	</div>
 </template>
 
@@ -17,8 +16,8 @@ export default {
 		post: Object,
 	},
 	methods: {
-		onLike(id) {
-			this.$emit('like-post', id);
+		onDelete(id) {
+			this.$emit('delete-post', id);
 		},
 	},
 };

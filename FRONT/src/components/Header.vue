@@ -1,8 +1,8 @@
 <template>
 	<header>
 		<h1>{{ titleTxt }}</h1>
-		<router-link to="/login"> login </router-link>
 		<Button text="inscription" />
+		<Button text="connection" />
 	</header>
 </template>
 

@@ -12,14 +12,37 @@
 
 			<input type="submit" value="Connection" class="btn" />
 		</form>
-		<router-link to="/">Go Back</router-link>
 	</div>
 </template>
 
 <script>
 export default {
 	name: 'Login',
+
+	data() {
+		return {
+			mail: '',
+			password: '',
+		};
+	},
+	//get user id mounted()
+	methods: {
+		onSubmi(e) {
+			e.preventDefault();
+
+			const User = {
+				mail: this.mail,
+				password: this.password,
+			};
+			console.log(User);
+			//fetch
+		},
+	},
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+form {
+	margin: 30px;
+}
+</style>
