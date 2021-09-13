@@ -6,7 +6,7 @@
 			<Signup />
 			<Login />
 			<CreatePost @create-post="createPost" />
-			<Posts @delete-post="deletePost" v-bind:posts="posts" />
+			<Posts @delete-post="deletePost" v-bind:posts="posts" @create-comment="createComment" />
 		</div>
 	</div>
 </template>
@@ -44,6 +44,11 @@ export default {
 				this.posts = this.posts.filter((post) => post.id !== id); // compare les id post de la db avec l'id envoyer
 			}
 		},
+
+		createComment(comment) {
+			// this.posts.comments = [...this.posts.comments, comment];
+			this.posts = [...this.posts.comments, comment];
+		},
 	},
 
 	created() {
@@ -53,12 +58,14 @@ export default {
 				userId: 3,
 				content: 'salut la planète',
 				imageUrl: '',
+				comments: ['saluuuut!', 'yo'],
 			},
 			{
 				id: 2,
 				userId: 7,
 				content: 'hello world',
 				imageUrl: '',
+				comments: '',
 			},
 		];
 	},

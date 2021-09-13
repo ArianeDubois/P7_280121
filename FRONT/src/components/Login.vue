@@ -27,7 +27,7 @@ export default {
 	},
 	//get user id mounted()
 	methods: {
-		onSubmi(e) {
+		onSubmit(e) {
 			e.preventDefault();
 
 			const User = {

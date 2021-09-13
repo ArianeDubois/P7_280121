@@ -6,13 +6,18 @@
 			<!-- affihce le texte de cahque post -->
 			<!-- <h3>{{ post.content }}</h3>
 			<p>{{ post.userId }}</p> -->
-			<Post @delete-post="$emit('delete-post', post.id)" :post="post" />
+			<Post
+				@delete-post="$emit('delete-post', post.id)"
+				@create-post="$emit('create-post', comment)"
+				:post="post"
+			/>
 		</div>
 	</div>
 </template>
 
 <script>
 import Post from './Post.vue';
+
 export default {
 	name: 'Posts',
 	props: {
