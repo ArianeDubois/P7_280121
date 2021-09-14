@@ -3,7 +3,7 @@
 		<form @submit="onSubmit">
 			<div>
 				<label>Mail</label>
-				<input type="email" v-model="mail" name="mail" placeholder="email@mail.fr" />
+				<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
 			</div>
 			<div>
 				<label>Password</label>
@@ -21,21 +21,45 @@ export default {
 
 	data() {
 		return {
-			mail: '',
+			email: '',
 			password: '',
 		};
 	},
 	//get user id mounted()
 	methods: {
+		// async fetchLogin() {
+		// 	const res = await fetch('http://localhost:3000/home/login');
+		// 	const data = await res.json();
+		// 	return data;
+		// },
+
 		onSubmit(e) {
 			e.preventDefault();
 
 			const User = {
-				mail: this.mail,
+				email: this.email,
 				password: this.password,
 			};
-			console.log(User);
+			const options = {
+				method: 'POST',
+				body: JSON.stringify(User),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			// console.log(User, options);
 			//fetch
+
+			fetch('http://localhost:3000/home/login', options)
+				.then((res) => res.json())
+				.then((res) => {
+					// if(res.idUser == res.token )
+					localStorage.setItem('idUser', res.idUser);
+					localStorage.setItem('token', res.token);
+					console.log(localStorage);
+				})
+				.catch((error) => console.log(error));
 		},
 	},
 };

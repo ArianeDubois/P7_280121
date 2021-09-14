@@ -4,7 +4,7 @@
 	<div>
 		<div class="post">
 			<h2>
-				{{ post.userId }}
+				{{ post.idUser }}
 			</h2>
 			<p>{{ post.content }}</p>
 			<i @click="onDelete(post.id)" class="fas fa-times"></i>
@@ -29,10 +29,8 @@ export default {
 	},
 	methods: {
 		onDelete(id) {
-			console.log(this.post);
 			this.$emit('delete-post', id);
 		},
-		emits: ['create-comment'],
 	},
 };
 </script>
@@ -46,10 +44,7 @@ export default {
 	padding: 1.5rem;
 	border-radius: 1rem;
 	margin: 30px auto auto auto;
-}
-
-.like {
-	color: red;
+	box-shadow: 10px, 5px, 20px, black;
 }
 </style>
 

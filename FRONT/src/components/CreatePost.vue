@@ -17,7 +17,7 @@ export default {
 	data() {
 		return {
 			content: '',
-			userId: '',
+			idUser: '',
 			imageUrl: '',
 		};
 	},
@@ -31,17 +31,17 @@ export default {
 			// 	return;
 			// }
 			const newPost = {
-				id: Math.floor(Math.random() * 100000),
+				// id: Math.floor(Math.random() * 100000),
 				content: this.content,
-				userId: this.userId,
-				//userId =req.userId
+				idUser: JSON.parse(localStorage.getItem('idUser')),
+				// userId = req.userId
 				imageUrl: this.imageUrl,
 			};
 
 			this.$emit('create-post', newPost);
-			console.log(newPost);
+			// console.log(newPost);
 			// this.content = '';
-			// this.userId = '';
+			// this.idUser = '';
 			// this.imageUrl = '';
 
 			//fetch

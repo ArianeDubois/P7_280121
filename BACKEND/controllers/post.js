@@ -40,14 +40,32 @@ exports.getAllPosts = (req, res, next) => {
 		.catch((error) => res.status(400).json({ error }));
 };
 
+// exports.deletePost = (req, res, next) => {
+// 	Post.findOne({ where: { id: req.params.id } }) // on récupère le post dans la db (id=routeurl)
+// 		//rajouter not null pour userId
+// 		.then((post) => {
+// 			if (!post) {
+// 				return res.status(400).json({ message: 'post introuvable' });
+// 			} else if (req.body.idUser.isAdmin == true || post.idUser == req.body.idUser) {
+// 				Post.destroy({ where: { id: req.params.id, idUser: req.body.idUser } })
+// 					.then(() => res.status(200).json({ message: 'Post supprimé' }))
+// 					.catch((error) => res.status(401).json({ error }));
+// 			} else {
+// 				return res
+// 					.status(400)
+// 					.json({ message: "vous n'êtes pas autorisez à supprimer ce post" });
+// 			}
+// 		})
+// 		.catch((error) => res.status(500).json({ error }));
+// };
 exports.deletePost = (req, res, next) => {
 	Post.findOne({ where: { id: req.params.id } }) // on récupère le post dans la db (id=routeurl)
 		//rajouter not null pour userId
 		.then((post) => {
 			if (!post) {
 				return res.status(400).json({ message: 'post introuvable' });
-			} else if (req.body.idUser.isAdmin == true || post.idUser == req.body.idUser) {
-				Post.destroy({ where: { id: req.params.id, idUser: req.body.idUser } })
+			} else if (post) {
+				Post.destroy({ where: { id: req.params.id } })
 					.then(() => res.status(200).json({ message: 'Post supprimé' }))
 					.catch((error) => res.status(401).json({ error }));
 			} else {

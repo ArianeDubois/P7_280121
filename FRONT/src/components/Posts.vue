@@ -26,7 +26,7 @@ export default {
 	components: {
 		Post,
 	},
-	emits: ['delete-post', 'create-comment'],
+	emits: ['delete-post'],
 };
 </script>
 

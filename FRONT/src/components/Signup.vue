@@ -3,7 +3,7 @@
 		<form @submit="onSubmit">
 			<div>
 				<label>Firstname</label>
-				<input type="text" v-model="firstname" name="firstname" />
+				<input type="text" v-model="firstName" name="firstName" />
 			</div>
 			<div>
 				<label>LastName</label>
@@ -11,7 +11,7 @@
 			</div>
 			<div>
 				<label>Mail</label>
-				<input type="email" v-model="mail" name="mail" placeholder="email@mail.fr" />
+				<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
 			</div>
 			<div>
 				<label>Password</label>
@@ -33,9 +33,9 @@ export default {
 	name: 'Signup',
 	data() {
 		return {
-			firstname: '',
+			firstName: '',
 			lastName: '',
-			mail: '',
+			email: '',
 			password: '',
 			biographie: '',
 		};
@@ -45,15 +45,33 @@ export default {
 			e.preventDefault();
 			//alert champs null
 			const newUser = {
-				firstname: this.firstname,
+				firstName: this.firstName,
 				lastName: this.lastName,
-				mail: this.mail,
+				email: this.email,
 				password: this.password,
 				biographie: this.biographie,
 			};
 
-			console.log(newUser);
+			// console.log(newUser);
 			//fetch
+
+			const options = {
+				method: 'POST',
+				body: JSON.stringify(newUser),
+				headers: {
+					'Content-Type': 'application/json',
+				},
+			};
+
+			// console.log(User, options);
+			//fetch
+
+			fetch('http://localhost:3000/home/signup', options)
+				.then((res) => res.json())
+				.then((res) => {
+					console.log(res);
+				})
+				.catch((error) => console.log(error));
 		},
 	},
 };

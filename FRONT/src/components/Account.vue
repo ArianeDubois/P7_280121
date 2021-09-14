@@ -1,5 +1,7 @@
 <template>
 	<div>
+		<!-- on submit ubdate -->
+		<!-- faire un place holder dynamique avec un fetch sur mes donnée  -->
 		<form @submit="onSubmit">
 			<div>
 				<label>Firstname</label>
@@ -23,7 +25,7 @@
 				<input type="text" v-model="biographie" name="biographie" />
 			</div>
 
-			<input type="submit" value="Inscription" class="btn" />
+			<input type="submit" value="MODIFIER" class="btn" />
 		</form>
 	</div>
 </template>

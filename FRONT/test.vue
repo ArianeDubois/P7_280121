@@ -13,7 +13,7 @@ export default {
 
 	data() {
 		return {
-			userId: '',
+			idUser: '',
 			content: '',
 		};
 	},
@@ -23,7 +23,7 @@ export default {
 			e.preventDefault();
 
 			const comment = {
-				userId: this.userId,
+				idUser: this.idUser,
 				content: this.content,
 			};
 

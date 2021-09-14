@@ -34,42 +34,56 @@ export default {
 	},
 	methods: {
 		//data posts = les posts existant + newPost
-		createPost(newPost) {
-			this.posts = [...this.posts, newPost];
+		async createPost(newPost) {
+			const res = await fetch('http://localhost:3000/home/post', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
+				},
+				body: JSON.stringify(newPost),
+			});
+			this.posts = [...this.posts, res.json()];
 		},
 
-		deletePost(id) {
+		async deletePost(id) {
 			if (confirm('are you sure ?')) {
 				console.log(id);
-				this.posts = this.posts.filter((post) => post.id !== id); // compare les id post de la db avec l'id envoyer
+				const res = await fetch(`http://localhost:3000/home/post/${id}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer ' + localStorage.getItem('token'),
+					},
+					// body: { idUser: JSON.parse(localStorage.getItem('idUser')) },
+				});
+				console.log(res);
+				if (res.status === 200) {
+					this.posts = this.posts.filter((post) => post.id !== id); // compare les id post de la db avec l'id envoyer
+				} else {
+					alert('error on deleting post');
+				}
 			}
+		},
+
+		async fetchPosts() {
+			const res = await fetch('http://localhost:3000/home/post', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
+				},
+			});
+			//	body:
+			//mount
+			const data = await res.json();
+			return data;
 		},
 	},
 
-	created() {
-		this.posts = [
-			{
-				id: 1,
-				userId: 3,
-				content: 'salut la planète',
-				imageUrl: '',
-				comments: [{ content: 'saluuuut!' }, { content: 'yo' }],
-			},
-			{
-				id: 2,
-				userId: 7,
-				content: 'hello world',
-				imageUrl: '',
-				comments: [],
-			},
-		];
+	async created() {
+		this.posts = await this.fetchPosts();
 	},
-
-	// async fetchPosts(){
-	// 	const res= await fetch('http//api')
-	// 	const dara = await res.json()
-	// 	return data
-	// }
 };
 </script>
 
