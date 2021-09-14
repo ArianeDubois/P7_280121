@@ -8,25 +8,20 @@
 			</div>
 			<input type="submit" value="Commenter" class="btn" />
 		</form>
-		<!-- affichage listComments -->
 
-		<div v-for="comment in comments" :key="comment.id">
+		<!-- affichage de la liste des commentaires-->
+		<div v-for="comment in post.comments" :key="comment.id">
 			<p>{{ comment.content }}</p>
 		</div>
 	</div>
+	<!-- </div> -->
 </template>
 <script>
 export default {
 	name: 'Comment',
-	data() {
-		return {
-			// comment: '',
-			comments: [],
-		};
-	},
-	//undifined
+	//recupère liste des précedents posts
 	props: {
-		postId: Number,
+		post: Object,
 	},
 
 	//get user id mounted()
@@ -34,14 +29,13 @@ export default {
 		onSubmit(e) {
 			e.preventDefault();
 
-			const commentContent = {
+			const newComment = {
 				id: Math.floor(Math.random() * 100000),
 				content: this.content,
-				postId: this.postId,
 			};
 
-			console.log(commentContent);
-			this.comments = [...this.comments, commentContent];
+			console.log(this.$props.post.comments);
+			this.$props.post.comments = [...this.$props.post.comments, newComment];
 			//fetch post
 		},
 	},

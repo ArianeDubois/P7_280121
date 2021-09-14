@@ -12,7 +12,8 @@
 				<h3>{{ comment.content }}</h3>
 			</div> -->
 		</div>
-		<Comment />
+
+		<Comment :post="post" />
 	</div>
 </template>
 
@@ -28,8 +29,10 @@ export default {
 	},
 	methods: {
 		onDelete(id) {
+			console.log(this.post);
 			this.$emit('delete-post', id);
 		},
+		emits: ['create-comment'],
 	},
 };
 </script>
