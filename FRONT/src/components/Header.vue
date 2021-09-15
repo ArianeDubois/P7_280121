@@ -5,7 +5,7 @@
 		<Button @click="deconnectUser" text="déconnexion" />
 		<!-- <Button text="mon compte" /> -->
 		<a href="/profil" class="btn"> profil </a>
-		<Button text="home" />
+		<Button text="Acceuil" />
 	</header>
 </template>
 

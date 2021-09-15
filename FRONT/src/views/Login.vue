@@ -1,21 +1,25 @@
 <template>
 	<div>
-		<form @submit="fetchLogin">
-			<div>
-				<label>Mail</label>
-				<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
-			</div>
-			<div>
-				<label>Password</label>
-				<input type="password" v-model="password" name="password" />
-			</div>
+		<div>
+			<form @submit="fetchLogin">
+				<div>
+					<label>Mail</label>
+					<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
+				</div>
+				<div>
+					<label>Password</label>
+					<input type="password" v-model="password" name="password" />
+				</div>
 
-			<input type="submit" value="Connection" class="btn" />
-		</form>
+				<input type="submit" value="Connection" class="btn" />
+			</form>
+		</div>
+		<router-link to="/signup" class="btn">inscription</router-link>
+		<Button text="connextion" class="btn" />
 	</div>
 </template>
-
 <script>
+import Button from '../components/Button.vue';
 export default {
 	name: 'Login',
 
@@ -25,11 +29,13 @@ export default {
 			password: '',
 		};
 	},
+	components: {
+		Button,
+	},
 	//get user id mounted()
 	methods: {
 		async fetchLogin(e) {
 			e.preventDefault();
-
 			const User = {
 				email: this.email,
 				password: this.password,
@@ -47,6 +53,8 @@ export default {
 			localStorage.setItem('idUser', data.idUser);
 			localStorage.setItem('token', data.token);
 			console.log(localStorage);
+			//navigation gards
+			this.$router.push('/home');
 		},
 		//	// this.$router.push("/home");
 		//ou wondow reload ...

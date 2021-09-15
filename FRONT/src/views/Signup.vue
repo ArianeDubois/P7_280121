@@ -25,10 +25,12 @@
 
 			<input type="submit" value="Inscription" class="btn" />
 		</form>
+		<router-link to="/" class="btn">login</router-link>
+		<Button text="Signup" class="btn" />
 	</div>
 </template>
-
 <script>
+import Button from '../components/Button.vue';
 export default {
 	name: 'Signup',
 	data() {
@@ -39,6 +41,9 @@ export default {
 			password: '',
 			biographie: '',
 		};
+	},
+	components: {
+		Button,
 	},
 	methods: {
 		onSubmit(e) {
