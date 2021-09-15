@@ -5,6 +5,7 @@
 			<div class="comment">
 				<div>
 					<label for=""></label>
+					<!-- revoir le v-model -->
 					<input type="text" v-model="content" name="content" />
 				</div>
 
@@ -27,6 +28,7 @@ export default {
 	//recupère liste des précedents posts
 	data() {
 		return {
+			content: '',
 			comment: '',
 			comments: [],
 		};

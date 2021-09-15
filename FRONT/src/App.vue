@@ -7,6 +7,7 @@
 			<Login />
 			<CreatePost @create-post="createPost" />
 			<Posts @delete-post="deletePost" v-bind:posts="posts" />
+			<Account />
 		</div>
 	</div>
 </template>
@@ -17,6 +18,7 @@ import Signup from './components/Signup.vue';
 import Login from './components/Login.vue';
 import CreatePost from './components/CreatePost.vue';
 import Posts from './components/Posts.vue';
+import Account from './components/Account.vue';
 
 export default {
 	name: 'App',
@@ -26,6 +28,7 @@ export default {
 		Login,
 		Posts,
 		CreatePost,
+		Account,
 	},
 	data() {
 		return {

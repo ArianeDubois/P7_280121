@@ -118,6 +118,8 @@ exports.updateProfil = (req, res, next) => {
 						firstName: req.body.firstName,
 						lastName: req.body.lastName,
 						biographie: req.body.biographie,
+						email: req.body.email,
+						password: req.body.password,
 					},
 					{ where: { id: req.params.id } }
 				)

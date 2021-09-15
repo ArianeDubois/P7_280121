@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<form @submit="onSubmit">
+		<form @submit="fetchLogin">
 			<div>
 				<label>Mail</label>
 				<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
@@ -27,40 +27,29 @@ export default {
 	},
 	//get user id mounted()
 	methods: {
-		// async fetchLogin() {
-		// 	const res = await fetch('http://localhost:3000/home/login');
-		// 	const data = await res.json();
-		// 	return data;
-		// },
-
-		onSubmit(e) {
+		async fetchLogin(e) {
 			e.preventDefault();
 
 			const User = {
 				email: this.email,
 				password: this.password,
 			};
-			const options = {
+
+			const res = await fetch('http://localhost:3000/home/login', {
 				method: 'POST',
-				body: JSON.stringify(User),
 				headers: {
 					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
-			};
-
-			// console.log(User, options);
-			//fetch
-
-			fetch('http://localhost:3000/home/login', options)
-				.then((res) => res.json())
-				.then((res) => {
-					// if(res.idUser == res.token )
-					localStorage.setItem('idUser', res.idUser);
-					localStorage.setItem('token', res.token);
-					console.log(localStorage);
-				})
-				.catch((error) => console.log(error));
+				body: JSON.stringify(User),
+			});
+			const data = await res.json();
+			localStorage.setItem('idUser', data.idUser);
+			localStorage.setItem('token', data.token);
+			console.log(localStorage);
 		},
+		//	// this.$router.push("/home");
+		//ou wondow reload ...
 	},
 };
 </script>

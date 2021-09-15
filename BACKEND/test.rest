@@ -53,7 +53,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhd
 ###
 POST  http://localhost:3000/home/post/22
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTYzMjM5NCwiZXhwIjoxNjMxNzE4Nzk0fQ.YL7ZY9l_kqPRiqxsUJzDr5NKCdVv3jNBc3VmrihLIE4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
 {     
         "idUser": 4,
  		"content": "je commente ce post"
@@ -85,7 +86,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhd
 ###
 GET  http://localhost:3000/home/profil/4
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTY1NjY4MCwiZXhwIjoxNjMxNzQzMDgwfQ.4WFDcJZpVi0t6ardOSnH0MwbwLq7oJaO2okrHH81Z_A
 
 
 ###

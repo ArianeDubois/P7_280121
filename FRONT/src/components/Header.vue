@@ -1,8 +1,11 @@
 <template>
 	<header>
 		<h1>{{ titleTxt }}</h1>
-		<Button text="inscription" />
-		<Button text="connection" />
+
+		<Button @click="deconnectUser" text="déconnexion" />
+		<!-- <Button text="mon compte" /> -->
+		<a href="/profil" class="btn"> profil </a>
+		<Button text="home" />
 	</header>
 </template>
 
@@ -17,12 +20,19 @@ export default {
 	props: {
 		titleTxt: String,
 	},
+	methods: {
+		deconnectUser() {
+			localStorage.clear();
+			// this.$router.push("/");
+			//ou wondow reload ...
+		},
+	},
 };
 </script>
 
 <style scoped>
 a {
-	color: black;
+	color: white;
 }
 header {
 	display: flex;
