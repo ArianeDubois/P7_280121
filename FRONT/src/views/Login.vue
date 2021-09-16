@@ -1,21 +1,21 @@
 <template>
 	<div>
-		<div>
-			<form @submit="fetchLogin">
-				<div>
-					<label>Mail</label>
-					<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
-				</div>
-				<div>
-					<label>Password</label>
-					<input type="password" v-model="password" name="password" />
-				</div>
+		<header>
+			<router-link to="/signup" class="btn">inscription</router-link>
+			<Button text="connextion" class="btn" />
+		</header>
+		<form @submit="fetchLogin">
+			<div>
+				<label>Mail</label>
+				<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
+			</div>
+			<div>
+				<label>Password</label>
+				<input type="password" v-model="password" name="password" />
+			</div>
 
-				<input type="submit" value="Connection" class="btn" />
-			</form>
-		</div>
-		<router-link to="/signup" class="btn">inscription</router-link>
-		<Button text="connextion" class="btn" />
+			<input type="submit" value="Connection" class="btn" />
+		</form>
 	</div>
 </template>
 <script>
@@ -55,9 +55,11 @@ export default {
 			console.log(localStorage);
 			//navigation gards
 			this.$router.push('/home');
+
+			if (localStorage.idUser === 'undefined') {
+				alert('identifiants incorrects ');
+			}
 		},
-		//	// this.$router.push("/home");
-		//ou wondow reload ...
 	},
 };
 </script>

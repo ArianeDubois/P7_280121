@@ -1,21 +1,25 @@
 <template>
 	<div>
+		<Header :user="user" />
 		<CreatePost @create-post="createPost" />
 		<Posts @delete-post="deletePost" v-bind:posts="posts" />
 	</div>
 </template>
 <script>
 import CreatePost from '../components/CreatePost.vue';
+import Header from '../components/Header.vue';
 import Posts from '../components/Posts.vue';
 export default {
 	name: 'Home',
 	components: {
 		Posts,
 		CreatePost,
+		Header,
 	},
 	data() {
 		return {
 			posts: [],
+			user: {},
 		};
 	},
 	methods: {
@@ -29,7 +33,8 @@ export default {
 				},
 				body: JSON.stringify(newPost),
 			});
-			this.posts = [...this.posts, res.json()];
+			const data = await res.json();
+			this.posts = [...this.posts, data];
 		},
 
 		async deletePost(id) {
@@ -41,13 +46,14 @@ export default {
 						'Content-Type': 'application/json',
 						Authorization: 'Bearer ' + localStorage.getItem('token'),
 					},
-					// body: { idUser: JSON.parse(localStorage.getItem('idUser')) },
 				});
 				console.log(res);
+				console.log(localStorage.getItem('token'));
+				console.log(localStorage.getItem('idUser'));
 				if (res.status === 200) {
 					this.posts = this.posts.filter((post) => post.id !== id); // compare les id post de la db avec l'id envoyer
 				} else {
-					alert('error on deleting post');
+					alert("vous n'êtes pas autorisé à suprimer ce post");
 				}
 			}
 		},
@@ -65,10 +71,24 @@ export default {
 			const data = await res.json();
 			return data;
 		},
+		async fetchAccount() {
+			const id = JSON.parse(localStorage.getItem('idUser'));
+
+			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
+				},
+			});
+			const data = await res.json();
+			return data;
+		},
 	},
 
 	async created() {
 		this.posts = await this.fetchPosts();
+		this.user = await this.fetchAccount();
 	},
 };
 </script>

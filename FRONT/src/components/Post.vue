@@ -2,7 +2,7 @@
 	<!-- si l'user id du post = user id de la demande => v-show cross  -->
 
 	<div>
-		<div class="post">
+		<div class="bloc post">
 			<h2>
 				{{ post.idUser }}
 			</h2>
@@ -35,16 +35,23 @@ export default {
 };
 </script>
 
-<style scoped>
-.post {
+<style>
+.bloc {
 	border: 2px solid black;
-	max-width: 50%;
+	max-width: 35%;
 	display: flex;
 	justify-content: space-between;
-	padding: 1.5rem;
 	border-radius: 1rem;
-	margin: 30px auto auto auto;
-	box-shadow: 10px, 5px, 20px, black;
+	margin: 0 auto 0 auto;
+	background-color: white;
+	box-shadow: 1px 1px 7px 2px rgb(175, 175, 175);
+}
+.post {
+	margin-top: 100px;
+}
+
+i {
+	margin: 15px;
 }
 </style>
 

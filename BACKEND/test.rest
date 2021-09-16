@@ -24,7 +24,7 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/home/post
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTYzMjM5NCwiZXhwIjoxNjMxNzE4Nzk0fQ.YL7ZY9l_kqPRiqxsUJzDr5NKCdVv3jNBc3VmrihLIE4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
 
 
 ###
@@ -39,13 +39,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhd
 
 
 ###
-DELETE  http://localhost:3000/home/post/21
+DELETE  http://localhost:3000/home/post/31
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTYzMjM5NCwiZXhwIjoxNjMxNzE4Nzk0fQ.YL7ZY9l_kqPRiqxsUJzDr5NKCdVv3jNBc3VmrihLIE4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
 
-{
-    "idUser": 4
-}
+
 
 
 // COMMENTS
@@ -68,13 +66,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhd
 
 
 ###
-DELETE  http://localhost:3000/home/comment/10
+DELETE  http://localhost:3000/home/comment/69
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
 
-{
-    "idUser": 4
-}
 
 
 //PROFIL
@@ -90,20 +85,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhd
 
 
 ###
-PUT  http://localhost:3000/home/profil/2
+PUT  http://localhost:3000/home/profil/9
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
 
 {
-        "idUser": 2,
-        "lastName": "jean"
+    "idUser": 9,
+    "email": "tino@mail.it"
 } 
+
 
 ###
-DELETE  http://localhost:3000/home/profil/2
+DELETE  http://localhost:3000/home/profil/9
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
-
-{
-    "idUser": 2
-} 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0

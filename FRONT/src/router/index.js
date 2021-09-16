@@ -9,11 +9,11 @@ const routes = [
 	{ path: '/signup', name: 'Signup', component: Signup },
 	//navigation guards
 	{ path: '/home', name: 'Home', component: Home, meta: { requiresAuth: true } },
-	// { path: '/home', name: 'Home', component: Home },
 	{ path: '/profil', name: 'Profil', component: Profil, meta: { requiresAuth: true } },
 ];
 const router = createRouter({
-	history: createWebHistory(process.env.BASE_URL),
+	// history: createWebHistory(process.env.BASE_URL),
+	history: createWebHistory(),
 	routes,
 });
 

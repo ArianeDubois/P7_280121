@@ -2,10 +2,12 @@
 	<header>
 		<h1>{{ titleTxt }}</h1>
 
+		<router-link to="/home" class="btn">Acceuil</router-link>
+
+		<router-link to="/profil" :user="user" class="btn">
+			{{ user.firstName }}{{ user.lastName }}
+		</router-link>
 		<Button @click="deconnectUser" text="déconnexion" />
-		<!-- <Button text="mon compte" /> -->
-		<a href="/profil" class="btn"> profil </a>
-		<Button text="Acceuil" />
 	</header>
 </template>
 
@@ -17,14 +19,18 @@ export default {
 	components: {
 		Button,
 	},
+
 	props: {
 		titleTxt: String,
+		user: Object,
 	},
+
 	methods: {
 		deconnectUser() {
+			// console.log(this.user); //undefined
+			// console.log(localStorage.idUser);
 			localStorage.clear();
-			// this.$router.push("/");
-			//ou wondow reload ...
+			this.$router.push('/');
 		},
 	},
 };

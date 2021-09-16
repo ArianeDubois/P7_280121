@@ -93,17 +93,12 @@ exports.deleteProfil = (req, res) => {
 	}).then((user) => {
 		if (!user) {
 			return res.status(400).json({ message: 'utiliasateur introuvable' });
-		} else if (req.body.idUser.isAdmin == true || user.id == req.body.idUser) {
-			User.destroy({
-				where: { id: req.body.idUser }, // recuperer l'id dans l l'url
-			})
-				.then((user) => res.status(200).json({ message: 'Compte suprimé !' }))
-				.catch((error) => res.status(404).json(error));
-		} else {
-			return res
-				.status(401)
-				.json({ message: "vous n'êtes pas autorisé à supprimer ce compte" });
 		}
+		User.destroy({
+			where: { id: req.params.id }, // recuperer l'id dans l l'url
+		})
+			.then(() => res.status(200).json({ message: 'Compte suprimé !' }))
+			.catch((user) => res.status(404).json(user));
 	});
 };
 
@@ -123,7 +118,7 @@ exports.updateProfil = (req, res, next) => {
 					},
 					{ where: { id: req.params.id } }
 				)
-					.then(() => res.status(201).json({ message: 'Compte modifié !' }))
+					.then(() => res.status(201).json(user))
 					.catch((error) => res.status(400).json({ error }));
 			} else {
 				return res

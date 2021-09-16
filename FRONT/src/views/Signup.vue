@@ -1,5 +1,9 @@
 <template>
 	<div>
+		<header>
+			<router-link to="/" class="btn">login</router-link>
+			<Button text="Signup" class="btn" />
+		</header>
 		<form @submit="onSubmit">
 			<div>
 				<label>Firstname</label>
@@ -25,8 +29,6 @@
 
 			<input type="submit" value="Inscription" class="btn" />
 		</form>
-		<router-link to="/" class="btn">login</router-link>
-		<Button text="Signup" class="btn" />
 	</div>
 </template>
 <script>

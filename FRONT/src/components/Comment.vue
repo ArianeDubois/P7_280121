@@ -1,23 +1,20 @@
 <template>
-	<!-- create comment -->
 	<div>
+		<!-- affichage de la liste des commentaires-->
+		<div v-for="comment in comments" :key="comment.id" class="bloc comment-list">
+			<p>{{ comment.content }}</p>
+			<i @click="deleteComment(comment.id)" class="fas fa-times"></i>
+		</div>
+
+		<!-- create comment -->
+
 		<form @submit="onSubmit">
-			<div class="comment">
-				<div>
-					<label for=""></label>
-					<!-- revoir le v-model -->
-					<input type="text" v-model="content" name="content" />
-				</div>
+			<div class="bloc-form">
+				<input class="bloc-form-content" type="text" v-model="content" name="content" />
 
 				<input type="submit" value="Commenter" class="btn" />
 			</div>
 		</form>
-
-		<!-- affichage de la liste des commentaires-->
-		<div v-for="comment in comments" :key="comment.id">
-			<p>{{ comment.content }}</p>
-			<i @click="deleteComment(comment.id)" class="fas fa-times"></i>
-		</div>
 	</div>
 	<!-- </div> -->
 </template>
@@ -84,6 +81,7 @@ export default {
 				},
 			});
 			console.log(res);
+			console.log(id);
 			if (res.status === 200) {
 				this.comments = this.comments.filter((comment) => comment.id !== id); // compare les id post de la db avec l'id envoyer
 			} else {
@@ -97,4 +95,31 @@ export default {
 	},
 };
 </script>
-<style></style>
+<style scoped>
+.bloc-form {
+	margin-top: -2px;
+	background-color: rgb(255, 255, 255);
+	border: 4px dotted black;
+	max-width: 35%;
+	display: flex;
+	justify-content: space-between;
+	border-radius: 1rem;
+	margin: 0 auto 0 auto;
+}
+.bloc-form-content {
+	/* reset css */
+	margin: 2px 10px 2px 10px;
+	border: none;
+	width: 100%;
+	top: 100%;
+	background-color: rgb(255, 255, 255);
+}
+
+.comment-list {
+	margin: -2px auto -2px auto;
+	max-width: 32%;
+}
+p {
+	margin-left: 10px;
+}
+</style>

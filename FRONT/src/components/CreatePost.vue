@@ -40,9 +40,6 @@ export default {
 
 			this.$emit('create-post', newPost);
 			// console.log(newPost);
-			// this.content = '';
-			// this.idUser = '';
-			// this.imageUrl = '';
 
 			//fetch
 		},

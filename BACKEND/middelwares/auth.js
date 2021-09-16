@@ -19,8 +19,5 @@ module.exports = (req, res, next) => {
 	}
 };
 
-// ajouter isOwner
-
-//sur la route post: il me faut juste un token
-
+// protege les route qui on un body dans la req
 //auth = compare le token envoyer dans le header(qui chiffre le user id envoyer lors de la connection) avec l'user id envoyé dans le body de la req

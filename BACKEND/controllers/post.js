@@ -28,7 +28,7 @@ exports.createPost = (req, res, next) => {
 			};
 
 			Post.create(post)
-				.then(() => res.status(201).json({ message: 'Message envoyé!' }))
+				.then(() => res.status(201).json(post))
 				.catch((error) => res.status(400).json({ error }));
 		})
 		.catch((error) => res.status(400).json({ message: 'utlisateur inconnu' }));
