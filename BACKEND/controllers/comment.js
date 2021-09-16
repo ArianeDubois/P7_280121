@@ -7,20 +7,20 @@ exports.createComment = (req, res, next) => {
 		if (!post) {
 			return res.status(400).json({ message: 'Post introuvable' });
 		}
-		const comment = {
+		const newComment = {
 			idPost: post.id,
 			idUser: req.body.idUser,
 			content: req.body.content,
 		};
 
-		Comment.create(comment)
-			.then(() => res.status(201).json({ message: 'Commentaire envoyé!' }))
+		Comment.create(newComment)
+			.then((comment) => res.status(201).json(comment))
 			.catch((error) => res.status(400).json({ error }));
 	});
 };
 
 exports.getComments = (req, res, next) => {
-	Comment.findAll({ where: { idPost: req.params.id } })
+	Comment.findAll({ where: { idPost: req.params.id }, include: User })
 		.then((comments) => {
 			res.status(200).json(comments);
 		})

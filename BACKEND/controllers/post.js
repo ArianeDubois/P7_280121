@@ -10,7 +10,7 @@ exports.createPost = (req, res, next) => {
 	// const userId = decodedToken.userId;
 	//=> AUTH middleware
 	User.findOne({
-		where: { id: req.body.idUser },
+		where: { id: req.body.idUser }, // recuperer token
 	})
 		.then((user) => {
 			{
@@ -20,22 +20,22 @@ exports.createPost = (req, res, next) => {
 			if (req.file) {
 				image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 			}
-			const post = {
+			const newPost = {
 				content: req.body.content,
 				imageUrl: image,
 				// idUser: req.body.userId,
 				idUser: user.id,
 			};
 
-			Post.create(post)
-				.then(() => res.status(201).json(post))
+			Post.create(newPost)
+				.then((post) => res.status(201).json(post))
 				.catch((error) => res.status(400).json({ error }));
 		})
 		.catch((error) => res.status(400).json({ message: 'utlisateur inconnu' }));
 };
 
 exports.getAllPosts = (req, res, next) => {
-	Post.findAll()
+	Post.findAll({ include: User }) //
 		.then((posts) => res.status(200).json(posts))
 		.catch((error) => res.status(400).json({ error }));
 };

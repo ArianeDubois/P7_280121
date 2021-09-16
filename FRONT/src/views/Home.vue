@@ -2,7 +2,7 @@
 	<div>
 		<Header :user="user" />
 		<CreatePost @create-post="createPost" />
-		<Posts @delete-post="deletePost" v-bind:posts="posts" />
+		<Posts @delete-post="deletePost" :posts="posts" />
 	</div>
 </template>
 <script>
@@ -33,6 +33,7 @@ export default {
 				},
 				body: JSON.stringify(newPost),
 			});
+
 			const data = await res.json();
 			this.posts = [...this.posts, data];
 		},

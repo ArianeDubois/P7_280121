@@ -3,14 +3,20 @@
 
 	<div>
 		<div class="bloc post">
-			<h2>
-				{{ post.idUser }}
-			</h2>
+			<!-- <h2>{{ post.User.firstName }} {{ post.User.lastName }}</h2> -->
+			<!-- <p>{{ post.createdAt.split('T')[0] }}</p>
+			<p>
+				{{
+					post.createdAt
+						.split('T')[1]
+						.split('', 5)
+						.join('')
+				}}
+			</p> -->
 			<p>{{ post.content }}</p>
+
+			<img :src="post.imageUrl" />
 			<i @click="onDelete(post.id)" class="fas fa-times"></i>
-			<!-- <div v-for="comment in comments" :key="comment.id">
-				<h3>{{ comment.content }}</h3>
-			</div> -->
 		</div>
 
 		<Comment :post="post" />
@@ -29,6 +35,8 @@ export default {
 	},
 	methods: {
 		onDelete(id) {
+			console.log(this.post);
+
 			this.$emit('delete-post', id);
 		},
 	},

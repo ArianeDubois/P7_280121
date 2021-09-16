@@ -43,7 +43,7 @@
 			</div>
 
 			<input type="submit" value="MODIFIER" class="btn" />
-			<div @click="deleteAccount" class="btn">Supprimer mon compte</div>
+			<button @click="deleteAccount" class="btn">Supprimer mon compte</button>
 		</form>
 	</div>
 </template>

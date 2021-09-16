@@ -26,9 +26,10 @@ sequelize
 	.then(() => {
 		console.log('Connection has been established successfully.');
 	})
-	// .then(() => {
-	// 	sequelize.sync({ force: true }); //synchronisation db
-	// })
+	.then(() => {
+		sequelize.sync({ force: true }); //synchronisation db
+	})
+
 	.catch((err) => {
 		console.error('Unable to connect to the database:', err);
 	});

@@ -21,7 +21,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	//routes qui demandent une auth
 	if (to.meta.requiresAuth) {
-		if (localStorage.idUser === 'undefined') {
+		if (localStorage.idUser === 'undefined' || localStorage.idUser === undefined) {
 			//on donne le nom du composant vers lequel rediriger l'user invalide
 			next({
 				name: 'Login',
