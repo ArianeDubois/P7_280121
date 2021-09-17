@@ -108,7 +108,6 @@ export default {
 		async deleteAccount() {
 			if (confirm('are you sure ?')) {
 				const id = JSON.parse(localStorage.getItem('idUser'));
-
 				const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 					method: 'DELETE',
 					headers: {
