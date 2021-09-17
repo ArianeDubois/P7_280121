@@ -6,7 +6,7 @@ const sequelize = new Sequelize('groupomania', 'root', 'root', {
 	dialect: 'mysql',
 	port: '8889',
 	define: {
-		timestamps: false,
+		timestamps: true,
 	},
 });
 

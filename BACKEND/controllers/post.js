@@ -23,10 +23,18 @@ exports.createPost = (req, res, next) => {
 				imageUrl: image,
 				// idUser: req.body.userId,
 				idUser: user.id,
+				user: {},
 			};
 
 			Post.create(newPost)
-				.then((post) => res.status(200).json(post))
+				.then((post) => {
+					Post.findOne({
+						where: {
+							id: post.id,
+						},
+						include: User,
+					}).then((userPost) => res.status(200).json(userPost));
+				})
 				.catch((error) => res.status(400).json({ error }));
 		})
 		.catch((error) => res.status(400).json({ message: 'utlisateur inconnu' }));

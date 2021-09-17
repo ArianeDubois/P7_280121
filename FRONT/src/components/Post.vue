@@ -3,8 +3,8 @@
 
 	<div>
 		<div class="bloc post">
-			<!-- <h2>{{ post.User.firstName }} {{ post.User.lastName }}</h2> -->
-			<!-- <p>{{ post.createdAt.split('T')[0] }}</p>
+			<h2>{{ post.User.firstName }} {{ post.User.lastName }}</h2>
+			<p>{{ post.createdAt.split('T')[0] }}</p>
 			<p>
 				{{
 					post.createdAt
@@ -12,7 +12,7 @@
 						.split('', 5)
 						.join('')
 				}}
-			</p> -->
+			</p>
 			<p>{{ post.content }}</p>
 
 			<img :src="post.imageUrl" />
