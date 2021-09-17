@@ -36,7 +36,6 @@ export default {
 	methods: {
 		onDelete(id) {
 			console.log(this.post);
-
 			this.$emit('delete-post', id);
 		},
 	},
@@ -57,7 +56,6 @@ export default {
 .post {
 	margin-top: 100px;
 }
-
 i {
 	margin: 15px;
 }

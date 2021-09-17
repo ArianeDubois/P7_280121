@@ -8,6 +8,12 @@ class User extends Model {
 }
 User.init(
 	{
+		// idUser: {
+		// 	type: DataTypes.INTEGER,
+		// 	primaryKey: true,
+		// 	autoIncrement: true,
+		// },
+
 		firstName: {
 			type: DataTypes.STRING,
 			allowNull: false,

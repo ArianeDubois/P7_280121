@@ -11,14 +11,19 @@ const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
 
-//ASSOCIATION
-
+// // //ASSOCIATION
 User.hasMany(Post, { foreignKey: 'idPost' });
 User.hasMany(Comment, { foreignKey: 'idComment' });
-Post.belongsTo(User, { foreignKey: { name: 'idUser', allowNull: false }, onDelete: 'CASCADE' });
-Post.hasMany(Comment, { foreignKey: 'idComment' });
+Post.belongsTo(User, {
+	foreignKey: { name: 'idUser', allowNull: false },
+	onDelete: 'CASCADE',
+});
+Post.hasMany(Comment, { foreignKey: { name: 'idComment' } });
 Comment.belongsTo(User, { foreignKey: { name: 'idUser', allowNull: false } });
-Comment.belongsTo(Post, { foreignKey: { name: 'idPost', allowNull: false }, onDelete: 'CASCADE' }); // si on supriome Post on suprrime ses commentaire
+Comment.belongsTo(Post, {
+	foreignKey: { name: 'idPost', allowNull: false },
+	onDelete: 'CASCADE',
+}); // si on supriome Post on suprrime ses commentaire
 
 // test de connection sequelize
 sequelize
@@ -27,15 +32,18 @@ sequelize
 		console.log('Connection has been established successfully.');
 	})
 	.then(() => {
-		sequelize.sync({ force: true }); //synchronisation db
+		sequelize.sync({ force: true }).catch((err) => {
+			console.error('Unable to connect to the database:', err);
+			// sequelize.sync().catch((err) => {
+			// 	console.error('Unable to connect to the database:', err);
+		}); //Sync all models that are not)
+		// sequelize.sync({ force: true });
 	})
-
 	.catch((err) => {
 		console.error('Unable to connect to the database:', err);
 	});
 
 //CORS
-
 app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader(
@@ -53,7 +61,6 @@ app.use('/auth', userRoutes);
 app.use('/home', postRoutes);
 app.use('/home', commentRoutes);
 app.use('/home', userRoutes);
-
 //IMAGES
 app.use('/images', express.static(path.join(__dirname, 'images'))); // gère les req images.
 

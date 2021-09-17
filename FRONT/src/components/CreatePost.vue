@@ -27,7 +27,6 @@ export default {
 			imageUrl: '',
 		};
 	},
-
 	methods: {
 		onSubmit(e) {
 			e.preventDefault();
@@ -40,6 +39,7 @@ export default {
 				idUser: JSON.parse(localStorage.getItem('idUser')),
 				imageUrl: this.imageUrl,
 			};
+			console.log(newPost);
 
 			this.$emit('create-post', newPost);
 		},

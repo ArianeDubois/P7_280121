@@ -33,11 +33,9 @@ export default {
 				},
 				body: JSON.stringify(newPost),
 			});
-
 			const data = await res.json();
 			this.posts = [...this.posts, data];
 		},
-
 		async deletePost(id) {
 			if (confirm('are you sure ?')) {
 				console.log(id);
@@ -58,7 +56,6 @@ export default {
 				}
 			}
 		},
-
 		async fetchPosts() {
 			const res = await fetch('http://localhost:3000/home/post', {
 				method: 'GET',
@@ -74,7 +71,6 @@ export default {
 		},
 		async fetchAccount() {
 			const id = JSON.parse(localStorage.getItem('idUser'));
-
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 				method: 'GET',
 				headers: {
@@ -86,7 +82,6 @@ export default {
 			return data;
 		},
 	},
-
 	async created() {
 		this.posts = await this.fetchPosts();
 		this.user = await this.fetchAccount();
@@ -101,7 +96,6 @@ body {
 	color: #2c3e50;
 	margin-top: 60px;
 }
-
 .btn {
 	background-color: black;
 	color: white;

@@ -16,30 +16,34 @@ exports.signup = (req, res, next) => {
 		return res.status(400).json({ error: 'Veillez remplir tout les champs' });
 	}
 
-	User.findOne({ where: { email: req.body.email } }).then((user) => {
-		// const cryptoMail = crypto.HmacSHA1(req.body.email, process.env.DB_MAIL_KEY).toString();
-		if (user) {
-			return res.status(401).json({ error: 'email déjà utilisé!' });
-		} else {
-			if (validator.validate(req.body.email)) {
+	User.findOne({ where: { email: req.body.email } })
+		.then((user) => {
+			// const cryptoMail = crypto.HmacSHA1(req.body.email, process.env.DB_MAIL_KEY).toString();
+			if (user) {
+				return res.status(401).json({ error: 'email déjà utilisé!' });
+			} else if (validator.validate(req.body.email)) {
 				//verifie le mail avant de l'envoyer
-				bcrypt.hash(req.body.password, 10).then((hash) => {
-					const user = User.create({
-						firstName: req.body.firstName,
-						lastName: req.body.lastName,
-						biographie: req.body.biographie,
-						email: req.body.email,
-						isAdmin: false,
-						password: hash,
-					})
-						.then((user) => res.status(201).json(user))
-						.catch((error) => res.status(400).json({ error }));
-				});
+				bcrypt
+					.hash(req.body.password, 10)
+					.catch((error) => res.status(400).json({ error }))
+					.then((hash) => {
+						const newUser = User.create({
+							firstName: req.body.firstName,
+							lastName: req.body.lastName,
+							biographie: req.body.biographie,
+							email: req.body.email,
+							isAdmin: false,
+							password: hash,
+						})
+
+							.then((user) => res.status(201).json(user))
+							.catch((error) => res.status(400).json({ error }));
+					});
 			} else {
 				return res.status(401).json({ error: 'le mail est invalide' });
 			}
-		}
-	});
+		})
+		.catch((error) => res.status(400).json({ error }));
 };
 
 exports.login = (req, res, next) => {
@@ -56,15 +60,18 @@ exports.login = (req, res, next) => {
 						if (!valid) {
 							return res.status(401).json({ error: 'Mot de passe incorrect !' });
 						} else {
-							return res.status(200).json({
-								idUser: user.id,
-								isAdmin: user.isAdmin,
-								token: jwt.sign(
-									{ idUser: user.id }, // donnée à chiffrer
-									'RANDOM_TOKEN_SECRET', //clé de chiffrement
-									{ expiresIn: '24h' }
-								),
-							});
+							return res
+								.status(200)
+								.json({
+									idUser: user.id,
+									isAdmin: user.isAdmin,
+									token: jwt.sign(
+										{ idUser: user.id }, // donnée à chiffrer
+										'RANDOM_TOKEN_SECRET', //clé de chiffrement
+										{ expiresIn: '24h' }
+									),
+								})
+								.catch((error) => res.status(400).json({ error }));
 						}
 					})
 					.catch((error) => res.status(500).json({ error })); // erreur serveur bcrypt ou jwt

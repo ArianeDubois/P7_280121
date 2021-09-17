@@ -1,15 +1,13 @@
-
-###
-POST http://localhost:3000/auth/signup
-Content-Type: application/json 
+### 
+POST http://localhost:3000/auth/signup 
+Content-Type: application/json
 
 {
-    "firstName": "john",
-    "lastName": "doe",
-    "email": "jid@mail.fr",
+    "firstName": "john", 
+    "lastName": "doe", 
+    "email": "jid@mail.fr", 
     "password": "hey"
-} 
-
+}
 
 ###
 POST http://localhost:3000/auth/login

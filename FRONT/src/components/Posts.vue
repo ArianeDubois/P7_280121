@@ -10,7 +10,6 @@
 
 <script>
 import Post from './Post.vue';
-
 export default {
 	name: 'Posts',
 	props: {

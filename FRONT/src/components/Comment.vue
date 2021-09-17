@@ -33,7 +33,6 @@
 <script>
 export default {
 	name: 'Comment',
-
 	//recupère liste des précedents posts
 	data() {
 		return {
@@ -44,12 +43,10 @@ export default {
 	props: {
 		post: Object,
 	},
-
 	//get user id mounted()
 	methods: {
 		async fetchComments() {
 			const id = this.$props.post.id;
-
 			const res = await fetch(`http://localhost:3000/home/post/${id}/comment`, {
 				method: 'GET',
 				headers: {
@@ -60,7 +57,6 @@ export default {
 			const data = await res.json();
 			return data;
 		},
-
 		async onSubmit(e) {
 			e.preventDefault();
 			const id = this.$props.post.id;
@@ -79,7 +75,6 @@ export default {
 			const data = await res.json();
 			this.comments = [...this.comments, data];
 		},
-
 		async deleteComment(id) {
 			//confirmation delete
 			const res = await fetch(`http://localhost:3000/home/comment/${id}`, {
@@ -91,7 +86,6 @@ export default {
 			});
 			// const data = await res.json();
 			// console.log(data);
-
 			if (res.status === 200) {
 				this.comments = this.comments.filter((comment) => comment.id !== id); // compare les id post de la db avec l'id envoyer
 			} else {
@@ -99,7 +93,6 @@ export default {
 			}
 		},
 	},
-
 	async created() {
 		this.comments = await this.fetchComments();
 	},
@@ -124,7 +117,6 @@ export default {
 	top: 100%;
 	background-color: rgb(255, 255, 255);
 }
-
 .comment-list {
 	margin: -2px auto -2px auto;
 	max-width: 32%;

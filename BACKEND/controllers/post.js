@@ -13,8 +13,6 @@ exports.createPost = (req, res, next) => {
 		where: { id: req.body.idUser }, // recuperer token
 	})
 		.then((user) => {
-			{
-			}
 			let image = '';
 
 			if (req.file) {
@@ -28,7 +26,7 @@ exports.createPost = (req, res, next) => {
 			};
 
 			Post.create(newPost)
-				.then((post) => res.status(201).json(post))
+				.then((post) => res.status(200).json(post))
 				.catch((error) => res.status(400).json({ error }));
 		})
 		.catch((error) => res.status(400).json({ message: 'utlisateur inconnu' }));
