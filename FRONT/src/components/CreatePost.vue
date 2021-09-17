@@ -1,5 +1,5 @@
 <template>
-	<form @submit="onSubmit">
+	<form @submit="onSubmit" enctype="multipart/form-data">
 		<div>
 			<label>Content</label>
 			<input type="text" v-model="content" name="content" placeholder="Content" />
