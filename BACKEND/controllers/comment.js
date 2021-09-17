@@ -3,20 +3,29 @@ const User = require('../models/User');
 const Comment = require('../models/Comment');
 
 exports.createComment = (req, res, next) => {
-	Post.findOne({ where: { id: req.params.id } }).then((post) => {
-		if (!post) {
-			return res.status(400).json({ message: 'Post introuvable' });
-		}
-		const newComment = {
-			idPost: post.id,
-			idUser: req.body.idUser,
-			content: req.body.content,
-		};
+	Post.findOne({ where: { id: req.params.id } })
+		.then((post) => {
+			if (!post) {
+				return res.status(400).json({ message: 'Post introuvable' });
+			}
+			const newComment = {
+				idPost: post.id,
+				idUser: req.body.idUser,
+				content: req.body.content,
+			};
 
-		Comment.create(newComment)
-			.then((comment) => res.status(201).json(comment))
-			.catch((error) => res.status(400).json({ error }));
-	});
+			Comment.create(newComment)
+				.then((comment) => {
+					Comment.findOne({
+						where: {
+							id: comment.id,
+						},
+						include: User,
+					}).then((commentUser) => res.status(200).json(commentUser));
+				})
+				.catch((error) => res.status(400).json({ error }));
+		})
+		.catch((error) => res.status(400).json({ message: 'utlisateur inconnu' }));
 };
 
 exports.getComments = (req, res, next) => {

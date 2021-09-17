@@ -5,6 +5,7 @@ const MIME_TYPES = {
 	'image/jpg': 'jpg',
 	'image/jpeg': 'jpg',
 	'image/png': 'png',
+	'image/gif': 'gif',
 };
 
 //indique à multer ou enregistrer les fichier entrant
@@ -20,4 +21,4 @@ const storage = multer.diskStorage({
 	},
 });
 
-module.exports = multer({ storage: storage }).single('image');
+module.exports = multer({ storage: storage }).single('imageUrl');

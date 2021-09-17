@@ -5,13 +5,7 @@
 			<input type="text" v-model="content" name="content" placeholder="Content" />
 
 			<label>Image</label>
-			<input
-				type="file"
-				accept="image/jpeg"
-				@change="uploadImage"
-				name="imageUrl"
-				placeholder="url"
-			/>
+			<input type="file" ref="file" @change="uploadImage" name="imageUrl" placeholder="url" />
 		</div>
 		<input type="submit" value="Poster un message" class="btn btn-block" />
 	</form>
@@ -34,16 +28,27 @@ export default {
 			// 	alert('Please add a text');
 			// 	return;
 			// }
-			const newPost = {
-				content: this.content,
-				idUser: JSON.parse(localStorage.getItem('idUser')),
-				imageUrl: this.imageUrl,
-			};
-			console.log(newPost);
 
-			this.$emit('create-post', newPost);
+			let formData = new FormData();
+			formData.append('content', this.content),
+				formData.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
+				formData.append('imageUrl', this.imageUrl),
+				// const newPost = {
+				// 	content: this.content,
+				// 	idUser: JSON.parse(localStorage.getItem('idUser')),
+				// 	imageUrl: formData.append('file', this.file),
+				// };
+				// console.log(formData);
+
+				// console.log(...formData.entries());
+				this.$emit('create-post', formData);
 		},
-		async uploadImage() {},
+
+		//on Chnage
+		async uploadImage() {
+			this.imageUrl = this.$refs.file.files[0]; //
+			console.log(this.imageUrl);
+		},
 	},
 	async created() {
 		this.imageUrl = await this.uploadImage();

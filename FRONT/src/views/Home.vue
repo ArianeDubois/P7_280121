@@ -26,15 +26,18 @@ export default {
 		//data posts = les posts existant + newPost
 		async createPost(newPost) {
 			const res = await fetch('http://localhost:3000/home/post', {
+				'Content-Type': 'multipart/form-data',
+
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json',
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
-				body: JSON.stringify(newPost),
+				body: newPost,
+				// body: JSON.stringify(newPost),
 			});
 			const data = await res.json();
 			console.log(data);
+			console.log(newPost);
 			this.posts = [...this.posts, data];
 		},
 		async deletePost(id) {
@@ -43,7 +46,6 @@ export default {
 				const res = await fetch(`http://localhost:3000/home/post/${id}`, {
 					method: 'DELETE',
 					headers: {
-						'Content-Type': 'application/json',
 						Authorization: 'Bearer ' + localStorage.getItem('token'),
 					},
 				});

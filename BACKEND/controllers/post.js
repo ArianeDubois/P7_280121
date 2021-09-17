@@ -2,6 +2,7 @@ const Post = require('../models/Post');
 const User = require('../models/User');
 const Comment = require('../models/Comment');
 const fs = require('fs');
+const path = require('path');
 const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
@@ -18,12 +19,12 @@ exports.createPost = (req, res, next) => {
 			if (req.file) {
 				image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 			}
+			console.log(req.file);
 			const newPost = {
 				content: req.body.content,
 				imageUrl: image,
 				// idUser: req.body.userId,
 				idUser: user.id,
-				user: {},
 			};
 
 			Post.create(newPost)

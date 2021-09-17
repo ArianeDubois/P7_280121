@@ -2,8 +2,8 @@
 	<div>
 		<!-- affichage de la liste des commentaires-->
 		<div v-for="comment in comments" :key="comment.id" class="bloc comment-list">
-			<!-- <h3>{{ comment.User.firstName }} {{ comment.User.lastName }}</h3> -->
-			<!-- <p>{{ comment.createdAt.split('T')[0] }}</p>
+			<h3>{{ comment.User.firstName }} {{ comment.User.lastName }}</h3>
+			<p>{{ comment.createdAt.split('T')[0] }}</p>
 			<p>
 				{{
 					comment.createdAt
@@ -11,7 +11,7 @@
 						.split('', 5)
 						.join('')
 				}}
-			</p> -->
+			</p>
 			<p>{{ comment.content }}</p>
 
 			<!-- split(separator,limit)index -->
@@ -72,7 +72,10 @@ export default {
 				},
 				body: JSON.stringify(newComment),
 			});
+
 			const data = await res.json();
+			console.log(data);
+
 			this.comments = [...this.comments, data];
 		},
 		async deleteComment(id) {
