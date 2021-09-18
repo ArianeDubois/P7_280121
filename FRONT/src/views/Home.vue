@@ -43,6 +43,7 @@ export default {
 		async deletePost(id) {
 			if (confirm('are you sure ?')) {
 				console.log(id);
+
 				const res = await fetch(`http://localhost:3000/home/post/${id}`, {
 					method: 'DELETE',
 					headers: {

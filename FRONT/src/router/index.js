@@ -3,10 +3,13 @@ import Login from '../views/Login';
 import Signup from '../views/Signup';
 import Home from '../views/Home';
 import Profil from '../views/Profil';
+import Moderate from '../views/Moderate';
 
 const routes = [
 	{ path: '/', name: 'Login', component: Login },
 	{ path: '/signup', name: 'Signup', component: Signup },
+	{ path: '/moderate', name: 'Moderate', component: Moderate },
+
 	//navigation guards
 	{ path: '/home', name: 'Home', component: Home, meta: { requiresAuth: true } },
 	{ path: '/profil', name: 'Profil', component: Profil, meta: { requiresAuth: true } },

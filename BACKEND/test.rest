@@ -3,9 +3,9 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "firstName": "john", 
-    "lastName": "doe", 
-    "email": "jid@mail.fr", 
+    "firstName": "tino", 
+    "lastName": "rossi", 
+    "email": "tt@mail.fr", 
     "password": "hey"
 }
 
@@ -14,25 +14,24 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-      "email": "test@mail.fr",
-    "password": "mariemarie"
+      "email": "tt@mail.fr",
+    "password": "hey"
 } 
 
 // POST
 ###
 GET http://localhost:3000/home/post
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjIsImlhdCI6MTYzMTg3MjE0NiwiZXhwIjoxNjMxOTU4NTQ2fQ.YMIFwjwBkjH0IHTt1NHm_ASjJvwv3aVmT0vy-uWWHcs
 
 ###
 POST http://localhost:3000/home/post
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTYyODY4MywiZXhwIjoxNjMxNzE1MDgzfQ.c6ByQ-DO5gfob6bhdc_KijLkTkCM9ggif3abRd_sqCw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTg3MzEyOSwiZXhwIjoxNjMxOTU5NTI5fQ.nlXeaIOqHb7qx-RYJD-riNDFuZs9rR57cOpZmyzi8dE
 
 {       
-        "idUser": 4,
- 		"content": "hey!"
+        "idUser": 1,
+ 		"content": "salut!"
 } 
 
 
@@ -72,14 +71,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhd
 
 //PROFIL
 ###
-GET  http://localhost:3000/home/profil
+GET  http://localhost:3000/home/1/profil
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTk2MjU0NCwiZXhwIjoxNjMyMDQ4OTQ0fQ.pFL6mAIHjfpc3c_3Bkz8YJzqlhpO0S-zAYZqPLovnTI
 
 ###
-GET  http://localhost:3000/home/profil/4
+GET  http://localhost:3000/home/profil/1
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTY1NjY4MCwiZXhwIjoxNjMxNzQzMDgwfQ.4WFDcJZpVi0t6ardOSnH0MwbwLq7oJaO2okrHH81Z_A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTk2MjU0NCwiZXhwIjoxNjMyMDQ4OTQ0fQ.pFL6mAIHjfpc3c_3Bkz8YJzqlhpO0S-zAYZqPLovnTI
 
 
 ###
@@ -94,6 +93,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhd
 
 
 ###
-DELETE  http://localhost:3000/home/profil/9
+DELETE  http://localhost:3000/home/profil/25
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjI0LCJpYXQiOjE2MzE5ODY2MDUsImV4cCI6MTYzMjA3MzAwNX0.roo0sZNgXaiNWMqMGtpdQu1zwisscIwDBcP4pS0ye3w

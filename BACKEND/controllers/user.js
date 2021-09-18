@@ -95,18 +95,18 @@ exports.userProfil = (req, res) => {
 };
 
 exports.deleteProfil = (req, res) => {
-	User.findOne({
-		where: { id: req.params.id }, // recuperer l'id dans l l'url
-	}).then((user) => {
-		if (!user) {
-			return res.status(400).json({ message: 'utiliasateur introuvable' });
-		}
-		User.destroy({
-			where: { id: req.params.id }, // recuperer l'id dans l l'url
+	User.findOne({ where: { id: req.params.id } || { isAdmin: true } })
+		.then((user) => {
+			if (!user) {
+				return res.status(400).json({ message: 'utiliasateur incorrect' });
+			}
+			User.destroy({
+				where: { id: req.params.id }, // recuperer l'id dans l l'url
+			})
+				.then(() => res.status(200).json({ message: 'Compte suprimé !' }))
+				.catch((user) => res.status(404).json(user));
 		})
-			.then(() => res.status(200).json({ message: 'Compte suprimé !' }))
-			.catch((user) => res.status(404).json(user));
-	});
+		.catch((error) => res.status(404).json(error));
 };
 
 exports.updateProfil = (req, res, next) => {
@@ -136,9 +136,31 @@ exports.updateProfil = (req, res, next) => {
 		.catch((error) => res.status(500).json({ error }));
 };
 
-//masquer les données sensibles
 exports.getAllUsers = (req, res, next) => {
-	User.findAll()
-		.then((users) => res.status(200).json(users))
+	User.findOne({ where: { id: req.params.id } })
+		.then((user) => {
+			if (!user.isAdmin == true) {
+				return res.status(401).json({ message: 'utilisateur non admin' });
+			} else {
+				User.findAll()
+					.then((users) => res.status(200).json(users))
+					.catch((error) => res.status(400).json({ error }));
+			}
+		})
 		.catch((error) => res.status(400).json({ error }));
 };
+
+//test envoeyr id ou admin
+// exports.getAllUsers = (req, res, next) => {
+// 	User.findOne({ where: { id: req.params.id } || { isAdmin: true } })
+// 		.then((user) => {
+// 			if (user) {
+// 				return res.status(401).json(user);
+// 			} else {
+// 				User.findAll()
+// 					.then((users) => res.status(200).json(users))
+// 					.catch((error) => res.status(400).json({ error }));
+// 			}
+// 		})
+// 		.catch((error) => res.status(400).json({ error }));
+// };

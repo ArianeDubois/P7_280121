@@ -8,6 +8,9 @@
 			{{ user.firstName }}{{ user.lastName }}
 		</router-link>
 		<Button @click="deconnectUser" text="déconnexion" />
+		<!-- v-show if is admin -->
+		<!-- router bloquer l'accès avce l'url  -->
+		<router-link to="/moderate" :user="user" class="btn"> liste des utilsateurs </router-link>
 	</header>
 </template>
 
