@@ -36,8 +36,6 @@ export default {
 				// body: JSON.stringify(newPost),
 			});
 			const data = await res.json();
-			console.log(data);
-			console.log(newPost);
 			this.posts = [...this.posts, data];
 		},
 		async deletePost(id) {

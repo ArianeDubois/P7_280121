@@ -33,6 +33,9 @@ User.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		imageUrl: {
+			type: DataTypes.STRING,
+		},
 
 		biographie: {
 			type: DataTypes.TEXT,

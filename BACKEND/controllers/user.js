@@ -2,6 +2,8 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('email-validator');
+const fs = require('fs');
+
 // const crypto = require('crypto-js'); //crypto allows you to hash plain texts before storing them in the database
 
 //hasher le mot de passe avant de l'envoyer
@@ -19,6 +21,11 @@ exports.signup = (req, res, next) => {
 	User.findOne({ where: { email: req.body.email } })
 		.then((user) => {
 			// const cryptoMail = crypto.HmacSHA1(req.body.email, process.env.DB_MAIL_KEY).toString();
+
+			if (req.file) {
+				image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+			}
+
 			if (user) {
 				return res.status(401).json({ error: 'email déjà utilisé!' });
 			} else if (validator.validate(req.body.email)) {
@@ -32,6 +39,7 @@ exports.signup = (req, res, next) => {
 							lastName: req.body.lastName,
 							biographie: req.body.biographie,
 							email: req.body.email,
+							imageUrl: image,
 							isAdmin: false,
 							password: hash,
 						})

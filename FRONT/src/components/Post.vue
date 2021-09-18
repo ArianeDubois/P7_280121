@@ -3,20 +3,34 @@
 
 	<div>
 		<div class="bloc post">
-			<h2>{{ post.User.firstName }} {{ post.User.lastName }}</h2>
-			<p>{{ post.createdAt.split('T')[0] }}</p>
-			<p>
-				{{
-					post.createdAt
-						.split('T')[1]
-						.split('', 5)
-						.join('')
-				}}
-			</p>
+			<div class="bloc-header">
+				<div class="profilPic ">
+					<img :src="post.User.imageUrl" class="profilPic-img" />
+				</div>
+
+				<h2 class="bloc-header-user">
+					{{ post.User.firstName }} <br />
+					{{ post.User.lastName }}
+				</h2>
+				<div class="bloc-header-date">
+					<p class="bloc-header-date-day">{{ post.createdAt.split('T')[0] }}</p>
+					<p class="bloc-header-date-hours">
+						{{
+							post.createdAt
+								.split('T')[1]
+								.split('', 5)
+								.join('')
+						}}
+					</p>
+				</div>
+
+				<i @click="onDelete(post.id)" class="fas fa-times"></i>
+			</div>
+
+			<div class="bloc-content"></div>
 			<p>{{ post.content }}</p>
 
 			<img :src="post.imageUrl" />
-			<i @click="onDelete(post.id)" class="fas fa-times"></i>
 		</div>
 
 		<Comment :post="post" />
@@ -48,6 +62,7 @@ export default {
 	max-width: 35%;
 	display: flex;
 	justify-content: space-between;
+	flex-direction: column;
 	border-radius: 1rem;
 	margin: 0 auto 0 auto;
 	background-color: white;
@@ -58,6 +73,27 @@ export default {
 }
 i {
 	margin: 15px;
+}
+
+.profilPic-img {
+	border-radius: 10rem;
+	object-fit: cover;
+	height: 60px;
+	width: 60px;
+	margin: 5px;
+}
+.bloc-header {
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	border-bottom: 2px solid black;
+}
+
+.bloc-header-user {
+	margin: 0;
+}
+.bloc-header-date-day {
+	margin-top: 5px;
 }
 </style>
 

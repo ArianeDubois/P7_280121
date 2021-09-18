@@ -33,14 +33,6 @@ export default {
 			formData.append('content', this.content),
 				formData.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
 				formData.append('imageUrl', this.imageUrl),
-				// const newPost = {
-				// 	content: this.content,
-				// 	idUser: JSON.parse(localStorage.getItem('idUser')),
-				// 	imageUrl: formData.append('file', this.file),
-				// };
-				// console.log(formData);
-
-				// console.log(...formData.entries());
 				this.$emit('create-post', formData);
 		},
 
@@ -50,7 +42,7 @@ export default {
 			console.log(this.imageUrl);
 		},
 	},
-	async created() {
+	async mounted() {
 		this.imageUrl = await this.uploadImage();
 	},
 };

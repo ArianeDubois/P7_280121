@@ -127,7 +127,7 @@ export default {
 		},
 	},
 
-	async create() {
+	async created() {
 		this.user = await this.fetchAccount();
 		this.user = await this.updateProfil();
 	},

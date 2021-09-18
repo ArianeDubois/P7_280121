@@ -4,7 +4,7 @@
 			<router-link to="/" class="btn">login</router-link>
 			<Button text="Signup" class="btn" />
 		</header>
-		<form @submit="onSubmit">
+		<form @submit="onSubmit" enctype="multipart/form-data">
 			<div>
 				<label>Firstname</label>
 				<input type="text" v-model="firstName" name="firstName" />
@@ -27,6 +27,9 @@
 				<input type="text" v-model="biographie" name="biographie" />
 			</div>
 
+			<label>Photo de profil</label>
+			<input type="file" ref="file" @change="uploadImage" name="imageUrl" placeholder="url" />
+
 			<input type="submit" value="Inscription" class="btn" />
 		</form>
 	</div>
@@ -42,6 +45,7 @@ export default {
 			email: '',
 			password: '',
 			biographie: '',
+			imageUrl: '',
 		};
 	},
 	components: {
@@ -51,35 +55,35 @@ export default {
 		onSubmit(e) {
 			e.preventDefault();
 			//alert champs null
-			const newUser = {
-				firstName: this.firstName,
-				lastName: this.lastName,
-				email: this.email,
-				password: this.password,
-				biographie: this.biographie,
-			};
 
+			let formData = new FormData();
+			formData.append('firstName', this.firstName),
+				formData.append('lastName', this.lastName),
+				formData.append('email', this.email),
+				formData.append('password', this.password);
+			formData.append('biographie', this.biographie);
+			formData.append('imageUrl', this.imageUrl);
 			// console.log(newUser);
 			//fetch
+			fetch('http://localhost:3000/home/signup', {
+				'Content-Type': 'multipart/form-data',
 
-			const options = {
 				method: 'POST',
-				body: JSON.stringify(newUser),
 				headers: {
-					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
-			};
-
-			// console.log(User, options);
-			//fetch
-
-			fetch('http://localhost:3000/home/signup', options)
-				.then((res) => res.json())
-				.then((res) => {
-					console.log(res);
-				})
-				.catch((error) => console.log(error));
+				body: formData,
+			});
 		},
+
+		async uploadImage() {
+			this.imageUrl = this.$refs.file.files[0]; //
+			console.log(this.imageUrl);
+		},
+	},
+
+	async mounted() {
+		this.imageUrl = await this.uploadImage();
 	},
 };
 </script>

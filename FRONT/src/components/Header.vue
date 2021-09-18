@@ -3,6 +3,7 @@
 		<h1>{{ titleTxt }}</h1>
 
 		<router-link to="/home" class="btn">Acceuil</router-link>
+		<div class="profilPic"><img :src="user.imageUrl" class="profilPic-img" /></div>
 
 		<router-link to="/profil" :user="user" class="btn">
 			{{ user.firstName }}{{ user.lastName }}

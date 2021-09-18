@@ -4,8 +4,9 @@ const userCtrl = require('../controllers/user');
 const auth = require('../middelwares/auth');
 const isUser = require('../middelwares/isUser');
 const isUserOrAdmin = require('../middelwares/isUserOrAdmin');
+const multer = require('../middelwares/multer');
 
-router.post('/signup', userCtrl.signup);
+router.post('/signup', multer, userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/profil/:id', auth, userCtrl.userProfil);
 router.put('/profil/:id', auth, isUser, userCtrl.updateProfil);
