@@ -2,21 +2,35 @@
 	<div>
 		<!-- affichage de la liste des commentaires-->
 		<div v-for="comment in comments" :key="comment.id" class="bloc comment-list">
-			<h3>{{ comment.User.firstName }} {{ comment.User.lastName }}</h3>
-			<p>{{ comment.createdAt.split('T')[0] }}</p>
+			<div class="bloc-header">
+				<div class="profilPic ">
+					<img :src="post.User.imageUrl" class="profilPic-img" />
+					<div class="bloc-header-user">
+						<h3>
+							{{ comment.User.firstName }}
+							{{ comment.User.lastName }}
+						</h3>
+					</div>
+				</div>
+
+				<div class="bloc-header-date">
+					<p>{{ comment.createdAt.split('T')[0] }}</p>
+					<p>
+						{{
+							comment.createdAt
+								.split('T')[1]
+								.split('', 5)
+								.join('')
+						}}
+					</p>
+				</div>
+				<i @click="deleteComment(comment.id)" class="fas fa-times"></i>
+			</div>
 			<p>
-				{{
-					comment.createdAt
-						.split('T')[1]
-						.split('', 5)
-						.join('')
-				}}
+				<em>{{ comment.content }} </em>
 			</p>
-			<p>{{ comment.content }}</p>
 
 			<!-- split(separator,limit)index -->
-
-			<i @click="deleteComment(comment.id)" class="fas fa-times"></i>
 		</div>
 
 		<!-- create comment -->
@@ -112,6 +126,7 @@ export default {
 	border-radius: 1rem;
 	margin: 0 auto 0 auto;
 }
+
 .bloc-form-content {
 	/* reset css */
 	margin: 2px 10px 2px 10px;

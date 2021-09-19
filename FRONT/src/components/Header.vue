@@ -1,13 +1,14 @@
 <template>
 	<header>
-		<h1>{{ titleTxt }}</h1>
-
 		<router-link to="/home" class="btn">Acceuil</router-link>
-		<div class="profilPic"><img :src="user.imageUrl" class="profilPic-img" /></div>
 
-		<router-link to="/profil" :user="user" class="btn">
-			{{ user.firstName }}{{ user.lastName }}
-		</router-link>
+		<div class="profilPic">
+			<img :src="user.imageUrl" class="profilPic-img" />
+			<router-link to="/profil" :user="user" class="btn">
+				{{ user.firstName }}{{ user.lastName }}
+			</router-link>
+		</div>
+
 		<Button @click="deconnectUser" text="déconnexion" />
 		<!-- v-show if is admin -->
 		<!-- router bloquer l'accès avce l'url  -->
@@ -46,8 +47,11 @@ a {
 }
 header {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	max-width: 50vw;
 	align-items: center;
 	margin: auto;
+	padding-bottom: 20px;
+	border-bottom: 13px solid black;
 }
 </style>

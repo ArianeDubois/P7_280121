@@ -4,47 +4,63 @@
 
 		<!-- on submit ubdate -->
 		<!-- faire un place holder dynamique avec un fetch sur mes donnée  -->
-		<form @submit="updateProfil">
-			<div>
-				<label>Firstname</label>
-				<input
-					type="text"
-					v-model="user.firstName"
-					name="firstName"
-					:placeholder="user.firstName"
-				/>
-			</div>
-			<div>
-				<label>LastName</label>
-				<input
-					type="text"
-					v-model="user.lastName"
-					name="lastName"
-					:placeholder="user.lastName"
-				/>
-			</div>
-			<div>
-				<label>Mail</label>
-				<input type="email" v-model="user.email" name="email" :placeholder="user.email" />
-			</div>
-			<div>
-				<label>Password</label>
-				<input type="password" v-model="user.password" name="password" />
-			</div>
+		<div class="bloc">
+			<form @submit="updateProfil" enctype="multipart/form-data">
+				<div class="blocForm">
+					<div class="image-form">
+						<label>Photo de profil</label>
+						<img :src="user.imageUrl" class="profilPic-img" />
+						<input
+							type="file"
+							ref="file"
+							@change="uploadImage"
+							name="imageUrl"
+							placeholder="url"
+						/>
+					</div>
+					<div class="content-form">
+						<label>Firstname</label>
+						<input
+							type="text"
+							v-model="newUser.firstName"
+							name="firstName"
+							:placeholder="newUser.firstName"
+						/>
 
-			<div>
-				<label>Biographie</label>
-				<input
-					type="text"
-					v-model="user.biographie"
-					name="biographie"
-					:placeholder="user.biographie"
-				/>
-			</div>
+						<label>LastName</label>
+						<input
+							type="text"
+							v-model="newUser.lastName"
+							name="lastName"
+							:placeholder="newUser.lastName"
+						/>
 
-			<input type="submit" value="MODIFIER" class="btn" />
-			<button @click="deleteAccount" class="btn">Supprimer mon compte</button>
-		</form>
+						<label>Mail</label>
+						<input
+							type="email"
+							v-model="newUser.email"
+							name="email"
+							:placeholder="user.email"
+						/>
+
+						<label>Password</label>
+						<input type="password" v-model="newUser.password" name="password" />
+
+						<label>Biographie</label>
+						<input
+							type="text"
+							v-model="newUser.biographie"
+							name="biographie"
+							:placeholder="user.biographie"
+						/>
+					</div>
+				</div>
+				<div class="button-form">
+					<button @click="deleteAccount" class="btn">Supprimer mon compte</button>
+					<input type="submit" value="modifier" class="btn" />
+				</div>
+			</form>
+		</div>
 	</div>
 </template>
 
@@ -55,6 +71,7 @@ export default {
 	data() {
 		return {
 			user: {},
+			newUser: {},
 		};
 	},
 
@@ -76,34 +93,45 @@ export default {
 			const data = await res.json();
 			return data;
 		},
+
 		//UBDATE
 		async updateProfil(e) {
 			e.preventDefault();
 			//alert champs null
-			const modifyUser = {
-				firstName: this.user.firstName,
-				lastName: this.user.lastName,
-				email: this.user.email,
-				password: this.user.password,
-				biographie: this.user.biographie,
-				idUser: JSON.parse(localStorage.getItem('idUser')),
-			};
+			let modifyUser = new FormData();
+			modifyUser.append('firstName', this.newUser.firstName),
+				modifyUser.append('lastName', this.newUser.lastName),
+				modifyUser.append('email', this.newUser.email),
+				modifyUser.append('password', this.newUser.password),
+				modifyUser.append('biographie', this.newUser.biographie),
+				modifyUser.append(
+					'idUser',
+					this.newUser.idUser.JSON.parse(localStorage.getItem('idUser'))
+				),
+				modifyUser.append('imageUrl', this.newUser.imageUrl);
 
 			const id = JSON.parse(localStorage.getItem('idUser'));
 
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 				method: 'PUT',
 				headers: {
-					'Content-Type': 'application/json',
+					'Content-Type': 'multipart/form-data',
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 
-				body: JSON.stringify(modifyUser),
+				body: modifyUser,
 			});
+
 			alert('modiffications effectuées');
-			const newUser = await res.json();
-			return newUser;
+			const data = await res.json();
+			return data;
 		},
+
+		async uploadImage() {
+			this.newUser.imageUrl = this.$refs.file.files[0]; //
+			console.log(this.newUser.imageUrl);
+		},
+
 		//DELETE
 		async deleteAccount() {
 			if (confirm('are you sure ?')) {
@@ -126,12 +154,40 @@ export default {
 			}
 		},
 	},
+	async mounted() {
+		this.newUser.imageUrl = await this.uploadImage();
+	},
 
 	async created() {
 		this.user = await this.fetchAccount();
-		this.user = await this.updateProfil();
+		this.newUser = await this.updateProfil();
 	},
 };
 </script>
 
-<style></style>
+<style scoped>
+.blocForm {
+	display: flex;
+	justify-content: space-around;
+}
+.content-form,
+.image-form {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	align-items: center;
+}
+img {
+	height: 100px;
+	width: 100px;
+}
+.bloc {
+	margin-top: 100px;
+}
+.button-form {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+	border-top: 2px solid black;
+}
+</style>

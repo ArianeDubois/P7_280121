@@ -6,15 +6,15 @@
 			<div class="bloc-header">
 				<div class="profilPic ">
 					<img :src="post.User.imageUrl" class="profilPic-img" />
+					<h2 class="bloc-header-user">
+						{{ post.User.firstName }}
+						{{ post.User.lastName }}
+					</h2>
 				</div>
 
-				<h2 class="bloc-header-user">
-					{{ post.User.firstName }} <br />
-					{{ post.User.lastName }}
-				</h2>
 				<div class="bloc-header-date">
-					<p class="bloc-header-date-day">{{ post.createdAt.split('T')[0] }}</p>
-					<p class="bloc-header-date-hours">
+					<p>{{ post.createdAt.split('T')[0] }}</p>
+					<p>
 						{{
 							post.createdAt
 								.split('T')[1]
@@ -28,7 +28,9 @@
 			</div>
 
 			<div class="bloc-content"></div>
-			<p>{{ post.content }}</p>
+			<p>
+				<em>{{ post.content }}</em>
+			</p>
 
 			<img :src="post.imageUrl" />
 		</div>
@@ -72,7 +74,13 @@ export default {
 	margin-top: 100px;
 }
 i {
-	margin: 15px;
+	margin: 20px;
+}
+
+.profilPic {
+	display: flex;
+	align-items: center;
+	margin: 0;
 }
 
 .profilPic-img {
@@ -81,19 +89,21 @@ i {
 	height: 60px;
 	width: 60px;
 	margin: 5px;
+	border-bottom: 2px solid black;
 }
 .bloc-header {
 	display: flex;
 	justify-content: space-between;
 	align-content: center;
+	max-height: 50px;
 	border-bottom: 2px solid black;
 }
 
-.bloc-header-user {
-	margin: 0;
+.bloc-header-date {
+	display: flex;
 }
-.bloc-header-date-day {
-	margin-top: 5px;
+.bloc-header-user {
+	margin: auto;
 }
 </style>
 

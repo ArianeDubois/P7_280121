@@ -2,20 +2,22 @@
 	<div>
 		<header>
 			<router-link to="/signup" class="btn">inscription</router-link>
-			<Button text="connextion" class="btn" />
+			<Button text="connexion" class="btn" />
 		</header>
-		<form @submit="fetchLogin">
-			<div>
-				<label>Mail</label>
-				<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
-			</div>
-			<div>
-				<label>Password</label>
-				<input type="password" v-model="password" name="password" />
-			</div>
+		<div class="bloc">
+			<form @submit="fetchLogin">
+				<div>
+					<label>Mail</label>
+					<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
+				</div>
+				<div>
+					<label>Password</label>
+					<input type="password" v-model="password" name="password" />
+				</div>
 
-			<input type="submit" value="Connection" class="btn" />
-		</form>
+				<input type="submit" value="Connection" class="btn" />
+			</form>
+		</div>
 	</div>
 </template>
 <script>

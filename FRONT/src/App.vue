@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<img alt="Vue logo" src="./assets/logo.png" />
-		<div class="container">
-			<router-view @updateProfil="updateProfil(modifyUser)"></router-view>
+		<div class="logo">
+			<img alt="Vue logo" src="./assets/logo.png" class="logo-img" />
 		</div>
+		<router-view @updateProfil="updateProfil(modifyUser)"></router-view>
 	</div>
 </template>
 
@@ -14,13 +14,6 @@ export default {
 </script>
 
 <style>
-body {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
-}
-
 .btn {
 	background-color: black;
 	color: white;
@@ -28,5 +21,18 @@ body {
 	font-size: 18px;
 	padding: 0.5rem 1rem 0.5rem 1rem;
 	border-radius: 0.8rem;
+}
+
+.logo {
+	max-height: 10vw;
+	display: flex;
+	justify-content: center;
+}
+.logo-img {
+	object-fit: cover;
+
+	width: 50vw;
+	height: auto;
+	margin: 0;
 }
 </style>

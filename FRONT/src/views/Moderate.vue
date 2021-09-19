@@ -3,11 +3,13 @@
 		<Header :user="user" />
 
 		<div v-for="user in users" :key="user.id">
-			<p>{{ user.firstName }}</p>
-			<p>{{ user.lastName }}</p>
-			<p>{{ user.email }}</p>
-			<!-- <img :src="post.imageUrl" /> -->
-			<i @click="deleteAccount(user.id)" class="fas fa-times"></i>
+			<div class=" blocModerate">
+				<p>{{ user.firstName }}</p>
+				<p>{{ user.lastName }}</p>
+				<p>{{ user.email }}</p>
+				<!-- <img :src="post.imageUrl" /> -->
+				<i @click="deleteAccount(user.id)" class="fas fa-times"></i>
+			</div>
 		</div>
 	</div>
 </template>
@@ -77,3 +79,13 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.blocModerate {
+	display: flex;
+	justify-content: space-around;
+	margin: 20px auto 20px auto;
+	max-width: 35vw;
+	border: 2px solid black;
+	border-radius: 1em;
+}
+</style>

@@ -1,11 +1,20 @@
 <template>
 	<form @submit="onSubmit" enctype="multipart/form-data">
-		<div>
-			<label>Content</label>
-			<input type="text" v-model="content" name="content" placeholder="Content" />
-
-			<label>Image</label>
-			<input type="file" ref="file" @change="uploadImage" name="imageUrl" placeholder="url" />
+		<div class="blocPost">
+			<div class="bloc-post-content">
+				<label class="blocPost-titre">Content</label>
+				<input type="text" v-model="content" name="content" placeholder="Content" />
+			</div>
+			<div class="bloc-post-image">
+				<label class="blocPost-titre">Image</label>
+				<input
+					type="file"
+					ref="file"
+					@change="uploadImage"
+					name="imageUrl"
+					placeholder="url"
+				/>
+			</div>
 		</div>
 		<input type="submit" value="Poster un message" class="btn btn-block" />
 	</form>
@@ -48,4 +57,21 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.blocPost {
+	border: 5px dotted black;
+	display: flex;
+	justify-content: space-around;
+	margin: 100px auto 0 auto;
+	max-width: 35vw;
+	height: 100px;
+	border-radius: 1em;
+}
+
+.bloc-post-content,
+.bloc-post-image {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+</style>

@@ -123,16 +123,26 @@ exports.updateProfil = (req, res, next) => {
 			if (!user) {
 				return res.status(400).json({ message: 'utilisateur introuvable' });
 			} else if (user.id == req.body.idUser) {
-				User.update(
-					{
-						firstName: req.body.firstName,
-						lastName: req.body.lastName,
-						biographie: req.body.biographie,
-						email: req.body.email,
-						password: req.body.password,
-					},
-					{ where: { id: req.params.id } }
-				)
+				const userModifs = {
+					firstName: req.body.firstName,
+					lastName: req.body.lastName,
+					biographie: req.body.biographie,
+					email: req.body.email,
+					password: req.body.password,
+					imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+				};
+
+				// if (req.file) {
+				// 	const filename = user.imageUrl.split('/images/')[1];
+				// 	fs.unlink(`images/${filename}`, () => {
+				// 		User.update({ userModifs }, { where: { id: req.params.id } })
+				// 			.then(() => res.status(201).json(user))
+				// 			.catch((error) => res.status(400).json({ error }));
+				// 	});
+				// }
+				// sans images
+
+				User.update({ userModifs }, { where: { id: req.params.id } })
 					.then(() => res.status(201).json(user))
 					.catch((error) => res.status(400).json({ error }));
 			} else {
