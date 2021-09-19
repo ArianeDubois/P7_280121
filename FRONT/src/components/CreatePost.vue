@@ -48,7 +48,7 @@ export default {
 		//on Chnage
 		async uploadImage() {
 			this.imageUrl = this.$refs.file.files[0]; //
-			console.log(this.imageUrl);
+			// console.log(this.imageUrl);
 		},
 	},
 	async mounted() {

@@ -82,13 +82,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhd
 
 
 ###
-PUT  http://localhost:3000/home/profil/9
+PUT  http://localhost:3000/home/profil/4
 Content-Type: application/json 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMjA0Mzk3OCwiZXhwIjoxNjMyMTMwMzc4fQ.Pn_9Dc9zbEh2EKQN-Nag9MElYFT4gJV5tMavVtp8G30
 
 {
-    "idUser": 9,
-    "email": "tino@mail.it"
+    "idUser": 4,
+    "email": "xt@mail.it"
 } 
 
 

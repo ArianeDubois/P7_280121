@@ -12,7 +12,9 @@
 		<Button @click="deconnectUser" text="déconnexion" />
 		<!-- v-show if is admin -->
 		<!-- router bloquer l'accès avce l'url  -->
-		<router-link to="/moderate" :user="user" class="btn"> liste des utilsateurs </router-link>
+		<router-link to="/moderate" :user="user" class="btn" v-if="showDeleteIcon">
+			Modération
+		</router-link>
 	</header>
 </template>
 
@@ -24,9 +26,12 @@ export default {
 	components: {
 		Button,
 	},
-
+	data() {
+		return {
+			showDeleteIcon: false,
+		};
+	},
 	props: {
-		titleTxt: String,
 		user: Object,
 	},
 
@@ -37,6 +42,20 @@ export default {
 			localStorage.clear();
 			this.$router.push('/');
 		},
+
+		async showIcon() {
+			// si l'user est admin ou si l'user connecté est l'useur
+			console.log(this.$props.user.isAdmi);
+
+			if (this.$props.user.isAdmin === true) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+	},
+	async created() {
+		this.showDeleteIcon = await this.showIcon();
 	},
 };
 </script>

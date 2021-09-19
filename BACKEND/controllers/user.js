@@ -129,22 +129,27 @@ exports.updateProfil = (req, res, next) => {
 					biographie: req.body.biographie,
 					email: req.body.email,
 					password: req.body.password,
-					imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+					imageUrl: req.body.imageUrl,
 				};
 
-				// if (req.file) {
-				// 	const filename = user.imageUrl.split('/images/')[1];
-				// 	fs.unlink(`images/${filename}`, () => {
-				// 		User.update({ userModifs }, { where: { id: req.params.id } })
-				// 			.then(() => res.status(201).json(user))
-				// 			.catch((error) => res.status(400).json({ error }));
-				// 	});
-				// }
-				// sans images
+				if (req.file) {
+					userModifs.imageUrl = `${req.protocol}://${req.get('host')}/images/${
+						req.file.filename
+					}`;
 
-				User.update({ userModifs }, { where: { id: req.params.id } })
-					.then(() => res.status(201).json(user))
-					.catch((error) => res.status(400).json({ error }));
+					const filename = user.imageUrl.split('/images/')[1];
+					fs.unlink(`images/${filename}`, () => {
+						User.update(userModifs, { where: { id: req.params.id } })
+							.then((newUser) => res.status(201).json(newUser))
+							.catch((error) => res.status(400).json({ error }));
+					});
+				}
+				// sans images
+				else {
+					User.update(userModifs, { where: { id: req.params.id } })
+						.then((newUser) => res.status(201).json(newUser))
+						.catch((error) => res.status(400).json({ error }));
+				}
 			} else {
 				return res
 					.status(401)

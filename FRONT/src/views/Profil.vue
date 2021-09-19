@@ -22,34 +22,34 @@
 						<label>Firstname</label>
 						<input
 							type="text"
-							v-model="newUser.firstName"
+							v-model="user.firstName"
 							name="firstName"
-							:placeholder="newUser.firstName"
+							:placeholder="user.firstName"
 						/>
 
 						<label>LastName</label>
 						<input
 							type="text"
-							v-model="newUser.lastName"
+							v-model="user.lastName"
 							name="lastName"
-							:placeholder="newUser.lastName"
+							:placeholder="user.lastName"
 						/>
 
 						<label>Mail</label>
 						<input
 							type="email"
-							v-model="newUser.email"
+							v-model="user.email"
 							name="email"
 							:placeholder="user.email"
 						/>
 
 						<label>Password</label>
-						<input type="password" v-model="newUser.password" name="password" />
+						<input type="password" v-model="user.password" name="password" />
 
 						<label>Biographie</label>
 						<input
 							type="text"
-							v-model="newUser.biographie"
+							v-model="user.biographie"
 							name="biographie"
 							:placeholder="user.biographie"
 						/>
@@ -71,7 +71,6 @@ export default {
 	data() {
 		return {
 			user: {},
-			newUser: {},
 		};
 	},
 
@@ -99,23 +98,20 @@ export default {
 			e.preventDefault();
 			//alert champs null
 			let modifyUser = new FormData();
-			modifyUser.append('firstName', this.newUser.firstName),
-				modifyUser.append('lastName', this.newUser.lastName),
-				modifyUser.append('email', this.newUser.email),
-				modifyUser.append('password', this.newUser.password),
-				modifyUser.append('biographie', this.newUser.biographie),
-				modifyUser.append(
-					'idUser',
-					this.newUser.idUser.JSON.parse(localStorage.getItem('idUser'))
-				),
-				modifyUser.append('imageUrl', this.newUser.imageUrl);
+			modifyUser.append('firstName', this.user.firstName),
+				modifyUser.append('lastName', this.user.lastName),
+				modifyUser.append('email', this.user.email),
+				modifyUser.append('password', this.user.password),
+				modifyUser.append('biographie', this.user.biographie),
+				modifyUser.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
+				modifyUser.append('imageUrl', this.user.imageUrl);
 
 			const id = JSON.parse(localStorage.getItem('idUser'));
 
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
+				'Content-Type': 'multipart/form-data',
 				method: 'PUT',
 				headers: {
-					'Content-Type': 'multipart/form-data',
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 
@@ -128,8 +124,8 @@ export default {
 		},
 
 		async uploadImage() {
-			this.newUser.imageUrl = this.$refs.file.files[0]; //
-			console.log(this.newUser.imageUrl);
+			this.user.imageUrl = this.$refs.file.files[0]; //
+			console.log(this.user.imageUrl);
 		},
 
 		//DELETE
@@ -154,13 +150,13 @@ export default {
 			}
 		},
 	},
-	async mounted() {
-		this.newUser.imageUrl = await this.uploadImage();
+	async beforeMouted() {
+		this.user.imageUrl = await this.uploadImage();
 	},
 
 	async created() {
 		this.user = await this.fetchAccount();
-		this.newUser = await this.updateProfil();
+		this.user = await this.updateProfil();
 	},
 };
 </script>

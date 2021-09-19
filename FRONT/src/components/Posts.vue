@@ -3,7 +3,7 @@
 		<!-- boucle sur la liste des posts pour les afficher individuellement -->
 		<!-- doit avoir une clé unique-->
 		<div v-for="post in posts" :key="post.id">
-			<Post @delete-post="$emit('delete-post', post.id)" :post="post" />
+			<Post @delete-post="$emit('delete-post', post.id)" :post="post" :user="user" />
 		</div>
 	</div>
 </template>

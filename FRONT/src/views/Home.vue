@@ -2,7 +2,7 @@
 	<div>
 		<Header :user="user" />
 		<CreatePost @create-post="createPost" />
-		<Posts @delete-post="deletePost" :posts="posts" />
+		<Posts @delete-post="deletePost" :user="user" :posts="posts" />
 	</div>
 </template>
 <script>
@@ -85,8 +85,8 @@ export default {
 		},
 	},
 	async created() {
-		this.posts = await this.fetchPosts();
 		this.user = await this.fetchAccount();
+		this.posts = await this.fetchPosts();
 	},
 };
 </script>

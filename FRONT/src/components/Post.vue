@@ -23,8 +23,7 @@
 						}}
 					</p>
 				</div>
-
-				<i @click="onDelete(post.id)" class="fas fa-times"></i>
+				<i v-if="showDeleteIcon" @click="onDelete(post.id)" class="fas fa-times"></i>
 			</div>
 
 			<div class="bloc-content"></div>
@@ -35,25 +34,47 @@
 			<img :src="post.imageUrl" />
 		</div>
 
-		<Comment :post="post" />
+		<Comments :post="post" :user="user" />
 	</div>
 </template>
 
 <script>
-import Comment from './Comment.vue';
+import Comments from './Comments.vue';
 export default {
 	name: 'Post',
+	data() {
+		return {
+			showDeleteIcon: false,
+		};
+	},
+
 	props: {
 		post: Object,
+		user: Object,
 	},
 	components: {
-		Comment,
+		Comments,
 	},
 	methods: {
 		onDelete(id) {
 			console.log(this.post);
 			this.$emit('delete-post', id);
 		},
+		async showIcon() {
+			// si l'user est admin ou si l'user connecté est l'useur du post
+
+			if (
+				this.$props.user.id === this.$props.post.idUser ||
+				this.$props.user.isAdmin === true
+			) {
+				return true;
+			} else {
+				return false;
+			}
+		},
+	},
+	async created() {
+		this.showDeleteIcon = await this.showIcon();
 	},
 };
 </script>
