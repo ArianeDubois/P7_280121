@@ -46,13 +46,17 @@
 						<label>Password</label>
 						<input type="password" v-model="user.password" name="password" />
 
-						<label>Biographie</label>
-						<input
-							type="text"
-							v-model="user.biographie"
-							name="biographie"
-							:placeholder="user.biographie"
-						/>
+						<label>Secteur d'activité</label>
+						<select id="secteurs" v-model="secteur" name="secteur">
+							<option disabled value="">{{ user.secteur }}</option>
+
+							<option value="communication">Communication</option>
+							<option value="vente">Vente</option>
+							<option value="management">Management</option>
+							<option value="finance">Finance</option>
+							<option value="manutention">Manutention</option>
+							<option value="alimentation">Alimentation</option>
+						</select>
 					</div>
 				</div>
 				<div class="button-form">
@@ -71,6 +75,7 @@ export default {
 	data() {
 		return {
 			user: {},
+			secteur: '',
 		};
 	},
 
@@ -102,7 +107,7 @@ export default {
 				modifyUser.append('lastName', this.user.lastName),
 				modifyUser.append('email', this.user.email),
 				modifyUser.append('password', this.user.password),
-				modifyUser.append('biographie', this.user.biographie),
+				modifyUser.append('secteur', this.secteur),
 				modifyUser.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
 				modifyUser.append('imageUrl', this.user.imageUrl);
 

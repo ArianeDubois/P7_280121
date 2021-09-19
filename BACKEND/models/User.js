@@ -35,10 +35,11 @@ User.init(
 		},
 		imageUrl: {
 			type: DataTypes.STRING,
+			allowNull: false,
 		},
 
-		biographie: {
-			type: DataTypes.TEXT,
+		secteur: {
+			type: DataTypes.STRING,
 			// allowNull defaults to true
 		},
 		isAdmin: {

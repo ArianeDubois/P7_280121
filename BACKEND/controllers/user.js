@@ -37,7 +37,7 @@ exports.signup = (req, res, next) => {
 						const newUser = User.create({
 							firstName: req.body.firstName,
 							lastName: req.body.lastName,
-							biographie: req.body.biographie,
+							secteur: req.body.secteur,
 							email: req.body.email,
 							imageUrl: image,
 							isAdmin: false,
@@ -126,7 +126,7 @@ exports.updateProfil = (req, res, next) => {
 				const userModifs = {
 					firstName: req.body.firstName,
 					lastName: req.body.lastName,
-					biographie: req.body.biographie,
+					secteur: req.body.secteur,
 					email: req.body.email,
 					password: req.body.password,
 					imageUrl: req.body.imageUrl,

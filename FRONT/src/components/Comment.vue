@@ -10,6 +10,9 @@
 							{{ comment.User.firstName }}
 							{{ comment.User.lastName }}
 						</h3>
+						<h4 :class="`secteur ${comment.User.secteur}`">
+							{{ comment.User.secteur }}
+						</h4>
 					</div>
 				</div>
 

@@ -25,8 +25,15 @@
 				</div>
 
 				<div>
-					<label>Biographie</label>
-					<input type="text" v-model="biographie" name="biographie" />
+					<label>Secteur d'activité</label>
+					<select id="secteurs" v-model="secteur" name="secteur">
+						<option value="communication">Communication</option>
+						<option value="vente">Vente</option>
+						<option value="management">Management</option>
+						<option value="finance">Finance</option>
+						<option value="manutention">Manutention</option>
+						<option value="alimentation">Alimentation</option>
+					</select>
 				</div>
 
 				<label>Photo de profil</label>
@@ -53,7 +60,7 @@ export default {
 			lastName: '',
 			email: '',
 			password: '',
-			biographie: '',
+			secteur: '',
 			imageUrl: '',
 		};
 	},
@@ -70,7 +77,7 @@ export default {
 				formData.append('lastName', this.lastName),
 				formData.append('email', this.email),
 				formData.append('password', this.password),
-				formData.append('biographie', this.biographie),
+				formData.append('secteur', this.secteur),
 				formData.append('imageUrl', this.imageUrl);
 			// console.log(newUser);
 			//fetch

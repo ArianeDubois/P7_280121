@@ -12,7 +12,8 @@
 		<Button @click="deconnectUser" text="déconnexion" />
 		<!-- v-show if is admin -->
 		<!-- router bloquer l'accès avce l'url  -->
-		<router-link to="/moderate" :user="user" class="btn" v-if="showDeleteIcon">
+		<router-link to="/moderate" :user="user" class="btn">
+			<!-- <router-link to="/moderate" :user="user" class="btn" v-if="showDeleteIcon"> -->
 			Modération
 		</router-link>
 	</header>

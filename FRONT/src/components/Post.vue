@@ -10,6 +10,7 @@
 						{{ post.User.firstName }}
 						{{ post.User.lastName }}
 					</h2>
+					<h3 :class="`secteur ${post.User.secteur}`">{{ post.User.secteur }}</h3>
 				</div>
 
 				<div class="bloc-header-date">
@@ -125,6 +126,41 @@ i {
 }
 .bloc-header-user {
 	margin: auto;
+	display: flex;
+	align-items: center;
+}
+
+.secteur {
+	border-radius: 1em;
+	padding: 1px 5px 1px 5px;
+	font-size: 15px;
+	margin: 16px;
+}
+
+.vente {
+	color: rgb(145, 66, 236);
+	border: 1px solid rgb(145, 66, 236);
+}
+.communication {
+	color: rgb(65, 14, 231);
+	border: 1px solid rgb(65, 14, 231);
+}
+.finance {
+	color: rgb(80, 200, 164);
+	border: 1px solid rgb(80, 200, 164);
+}
+.manutention {
+	color: rgb(255, 107, 93);
+	border: 1px solid rgb(255, 107, 93);
+}
+.management {
+	color: rgb(255, 99, 138);
+	border: 1px solid rgb(255, 99, 138);
+}
+
+.alimentation {
+	color: rgb(245, 48, 74);
+	border: 1px solid rgb(245, 48, 74);
 }
 </style>
 

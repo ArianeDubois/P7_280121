@@ -30,7 +30,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTg3MzEyOSwiZXhwIjoxNjMxOTU5NTI5fQ.nlXeaIOqHb7qx-RYJD-riNDFuZs9rR57cOpZmyzi8dE
 
 {       
-        "idUser": 1,
+        "idUser": 6,
  		"content": "salut!"
 } 
 
