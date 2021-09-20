@@ -47,9 +47,7 @@
 						<input type="password" v-model="user.password" name="password" />
 
 						<label>Secteur d'activité</label>
-						<select id="secteurs" v-model="secteur" name="secteur">
-							<option disabled value="">{{ user.secteur }}</option>
-
+						<select id="secteurs" v-model="user.secteur" name="secteur">
 							<option value="communication">Communication</option>
 							<option value="vente">Vente</option>
 							<option value="management">Management</option>
@@ -75,7 +73,7 @@ export default {
 	data() {
 		return {
 			user: {},
-			secteur: '',
+			// secteur: '',
 		};
 	},
 
@@ -107,7 +105,7 @@ export default {
 				modifyUser.append('lastName', this.user.lastName),
 				modifyUser.append('email', this.user.email),
 				modifyUser.append('password', this.user.password),
-				modifyUser.append('secteur', this.secteur),
+				modifyUser.append('secteur', this.user.secteur),
 				modifyUser.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
 				modifyUser.append('imageUrl', this.user.imageUrl);
 

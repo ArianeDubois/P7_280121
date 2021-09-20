@@ -14,6 +14,8 @@ exports.signup = (req, res, next) => {
 		req.body.password == null ||
 		req.body.lastName == null ||
 		req.body.firstName == null
+		// req.body.secteur == null||
+		// req.body.imageUrl == null
 	) {
 		return res.status(400).json({ error: 'Veillez remplir tout les champs' });
 	}

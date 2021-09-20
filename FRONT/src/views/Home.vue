@@ -36,7 +36,7 @@ export default {
 				// body: JSON.stringify(newPost),
 			});
 			const data = await res.json();
-			this.posts = [...this.posts, data];
+			this.posts = [data, ...this.posts];
 		},
 		async deletePost(id) {
 			if (confirm('are you sure ?')) {
