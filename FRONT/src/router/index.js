@@ -6,11 +6,11 @@ import Profil from '../views/Profil';
 import Moderate from '../views/Moderate';
 
 const routes = [
-	{ path: '/', name: 'Login', component: Login },
-	{ path: '/signup', name: 'Signup', component: Signup },
-	{ path: '/moderate', name: 'Moderate', component: Moderate },
+	{ path: '/', name: 'Login', component: Login, meta: { requiresAuth: false } },
+	{ path: '/signup', name: 'Signup', component: Signup, meta: { requiresAuth: false } },
 
 	//navigation guards
+	{ path: '/moderate', name: 'Moderate', component: Moderate, meta: { requiresAuth: true } },
 	{ path: '/home', name: 'Home', component: Home, meta: { requiresAuth: true } },
 	{ path: '/profil', name: 'Profil', component: Profil, meta: { requiresAuth: true } },
 ];
@@ -24,10 +24,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	//routes qui demandent une auth
 	if (to.meta.requiresAuth) {
-		if (localStorage.idUser === 'undefined' || localStorage.idUser === undefined) {
+		if (!localStorage.idUser || !localStorage.token) {
 			//on donne le nom du composant vers lequel rediriger l'user invalide
 			next({
 				name: 'Login',
+			});
+		} else {
+			next();
+		}
+		//routes qui demandent de ne pas être auth
+	} else if (!to.meta.requiresAuth) {
+		if (localStorage.idUser || localStorage.token) {
+			next({
+				name: 'Home',
 			});
 		} else {
 			next();
