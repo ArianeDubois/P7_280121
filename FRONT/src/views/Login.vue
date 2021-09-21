@@ -59,7 +59,7 @@ export default {
 			this.$router.push('/home');
 
 			if (localStorage.idUser === 'undefined') {
-				alert('identifiants incorrects ');
+				alert(data.error);
 			}
 		},
 	},

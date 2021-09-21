@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
 	Comment.findOne({ where: { id: req.params.id } })
 		.then((comment) => {
 			const token = req.headers.authorization.split(' ')[1]; //
-			const decodeToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
+			const decodeToken = jwt.verify(token, process.env.DB_SECRET_TOKEN);
 			const idUser = decodeToken.idUser;
 
 			//si le  post user  ne correspond pas au token utilisateur

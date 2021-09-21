@@ -4,26 +4,24 @@ const jwt = require('jsonwebtoken');
 const validator = require('email-validator');
 const fs = require('fs');
 
-// const crypto = require('crypto-js'); //crypto allows you to hash plain texts before storing them in the database
-
 //hasher le mot de passe avant de l'envoyer
 exports.signup = (req, res, next) => {
 	//ajouter auyre verif ?
 	if (
-		req.body.email == null ||
-		req.body.password == null ||
-		req.body.lastName == null ||
-		req.body.firstName == null
-		// req.body.secteur == null||
-		// req.body.imageUrl == null
+		req.body.email == '' ||
+		req.body.password == '' ||
+		req.body.lastName == '' ||
+		req.body.firstName == ''
 	) {
-		return res.status(400).json({ error: 'Veillez remplir tout les champs' });
+		return res.status(401).json({ error: 'Veillez remplir tout les champs' });
+	} else if (req.body.secteur == '') {
+		return res.status(401).json({ error: "Veillez renseigner votre secteur d'activité" });
+	} else if (req.body.imageUrl == 'undefined') {
+		return res.status(401).json({ error: 'Veillez importer une photo de profil' });
 	}
 
 	User.findOne({ where: { email: req.body.email } })
 		.then((user) => {
-			// const cryptoMail = crypto.HmacSHA1(req.body.email, process.env.DB_MAIL_KEY).toString();
-
 			if (req.file) {
 				image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 			}
@@ -41,6 +39,8 @@ exports.signup = (req, res, next) => {
 							lastName: req.body.lastName,
 							secteur: req.body.secteur,
 							email: req.body.email,
+							// email: cryptoMail,
+
 							imageUrl: image,
 							isAdmin: false,
 							password: hash,
@@ -50,15 +50,13 @@ exports.signup = (req, res, next) => {
 							.catch((error) => res.status(400).json({ error }));
 					});
 			} else {
-				return res.status(401).json({ error: 'le mail est invalide' });
+				return res.status(400).json({ error: 'le mail est invalide' });
 			}
 		})
 		.catch((error) => res.status(400).json({ error }));
 };
 
 exports.login = (req, res, next) => {
-	// const cryptoMail = crypto.HmacSHA1(req.body.email, process.env.DB_MAIL_KEY).toString();
-
 	User.findOne({ where: { email: req.body.email } })
 		.then((user) => {
 			if (!user) {
@@ -77,7 +75,7 @@ exports.login = (req, res, next) => {
 									isAdmin: user.isAdmin,
 									token: jwt.sign(
 										{ idUser: user.id }, // donnée à chiffrer
-										'RANDOM_TOKEN_SECRET', //clé de chiffrement
+										process.env.DB_SECRET_TOKEN, //clé de chiffrement
 										{ expiresIn: '24h' }
 									),
 								})

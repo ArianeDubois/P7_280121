@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-
+require('dotenv').config(); /*Variables d'environnement */
 const app = express();
 const bodyParser = require('body-parser');
 const User = require('./models/User');
@@ -10,6 +10,8 @@ const sequelize = require('./models/dbConnection');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 const commentRoutes = require('./routes/comment');
+
+const helmet = require('helmet');
 
 // // //ASSOCIATION
 User.hasMany(Post, { foreignKey: 'idPost', onDelete: 'CASCADE' });
@@ -54,6 +56,8 @@ app.use((req, res, next) => {
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 	next();
 });
+
+app.use(helmet());
 
 app.use(bodyParser.json());
 

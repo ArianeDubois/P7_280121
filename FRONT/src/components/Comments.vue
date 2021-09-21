@@ -71,18 +71,20 @@ export default {
 			this.comments = [...this.comments, data];
 		},
 		async deleteComment(id) {
-			//confirmation delete
-			const res = await fetch(`http://localhost:3000/home/comment/${id}`, {
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + localStorage.getItem('token'),
-				},
-			});
-			if (res.status === 200) {
-				this.comments = this.comments.filter((comment) => comment.id !== id); // compare les id post de la db avec l'id envoyer
-			} else {
-				alert('error on deleting post');
+			if (confirm('are you sure ?')) {
+				//confirmation delete
+				const res = await fetch(`http://localhost:3000/home/comment/${id}`, {
+					method: 'DELETE',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: 'Bearer ' + localStorage.getItem('token'),
+					},
+				});
+				if (res.status === 200) {
+					this.comments = this.comments.filter((comment) => comment.id !== id); // compare les id post de la db avec l'id envoyer
+				} else {
+					alert('error on deleting post');
+				}
 			}
 		},
 	},

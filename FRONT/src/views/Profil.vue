@@ -9,7 +9,10 @@
 				<div class="blocForm">
 					<div class="image-form">
 						<label>Photo de profil</label>
-						<img :src="user.imageUrl" class="profilPic-img" />
+						<!-- si pas de changement de photo affiche la phoot actuelle -->
+						<img v-if="!uploadFile" :src="user.imageUrl" class="profilPic-img" />
+						<!-- si changement de photo affiche la prévisualisation -->
+						<img v-if="uploadFile" :src="uploadFile" class="profilPic-img" />
 						<input
 							type="file"
 							ref="file"
@@ -73,6 +76,7 @@ export default {
 	data() {
 		return {
 			user: {},
+			uploadFile: '',
 			// secteur: '',
 		};
 	},
@@ -127,7 +131,8 @@ export default {
 		},
 
 		async uploadImage() {
-			this.user.imageUrl = this.$refs.file.files[0]; //
+			this.user.imageUrl = this.$refs.file.files[0]; //image à envoyer
+			this.uploadFile = URL.createObjectURL(this.user.imageUrl); // previsualisatoin
 			console.log(this.user.imageUrl);
 		},
 
@@ -153,13 +158,14 @@ export default {
 			}
 		},
 	},
-	async beforeMouted() {
+	async mounted() {
 		this.user.imageUrl = await this.uploadImage();
+		this.uploadFile = await this.uploadImage();
 	},
 
 	async created() {
 		this.user = await this.fetchAccount();
-		this.user = await this.updateProfil();
+		// this.user = await this.updateProfil();
 	},
 };
 </script>

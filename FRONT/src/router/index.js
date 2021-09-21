@@ -24,7 +24,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	//routes qui demandent une auth
 	if (to.meta.requiresAuth) {
-		if (!localStorage.idUser || !localStorage.token) {
+		if (localStorage.idUser == 'undefined' || localStorage.idUser == undefined) {
 			//on donne le nom du composant vers lequel rediriger l'user invalide
 			next({
 				name: 'Login',
@@ -33,14 +33,15 @@ router.beforeEach((to, from, next) => {
 			next();
 		}
 		//routes qui demandent de ne pas être auth
-	} else if (!to.meta.requiresAuth) {
-		if (localStorage.idUser || localStorage.token) {
-			next({
-				name: 'Home',
-			});
-		} else {
-			next();
-		}
+		// } else if (!to.meta.requiresAuth) {
+		// 	//localstorage undefined = errreur de connexions
+		// 	if (!localStorage.idUser == 'undefined' || localStorage.idUser) {
+		// 		next({
+		// 			name: 'Home',
+		// 		});
+		// 	} else {
+		// 		next();
+		// 	}
 	} else {
 		next();
 	}

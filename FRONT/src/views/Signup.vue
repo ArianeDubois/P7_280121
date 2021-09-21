@@ -37,6 +37,9 @@
 				</div>
 
 				<label>Photo de profil</label>
+				<i v-if="!uploadFile" class="fas fa-file-image profilPic-img"></i>
+				<!-- si changement de photo affiche la prévisualisation -->
+				<img v-if="uploadFile" :src="uploadFile" class="profilPic-img" />
 				<input
 					type="file"
 					ref="file"
@@ -56,6 +59,7 @@ export default {
 	name: 'Signup',
 	data() {
 		return {
+			uploadFile: '',
 			firstName: '',
 			lastName: '',
 			email: '',
@@ -64,11 +68,12 @@ export default {
 			imageUrl: '',
 		};
 	},
+
 	components: {
 		Button,
 	},
 	methods: {
-		onSubmit(e) {
+		async onSubmit(e) {
 			e.preventDefault();
 			//alert champs null
 
@@ -81,7 +86,7 @@ export default {
 				formData.append('imageUrl', this.imageUrl);
 			// console.log(newUser);
 			//fetch
-			fetch('http://localhost:3000/home/signup', {
+			const res = await fetch('http://localhost:3000/home/signup', {
 				'Content-Type': 'multipart/form-data',
 
 				method: 'POST',
@@ -90,11 +95,19 @@ export default {
 				},
 				body: formData,
 			});
+
+			const data = await res.json();
+
+			if (res.status === 400 || res.status === 401) {
+				alert(data.error);
+			} else if (res.status === 201) {
+				alert('inscription enregistrée, vous pouvez maintenant vous connecter');
+			}
 		},
 
 		async uploadImage() {
-			this.imageUrl = this.$refs.file.files[0]; //
-			console.log(this.imageUrl);
+			this.imageUrl = this.$refs.file.files[0]; // image de la requête
+			this.uploadFile = URL.createObjectURL(this.imageUrl); // previsualisatoin
 		},
 	},
 
@@ -104,4 +117,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+img.profilPic-img {
+	margin: auto;
+	display: flex;
+}
+i.profilPic-img {
+	margin: auto;
+	color: white;
+	background-color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+}
+</style>

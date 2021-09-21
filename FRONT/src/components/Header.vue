@@ -55,6 +55,9 @@ export default {
 			}
 		},
 	},
+
+	//! si les données changent
+
 	async created() {
 		this.showDeleteIcon = await this.showIcon();
 	},
