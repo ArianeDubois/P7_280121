@@ -111,9 +111,11 @@ export default {
 
 				body: modifyUser,
 			});
-
+			//mise a jour des infos
+			this.user = await this.fetchAccount();
 			alert('modiffications effectuées');
 			const data = await res.json();
+
 			return data;
 		},
 
