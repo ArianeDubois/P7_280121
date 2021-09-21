@@ -3,17 +3,16 @@
 		<router-link to="/home" class="btn">Acceuil</router-link>
 
 		<div class="profilPic">
+			<!-- <img v-if="uploadFile" :src="uploadFile" class="profilPic-img" /> -->
 			<img :src="user.imageUrl" class="profilPic-img" />
 			<router-link to="/profil" :user="user" class="btn">
-				{{ user.firstName }}{{ user.lastName }}
+				{{ user.firstName }} {{ user.lastName }}
 			</router-link>
 		</div>
 
 		<Button @click="deconnectUser" text="déconnexion" />
-		<!-- v-show if is admin -->
-		<!-- router bloquer l'accès avce l'url  -->
-		<router-link to="/moderate" :user="user" class="btn">
-			<!-- <router-link to="/moderate" :user="user" class="btn" v-if="showDeleteIcon"> -->
+
+		<router-link v-if="user.isAdmin" to="/moderate" :user="user" class="btn">
 			Modération
 		</router-link>
 	</header>
@@ -27,13 +26,10 @@ export default {
 	components: {
 		Button,
 	},
-	data() {
-		return {
-			showDeleteIcon: false,
-		};
-	},
+
 	props: {
 		user: Object,
+		// uploadFile: String,
 	},
 
 	methods: {
@@ -43,23 +39,6 @@ export default {
 			localStorage.clear();
 			this.$router.push('/');
 		},
-
-		async showIcon() {
-			// si l'user est admin ou si l'user connecté est l'useur
-			console.log(this.$props.user.isAdmi);
-
-			if (this.$props.user.isAdmin === true) {
-				return true;
-			} else {
-				return false;
-			}
-		},
-	},
-
-	//! si les données changent
-
-	async created() {
-		this.showDeleteIcon = await this.showIcon();
 	},
 };
 </script>

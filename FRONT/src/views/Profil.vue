@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Header :user="user" />
+		<Header :user="user" :userUptated="userUptated" />
 
 		<!-- on submit ubdate -->
 		<!-- faire un place holder dynamique avec un fetch sur mes donnée  -->
@@ -23,34 +23,19 @@
 					</div>
 					<div class="content-form">
 						<label>Firstname</label>
-						<input
-							type="text"
-							v-model="user.firstName"
-							name="firstName"
-							:placeholder="user.firstName"
-						/>
+						<input type="text" v-model="userUptated.firstName" name="firstName" />
 
 						<label>LastName</label>
-						<input
-							type="text"
-							v-model="user.lastName"
-							name="lastName"
-							:placeholder="user.lastName"
-						/>
+						<input type="text" v-model="userUptated.lastName" name="lastName" />
 
 						<label>Mail</label>
-						<input
-							type="email"
-							v-model="user.email"
-							name="email"
-							:placeholder="user.email"
-						/>
+						<input type="email" v-model="userUptated.email" name="email" />
 
 						<label>Password</label>
-						<input type="password" v-model="user.password" name="password" />
+						<input type="password" v-model="userUptated.password" name="password" />
 
 						<label>Secteur d'activité</label>
-						<select id="secteurs" v-model="user.secteur" name="secteur">
+						<select id="secteurs" v-model="userUptated.secteur" name="secteur">
 							<option value="communication">Communication</option>
 							<option value="vente">Vente</option>
 							<option value="management">Management</option>
@@ -76,6 +61,7 @@ export default {
 	data() {
 		return {
 			user: {},
+			userUptated: {},
 			uploadFile: '',
 			// secteur: '',
 		};
@@ -104,16 +90,17 @@ export default {
 		async updateProfil(e) {
 			e.preventDefault();
 			//alert champs null
-			let modifyUser = new FormData();
-			modifyUser.append('firstName', this.user.firstName),
-				modifyUser.append('lastName', this.user.lastName),
-				modifyUser.append('email', this.user.email),
-				modifyUser.append('password', this.user.password),
-				modifyUser.append('secteur', this.user.secteur),
-				modifyUser.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
-				modifyUser.append('imageUrl', this.user.imageUrl);
 
 			const id = JSON.parse(localStorage.getItem('idUser'));
+
+			let modifyUser = new FormData();
+			modifyUser.append('firstName', this.userUptated.firstName),
+				modifyUser.append('lastName', this.userUptated.lastName),
+				modifyUser.append('email', this.userUptated.email),
+				modifyUser.append('password', this.userUptated.password),
+				modifyUser.append('secteur', this.userUptated.secteur),
+				modifyUser.append('idUser', id),
+				modifyUser.append('imageUrl', this.userUptated.imageUrl);
 
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 				'Content-Type': 'multipart/form-data',
@@ -131,9 +118,9 @@ export default {
 		},
 
 		async uploadImage() {
-			this.user.imageUrl = this.$refs.file.files[0]; //image à envoyer
-			this.uploadFile = URL.createObjectURL(this.user.imageUrl); // previsualisatoin
-			console.log(this.user.imageUrl);
+			this.userUptated.imageUrl = this.$refs.file.files[0]; //image à envoyer
+			this.uploadFile = URL.createObjectURL(this.userUptated.imageUrl); // previsualisatoin
+			console.log(this.userUptated.imageUrl);
 		},
 
 		//DELETE
@@ -158,15 +145,12 @@ export default {
 			}
 		},
 	},
-	async mounted() {
-		this.user.imageUrl = await this.uploadImage();
-		this.uploadFile = await this.uploadImage();
-	},
 
-	async created() {
+	async mounted() {
 		this.user = await this.fetchAccount();
-		// this.user = await this.updateProfil();
+		this.userUptated = await this.fetchAccount();
 	},
+	//watch
 };
 </script>
 
