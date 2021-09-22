@@ -3,7 +3,13 @@
 		<div class="blocPost">
 			<div class="bloc-post-content">
 				<label class="blocPost-titre">Content</label>
-				<input type="text" v-model="content" name="content" placeholder="Content" />
+				<input
+					type="text"
+					v-model="content"
+					name="content"
+					placeholder="Content"
+					required
+				/>
 			</div>
 			<div class="bloc-post-image">
 				<label class="blocPost-titre">Image</label>

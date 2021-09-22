@@ -36,7 +36,11 @@ export default {
 				// body: JSON.stringify(newPost),
 			});
 			const data = await res.json();
+
 			this.posts = [data, ...this.posts];
+			if (res.status === 400 || res.status === 401) {
+				alert(data.error);
+			}
 		},
 		async deletePost(id) {
 			if (confirm('are you sure ?')) {
@@ -69,6 +73,7 @@ export default {
 			//	body:
 			//mount
 			const data = await res.json();
+
 			return data;
 		},
 		async fetchAccount() {

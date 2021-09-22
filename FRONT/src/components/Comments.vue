@@ -7,7 +7,13 @@
 		<!-- create comment -->
 		<form @submit="createComment">
 			<div class="bloc-form">
-				<input class="bloc-form-content" type="text" v-model="content" name="content" />
+				<input
+					class="bloc-form-content"
+					type="text"
+					v-model="content"
+					name="content"
+					required
+				/>
 
 				<input type="submit" value="Commenter" class="btn" />
 			</div>
@@ -66,8 +72,9 @@ export default {
 			});
 
 			const data = await res.json();
-			console.log(data);
-
+			if (res.status === 400 || res.status === 401) {
+				alert(data.error);
+			}
 			this.comments = [...this.comments, data];
 		},
 		async deleteComment(id) {

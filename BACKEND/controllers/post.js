@@ -6,10 +6,6 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 
 exports.createPost = (req, res, next) => {
-	// const token = req.headers.authorization.split(' ')[1];
-	// const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
-	// const userId = decodedToken.userId;
-	//=> AUTH middleware
 	User.findOne({
 		where: { id: req.body.idUser }, // recuperer token
 	})
@@ -19,13 +15,17 @@ exports.createPost = (req, res, next) => {
 			if (req.file) {
 				image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 			}
-			console.log(req.file);
+			// console.log(req.file);
 			const newPost = {
 				content: req.body.content,
 				imageUrl: image,
 				// idUser: req.body.userId,
 				idUser: user.id,
 			};
+
+			if (req.body.content == '') {
+				return res.status(400).json({ error: 'contenu vide' });
+			}
 
 			Post.create(newPost)
 				.then((post) => {

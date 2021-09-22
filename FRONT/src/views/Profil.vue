@@ -29,10 +29,20 @@
 						<input type="text" v-model="userUptated.lastName" name="lastName" />
 
 						<label>Mail</label>
-						<input type="email" v-model="userUptated.email" name="email" />
+						<input
+							type="email"
+							v-model="userUptated.email"
+							name="email"
+							pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+						/>
 
 						<label>Password</label>
-						<input type="password" v-model="userUptated.password" name="password" />
+						<input
+							type="password"
+							v-model="userUptated.password"
+							name="password"
+							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+						/>
 
 						<label>Secteur d'activité</label>
 						<select id="secteurs" v-model="userUptated.secteur" name="secteur">
@@ -60,10 +70,11 @@ export default {
 	name: 'Profil',
 	data() {
 		return {
+			//ne retourne pas le mots de passe
+
 			user: {},
 			userUptated: {},
 			uploadFile: '',
-			// secteur: '',
 		};
 	},
 
@@ -111,10 +122,14 @@ export default {
 
 				body: modifyUser,
 			});
-			//mise a jour des infos
+			//mise a jour des infos dans le header
 			this.user = await this.fetchAccount();
-			alert('modiffications effectuées');
 			const data = await res.json();
+			if (res.status === 400 || res.status === 401) {
+				alert(data.error);
+			} else if (res.status === 201) {
+				alert('modiffications effectuées');
+			}
 
 			return data;
 		},

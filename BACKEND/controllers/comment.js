@@ -8,6 +8,11 @@ exports.createComment = (req, res, next) => {
 			if (!post) {
 				return res.status(400).json({ message: 'Post introuvable' });
 			}
+
+			if (req.body.content == '') {
+				return res.status(400).json({ error: 'contenu vide' });
+			}
+
 			const newComment = {
 				idPost: post.id,
 				idUser: req.body.idUser,

@@ -4,9 +4,12 @@ const jwt = require('jsonwebtoken');
 const validator = require('email-validator');
 const fs = require('fs');
 
-//hasher le mot de passe avant de l'envoyer
+// Regex
+const regexEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+
 exports.signup = (req, res, next) => {
-	//ajouter auyre verif ?
+	//verifications de données
 	if (
 		req.body.email == '' ||
 		req.body.password == '' ||
@@ -14,10 +17,18 @@ exports.signup = (req, res, next) => {
 		req.body.firstName == ''
 	) {
 		return res.status(401).json({ error: 'Veillez remplir tout les champs' });
-	} else if (req.body.secteur == '') {
+	}
+	if (req.body.secteur == '') {
 		return res.status(401).json({ error: "Veillez renseigner votre secteur d'activité" });
-	} else if (req.body.imageUrl == 'undefined') {
+	}
+	if (req.body.imageUrl == 'undefined') {
 		return res.status(401).json({ error: 'Veillez importer une photo de profil' });
+	}
+	if (!regexEmail.test(req.body.email)) {
+		return res.status(401).json({ error: "Cet email n'est pas valide" });
+	}
+	if (!regexPassword.test(req.body.password)) {
+		return res.status(401).json({ error: "Ce mot de passe n'est pas valide" });
 	}
 
 	User.findOne({ where: { email: req.body.email } })
@@ -93,10 +104,24 @@ exports.userProfil = (req, res) => {
 	User.findOne({
 		where: { id: req.params.id }, // recuperer l'id dans l l'url
 	})
-		.then((user) => {
-			if (!user) {
+		.then((infosUser) => {
+			if (!infosUser) {
 				return res.status(400).json({ message: 'utiliasateur introuvable' });
 			}
+
+			//nerenvoit pas le mot de passe
+			const user = {
+				id: infosUser.id,
+				firstName: infosUser.firstName,
+				lastName: infosUser.lastName,
+				imageUrl: infosUser.imageUrl,
+				secteur: infosUser.secteur,
+				email: infosUser.email,
+				isAdmin: infosUser.isAdmin,
+				createAt: infosUser.createAt,
+				updateAt: infosUser.updateAt,
+			};
+
 			res.status(200).json(user);
 		})
 		.catch((error) => res.status(404).json(error));
@@ -118,6 +143,13 @@ exports.deleteProfil = (req, res) => {
 };
 
 exports.updateProfil = (req, res, next) => {
+	//verifications de données
+	if (!regexEmail.test(req.body.email)) {
+		return res.status(401).json({ error: "Cet email n'est pas valide" });
+	}
+	if (!regexPassword.test(req.body.password)) {
+		return res.status(401).json({ error: "Ce mot de passe n'est pas valide" });
+	}
 	User.findOne({ where: { id: req.params.id } })
 		.then((user) => {
 			if (!user) {
