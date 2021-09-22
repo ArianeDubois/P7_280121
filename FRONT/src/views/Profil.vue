@@ -37,7 +37,7 @@
 							pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
 						/>
 
-						<label>Password</label>
+						<!-- <label>Password</label>
 						<legend>
 							Le mot de passse doit contenir au moins huit caractères dont une lettre
 							majuscule, une lettre minuscule et un chiffre
@@ -47,7 +47,7 @@
 							v-model="userUptated.password"
 							name="password"
 							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-						/>
+						/> -->
 
 						<label>Secteur d'activité</label>
 						<select id="secteurs" v-model="userUptated.secteur" name="secteur">
@@ -113,7 +113,6 @@ export default {
 			modifyUser.append('firstName', this.userUptated.firstName),
 				modifyUser.append('lastName', this.userUptated.lastName),
 				modifyUser.append('email', this.userUptated.email),
-				modifyUser.append('password', this.userUptated.password),
 				modifyUser.append('secteur', this.userUptated.secteur),
 				modifyUser.append('idUser', id),
 				modifyUser.append('imageUrl', this.userUptated.imageUrl);
