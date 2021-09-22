@@ -108,8 +108,7 @@ exports.userProfil = (req, res) => {
 			if (!infosUser) {
 				return res.status(400).json({ message: 'utiliasateur introuvable' });
 			}
-
-			//nerenvoit pas le mot de passe
+			//ne renvoit pas le mot de passe
 			const user = {
 				id: infosUser.id,
 				firstName: infosUser.firstName,
@@ -155,33 +154,38 @@ exports.updateProfil = (req, res, next) => {
 			if (!user) {
 				return res.status(400).json({ message: 'utilisateur introuvable' });
 			} else if (user.id == req.body.idUser) {
-				const userModifs = {
-					firstName: req.body.firstName,
-					lastName: req.body.lastName,
-					secteur: req.body.secteur,
-					email: req.body.email,
-					password: req.body.password,
-					imageUrl: req.body.imageUrl,
-				};
+				bcrypt
+					.hash(req.body.password, 10)
+					.catch((error) => res.status(400).json({ error }))
+					.then((hash) => {
+						const userModifs = {
+							firstName: req.body.firstName,
+							lastName: req.body.lastName,
+							secteur: req.body.secteur,
+							email: req.body.email,
+							password: hash,
+							imageUrl: req.body.imageUrl,
+						};
 
-				if (req.file) {
-					userModifs.imageUrl = `${req.protocol}://${req.get('host')}/images/${
-						req.file.filename
-					}`;
+						if (req.file) {
+							userModifs.imageUrl = `${req.protocol}://${req.get('host')}/images/${
+								req.file.filename
+							}`;
 
-					const filename = user.imageUrl.split('/images/')[1];
-					fs.unlink(`images/${filename}`, () => {
-						User.update(userModifs, { where: { id: req.params.id } })
-							.then((newUser) => res.status(201).json(newUser))
-							.catch((error) => res.status(400).json({ error }));
+							const filename = user.imageUrl.split('/images/')[1];
+							fs.unlink(`images/${filename}`, () => {
+								User.update(userModifs, { where: { id: req.params.id } })
+									.then((newUser) => res.status(201).json(newUser))
+									.catch((error) => res.status(400).json({ error }));
+							});
+						}
+						// sans images
+						else {
+							User.update(userModifs, { where: { id: req.params.id } })
+								.then((newUser) => res.status(201).json(newUser))
+								.catch((error) => res.status(400).json({ error }));
+						}
 					});
-				}
-				// sans images
-				else {
-					User.update(userModifs, { where: { id: req.params.id } })
-						.then((newUser) => res.status(201).json(newUser))
-						.catch((error) => res.status(400).json({ error }));
-				}
 			} else {
 				return res
 					.status(401)

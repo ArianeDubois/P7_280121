@@ -23,7 +23,7 @@ exports.createPost = (req, res, next) => {
 				idUser: user.id,
 			};
 
-			if (req.body.content == '') {
+			if (!req.file && req.body.content == '') {
 				return res.status(400).json({ error: 'contenu vide' });
 			}
 

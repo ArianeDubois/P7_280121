@@ -20,6 +20,7 @@
 							name="imageUrl"
 							placeholder="url"
 						/>
+						<i v-if="uploadFile" @click="removeImageLoaded" class="fas fa-times"></i>
 					</div>
 					<div class="content-form">
 						<label>Firstname</label>
@@ -37,6 +38,10 @@
 						/>
 
 						<label>Password</label>
+						<legend>
+							Le mot de passse doit contenir au moins huit caractères dont une lettre
+							majuscule, une lettre minuscule et un chiffre
+						</legend>
 						<input
 							type="password"
 							v-model="userUptated.password"
@@ -137,7 +142,12 @@ export default {
 		async uploadImage() {
 			this.userUptated.imageUrl = this.$refs.file.files[0]; //image à envoyer
 			this.uploadFile = URL.createObjectURL(this.userUptated.imageUrl); // previsualisatoin
-			console.log(this.userUptated.imageUrl);
+		},
+
+		async removeImageLoaded() {
+			this.imageUrl = this.user.imageUrl;
+			this.$refs.file.value = '';
+			this.uploadFile = ''; // previsualisatoin
 		},
 
 		//DELETE

@@ -89,9 +89,7 @@ export default {
 			return data;
 		},
 	},
-	async updated() {
-		this.user = await this.fetchAccount();
-	},
+
 	async created() {
 		this.user = await this.fetchAccount();
 		this.posts = await this.fetchPosts();

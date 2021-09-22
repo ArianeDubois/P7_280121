@@ -58,7 +58,6 @@ export default {
 	},
 	methods: {
 		onDelete(id) {
-			console.log(this.post);
 			this.$emit('delete-post', id);
 		},
 		async showIcon() {

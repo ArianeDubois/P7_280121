@@ -3,24 +3,13 @@
 		<div class="blocPost">
 			<div class="bloc-post-content">
 				<label class="blocPost-titre">Content</label>
-				<input
-					type="text"
-					v-model="content"
-					name="content"
-					placeholder="Content"
-					required
-				/>
+				<input type="text" v-model="content" name="content" placeholder="Content" />
 			</div>
 			<div class="bloc-post-image">
 				<label class="blocPost-titre">Image</label>
-				<input
-					type="file"
-					ref="file"
-					@change="uploadImage"
-					name="imageUrl"
-					placeholder="url"
-				/>
+				<input type="file" ref="file" @change="uploadImage" name="imageUrl" />
 			</div>
+			<i v-if="imageUrl" @click="removeImageLoaded" class="fas fa-times"></i>
 		</div>
 		<input type="submit" value="Poster un message" class="btn btn-block" />
 	</form>
@@ -39,16 +28,16 @@ export default {
 	methods: {
 		onSubmit(e) {
 			e.preventDefault();
-			// if (!this.text) {
-			// 	alert('Please add a text');
-			// 	return;
-			// }
 
 			let formData = new FormData();
 			formData.append('content', this.content),
 				formData.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
 				formData.append('imageUrl', this.imageUrl),
 				this.$emit('create-post', formData);
+			//permet de netoyer les champs après envoie du contenu
+			this.content = '';
+			this.imageUrl = '';
+			this.$refs.file.value = '';
 		},
 
 		//on Chnage
@@ -56,8 +45,14 @@ export default {
 			this.imageUrl = this.$refs.file.files[0]; //
 			// console.log(this.imageUrl);
 		},
+
+		async removeImageLoaded() {
+			this.imageUrl = '';
+			this.$refs.file.value = '';
+			console.log(this.$refs.file);
+		},
 	},
-	async mounted() {
+	async created() {
 		this.imageUrl = await this.uploadImage();
 	},
 };

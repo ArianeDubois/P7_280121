@@ -76,6 +76,8 @@ export default {
 				alert(data.error);
 			}
 			this.comments = [...this.comments, data];
+			//permet de suprimer le contenu envoyer du champ create content
+			this.content = '';
 		},
 		async deleteComment(id) {
 			if (confirm('are you sure ?')) {

@@ -60,6 +60,7 @@
 				<input type="file" ref="file" @change="uploadImage" name="imageUrl" required />
 
 				<input type="submit" value="Inscription" class="btn" />
+				<i @click="removeImageLoaded" class="fas fa-times"></i>
 			</form>
 		</div>
 		<!-- 
@@ -137,6 +138,12 @@ export default {
 		async uploadImage() {
 			this.imageUrl = this.$refs.file.files[0]; // image de la requête
 			this.uploadFile = URL.createObjectURL(this.imageUrl); // previsualisatoin
+		},
+
+		async removeImageLoaded() {
+			this.imageUrl = '';
+			this.uploadFile = ''; // previsualisatoin
+			this.$refs.file.value = '';
 		},
 	},
 	async mounted() {
