@@ -1,17 +1,38 @@
 <template>
 	<form @submit="onSubmit" enctype="multipart/form-data">
 		<div class="blocPost">
-			<div class="bloc-post-content">
-				<label class="blocPost-titre">Content</label>
-				<input type="text" v-model="content" name="content" placeholder="Content" />
-			</div>
+			<input
+				class="bloc-post-content"
+				type="text"
+				v-model="content"
+				name="content"
+				placeholder="Content"
+			/>
+
 			<div class="bloc-post-image">
-				<label class="blocPost-titre">Image</label>
-				<input type="file" ref="file" @change="uploadImage" name="imageUrl" />
+				<label class="bloc-post-image_button">
+					<i class="fas fa-file-upload bloc-post-image_button_icone "></i>
+					<!-- <i class="fas fa-file-upload iconeUpload"> </i> -->
+					<!-- {{ imageUrl.name }} -->
+				</label>
 			</div>
-			<i v-if="imageUrl" @click="removeImageLoaded" class="fas fa-times"></i>
+			<input
+				class="bloc-post-image_input"
+				type="file"
+				ref="file"
+				@change="uploadImage"
+				name="imageUrl"
+			/>
 		</div>
 		<input type="submit" value="Poster un message" class="btn btn-block" />
+		<div class="bloc-img-caption">
+			<i
+				v-if="imageUrl"
+				@click="removeImageLoaded"
+				class="fas fa-times bloc-post-image_button_icone close"
+			></i>
+			<p>{{ imageUrl.name }}</p>
+		</div>
 	</form>
 </template>
 
@@ -43,7 +64,7 @@ export default {
 		//on Chnage
 		async uploadImage() {
 			this.imageUrl = this.$refs.file.files[0]; //
-			// console.log(this.imageUrl);
+			console.log(this.imageUrl.name);
 		},
 
 		async removeImageLoaded() {
@@ -58,21 +79,84 @@ export default {
 };
 </script>
 
-<style scoped>
-.blocPost {
-	border: 5px dotted black;
-	display: flex;
-	justify-content: space-around;
-	margin: 100px auto 0 auto;
-	max-width: 35vw;
-	height: 100px;
-	border-radius: 1em;
-}
+<style lang="scss" scoped>
+$border-dotted: 5px dotted black;
+$max-width-bloc: 35vw;
+$radius: 1em;
+//global
+$padding-btn: 0.5rem 1rem 0.5rem 1rem;
+$litle-radius: 0.7rem;
 
-.bloc-post-content,
-.bloc-post-image {
+.blocPost {
+	border: $border-dotted;
 	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-between;
+	margin: 100px auto 0 auto;
+	max-width: $max-width-bloc;
+	height: 100px;
+	border-radius: $radius;
+	position: relative;
+
+	.bloc-post-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 75%;
+		height: 50%;
+		margin: 1vw;
+		border: none;
+		&:active {
+		}
+		&:focus {
+			outline: none;
+			background-color: white;
+
+			border-bottom: 2px solid black;
+		}
+	}
+
+	.bloc-post-image {
+		display: flex;
+		flex-direction: column-reverse;
+		position: absolute;
+		top: 0%;
+		right: 0;
+		bottom: 0;
+		background-color: black;
+
+		// overflow: hidden;
+		&_button {
+			display: flex;
+			margin: 30px;
+			// transition: ease-in;
+
+			&_icone {
+				font-size: 3vw;
+				color: white;
+			}
+		}
+
+		&_input {
+			position: absolute;
+			width: 100px;
+			top: 0;
+			right: 0;
+			opacity: 0;
+			cursor: pointer;
+
+			height: 100%;
+			background-color: blueviolet;
+		}
+	}
+}
+.close {
+	font-size: 20px;
+	margin: 20px;
+}
+.bloc-img-caption {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: gray;
 }
 </style>

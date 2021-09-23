@@ -4,18 +4,19 @@
 	<div>
 		<div class="bloc post">
 			<div class="bloc-header">
-				<div class="profilPic ">
-					<img :src="post.User.imageUrl" class="profilPic-img" />
-					<h2 class="bloc-header-user">
+				<div class="bloc-header_user">
+					<img :src="post.User.imageUrl" class="bloc-header_user_img-profil" />
+					<h2 class="bloc-header_user_name">
 						{{ post.User.firstName }}
 						{{ post.User.lastName }}
 					</h2>
-					<h3 :class="`secteur ${post.User.secteur}`">{{ post.User.secteur }}</h3>
 				</div>
-
-				<div class="bloc-header-date">
-					<p>{{ post.createdAt.split('T')[0] }}</p>
-					<p>
+				<h3 :class="`bloc-header_secteur ${post.User.secteur}`">
+					{{ post.User.secteur }}
+				</h3>
+				<div class="bloc-header_date">
+					<p class="bloc-header_date_jour">{{ post.createdAt.split('T')[0] }}</p>
+					<p class="bloc-header_date_heure">
 						{{
 							post.createdAt
 								.split('T')[1]
@@ -24,15 +25,16 @@
 						}}
 					</p>
 				</div>
-				<i v-if="showDeleteIcon" @click="onDelete(post.id)" class="fas fa-times"></i>
+				<i v-if="showDeleteIcon" @click="onDelete(post.id)" class="close fas fa-times"></i>
 			</div>
 
-			<div class="bloc-content"></div>
-			<p>
-				<em>{{ post.content }}</em>
-			</p>
+			<div class="bloc-content">
+				<p class="bloc-content_text">
+					{{ post.content }}
+				</p>
 
-			<img :src="post.imageUrl" />
+				<img class="bloc-content_img" :src="post.imageUrl" />
+			</div>
 		</div>
 
 		<Comments :post="post" :user="user" />
@@ -79,10 +81,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .bloc {
-	border: 2px solid black;
+	// border-top: 10px solid black;
 	max-width: 35%;
+
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
@@ -94,46 +97,73 @@ export default {
 .post {
 	margin-top: 100px;
 }
-i {
-	margin: 20px;
-}
 
-.profilPic {
-	display: flex;
-	align-items: center;
-	margin: 0;
-}
-
-.profilPic-img {
-	border-radius: 10rem;
-	object-fit: cover;
-	height: 60px;
-	width: 60px;
-	margin: 5px;
-	border-bottom: 2px solid black;
-}
 .bloc-header {
 	display: flex;
 	justify-content: space-between;
-	align-content: center;
-	max-height: 50px;
-	border-bottom: 2px solid black;
+	max-height: 70px;
+
+	// border-bottom: 10px solid black;
+
+	&_user {
+		display: flex;
+		// border-right: 10px solid rgb(235, 235, 235);
+		max-width: 25%;
+
+		&_img-profil {
+			border-radius: 10rem;
+			object-fit: cover;
+			height: 60px;
+			width: 60px;
+			margin: 0 10px 0 10px;
+			align-self: center;
+		}
+
+		&_name {
+			font-family: 'title';
+			font-size: 15px;
+			line-height: 105%;
+			align-self: center;
+		}
+	}
+
+	&_secteur {
+		border-radius: 1em;
+		margin: 5px 0 0 10px;
+		padding: 1px 5px 1px 5px;
+		font-size: 15px;
+		align-self: baseline;
+		border: 1px solid black;
+	}
+
+	&_date {
+		display: flex;
+		align-self: baseline;
+
+		justify-content: space-between;
+		margin: 10px;
+		font-size: 15px;
+		min-width: 25%;
+		flex-direction: row-reverse;
+	}
+	.close {
+		font-size: 20px;
+		margin: 20px;
+	}
 }
 
-.bloc-header-date {
-	display: flex;
-}
-.bloc-header-user {
-	margin: auto;
-	display: flex;
-	align-items: center;
-}
-
-.secteur {
-	border-radius: 1em;
-	padding: 1px 5px 1px 5px;
-	font-size: 15px;
-	margin: 16px;
+.bloc-content {
+	box-shadow: 1px 1px 7px 2px rgb(212, 212, 212);
+	border-radius: 1rem;
+	background-color: whitesmoke;
+	&_text {
+		font-family: 'title-bold';
+		font-size: 2vw;
+		margin: 2%;
+	}
+	&_img {
+		width: 100%;
+	}
 }
 
 .vente {

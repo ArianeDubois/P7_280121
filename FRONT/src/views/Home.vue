@@ -97,19 +97,61 @@ export default {
 };
 </script>
 
-<style>
-body {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
+<style lang="scss">
+//global
+$main-color: black;
+$second-color: white;
+$padding-btn: 0.5rem 1rem 0.5rem 1rem;
+$litle-radius: 0.7rem;
+
+@font-face {
+	font-family: 'nb';
+	src: url('../assets/fonts/nb.ttf') format('truetype');
 }
+@font-face {
+	font-family: 'nb-light';
+	src: url('../assets/fonts/nb-light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'title';
+	src: url('../assets/fonts/title.otf');
+}
+@font-face {
+	font-family: 'title-bold';
+	src: url('../assets/fonts/title-bold.otf');
+}
+
+@mixin font-subtitle {
+	font-family: 'title', sans-serif;
+	// text-transform: uppercase;
+
+	// font-size: min(1.5vmax, 3rem);
+	font-size: 15px;
+}
+@mixin font-title {
+	font-family: 'title', sans-serif;
+
+	// font-family: 'ag', sans-serif;
+	// text-transform: uppercase;
+
+	// font-size: min(1.5vmax, 3rem);
+	font-size: 20px;
+}
+
+body {
+	@include font-subtitle;
+	text-align: center;
+	color: $main-color;
+	margin-top: 60px;
+	text-decoration: none;
+}
+
 .btn {
-	background-color: black;
-	color: white;
-	font-weight: 800;
-	font-size: 18px;
-	padding: 0.5rem 1rem 0.5rem 1rem;
-	border-radius: 0.8rem;
+	@include font-title;
+	background-color: $main-color;
+	color: $second-color;
+	padding: $padding-btn;
+	border-radius: $litle-radius;
 }
 </style>

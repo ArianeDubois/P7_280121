@@ -103,6 +103,14 @@ export default {
 };
 </script>
 <style>
+.img-profil {
+	border-radius: 10rem;
+	object-fit: cover;
+	height: 60px;
+	width: 60px;
+	margin: 0 6px 0 10px;
+	align-self: center;
+}
 .bloc-form {
 	margin-top: -2px;
 	background-color: rgb(255, 255, 255);

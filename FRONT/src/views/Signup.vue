@@ -13,6 +13,7 @@
 				</div>
 				<div>
 					<label>Nom</label>
+
 					<input type="text" v-model="lastName" name="lastName" required />
 				</div>
 				<div>

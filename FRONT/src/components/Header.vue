@@ -2,9 +2,9 @@
 	<header>
 		<router-link to="/home" class="btn">Acceuil</router-link>
 
-		<div class="profilPic">
+		<div class="profil">
 			<!-- <img v-if="uploadFile" :src="uploadFile" class="profilPic-img" /> -->
-			<img :src="user.imageUrl" class="profilPic-img" />
+			<img :src="user.imageUrl" class="profil-img" />
 			<router-link to="/profil" :user="user" class="btn">
 				{{ user.firstName }} {{ user.lastName }}
 			</router-link>
@@ -46,6 +46,7 @@ export default {
 <style scoped>
 a {
 	color: white;
+	text-decoration: none;
 }
 header {
 	display: flex;
@@ -55,5 +56,20 @@ header {
 	margin: auto;
 	padding-bottom: 20px;
 	border-bottom: 13px solid black;
+}
+
+.profil {
+	display: flex;
+	align-items: center;
+	margin: 0;
+}
+
+.profil-img {
+	border-radius: 10rem;
+	object-fit: cover;
+	height: 60px;
+	width: 60px;
+	margin: 5px;
+	border-bottom: 2px solid black;
 }
 </style>
