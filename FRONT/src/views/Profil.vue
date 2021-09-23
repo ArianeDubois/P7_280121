@@ -10,24 +10,35 @@
 					<div class="image-form">
 						<label>Photo de profil</label>
 						<!-- si pas de changement de photo affiche la phoot actuelle -->
-						<img v-if="!uploadFile" :src="user.imageUrl" class="profilPic-img" />
+						<img v-if="!uploadFile" :src="user.imageUrl" class="profil-img" />
 						<!-- si changement de photo affiche la prévisualisation -->
-						<img v-if="uploadFile" :src="uploadFile" class="profilPic-img" />
+						<img v-if="uploadFile" :src="uploadFile" class="profil-img" />
 						<input
 							type="file"
 							ref="file"
 							@change="uploadImage"
 							name="imageUrl"
+							class="input-form"
 							placeholder="url"
 						/>
 						<i v-if="uploadFile" @click="removeImageLoaded" class="fas fa-times"></i>
 					</div>
 					<div class="content-form">
 						<label>Firstname</label>
-						<input type="text" v-model="userUptated.firstName" name="firstName" />
+						<input
+							type="text"
+							v-model="userUptated.firstName"
+							name="firstName"
+							class="input-form"
+						/>
 
 						<label>LastName</label>
-						<input type="text" v-model="userUptated.lastName" name="lastName" />
+						<input
+							type="text"
+							v-model="userUptated.lastName"
+							name="lastName"
+							class="input-form"
+						/>
 
 						<label>Mail</label>
 						<input
@@ -35,6 +46,7 @@
 							v-model="userUptated.email"
 							name="email"
 							pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+							class="input-form"
 						/>
 
 						<!-- <label>Password</label>
@@ -50,7 +62,12 @@
 						/> -->
 
 						<label>Secteur d'activité</label>
-						<select id="secteurs" v-model="userUptated.secteur" name="secteur">
+						<select
+							id="secteurs"
+							v-model="userUptated.secteur"
+							name="secteur"
+							class="input-form"
+						>
 							<option value="communication">Communication</option>
 							<option value="vente">Vente</option>
 							<option value="management">Management</option>
@@ -76,13 +93,11 @@ export default {
 	data() {
 		return {
 			//ne retourne pas le mots de passe
-
 			user: {},
 			userUptated: {},
 			uploadFile: '',
 		};
 	},
-
 	components: {
 		Header,
 	},
@@ -90,7 +105,6 @@ export default {
 		//fetche sur les infos user
 		async fetchAccount() {
 			const id = JSON.parse(localStorage.getItem('idUser'));
-
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 				method: 'GET',
 				headers: {
@@ -101,14 +115,11 @@ export default {
 			const data = await res.json();
 			return data;
 		},
-
 		//UBDATE
 		async updateProfil(e) {
 			e.preventDefault();
 			//alert champs null
-
 			const id = JSON.parse(localStorage.getItem('idUser'));
-
 			let modifyUser = new FormData();
 			modifyUser.append('firstName', this.userUptated.firstName),
 				modifyUser.append('lastName', this.userUptated.lastName),
@@ -116,14 +127,12 @@ export default {
 				modifyUser.append('secteur', this.userUptated.secteur),
 				modifyUser.append('idUser', id),
 				modifyUser.append('imageUrl', this.userUptated.imageUrl);
-
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 				'Content-Type': 'multipart/form-data',
 				method: 'PUT',
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
-
 				body: modifyUser,
 			});
 			//mise a jour des infos dans le header
@@ -134,26 +143,21 @@ export default {
 			} else if (res.status === 201) {
 				alert('modiffications effectuées');
 			}
-
 			return data;
 		},
-
 		async uploadImage() {
 			this.userUptated.imageUrl = this.$refs.file.files[0]; //image à envoyer
 			this.uploadFile = URL.createObjectURL(this.userUptated.imageUrl); // previsualisatoin
 		},
-
 		async removeImageLoaded() {
 			this.imageUrl = this.user.imageUrl;
 			this.$refs.file.value = '';
 			this.uploadFile = ''; // previsualisatoin
 		},
-
 		//DELETE
 		async deleteAccount() {
 			if (confirm('are you sure ?')) {
 				const id = JSON.parse(localStorage.getItem('idUser'));
-
 				const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 					method: 'DELETE',
 					headers: {
@@ -171,7 +175,6 @@ export default {
 			}
 		},
 	},
-
 	async mounted() {
 		this.user = await this.fetchAccount();
 		this.userUptated = await this.fetchAccount();
@@ -180,11 +183,14 @@ export default {
 };
 </script>
 
-<style scoped>
-.blocForm {
-	display: flex;
-	justify-content: space-around;
+<style scoped lang="scss">
+.bloc {
+	margin-top: 50px;
+	max-width: 25%;
+	padding: 2%;
+	position: relative;
 }
+
 .content-form,
 .image-form {
 	display: flex;
@@ -196,13 +202,27 @@ img {
 	height: 100px;
 	width: 100px;
 }
-.bloc {
-	margin-top: 100px;
-}
+
 .button-form {
+	position: absolute;
 	display: flex;
-	justify-content: flex-end;
-	margin-top: 20px;
-	border-top: 2px solid black;
+
+	justify-content: space-between;
+	bottom: -50px;
+	left: 0;
+	width: 100%;
+	.btn {
+		height: 50px;
+		width: auto;
+	}
+}
+
+.profil-img {
+	border-radius: 10rem;
+	object-fit: cover;
+	height: 70px;
+	width: 70px;
+	margin: 5px;
+	border-bottom: 2px solid black;
 }
 </style>

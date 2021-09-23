@@ -5,14 +5,20 @@
 			<Button text="connexion" class="btn" />
 		</header>
 		<div class="bloc">
-			<form @submit="fetchLogin">
-				<div>
+			<form class="form" @submit="fetchLogin">
+				<div class="field-bloc">
 					<label>Mail</label>
-					<input type="email" v-model="email" name="email" placeholder="email@mail.fr" />
+					<input
+						class="input-form"
+						type="email"
+						v-model="email"
+						name="email"
+						placeholder="email@mail.fr"
+					/>
 				</div>
-				<div>
+				<div class="field-bloc">
 					<label>Password</label>
-					<input type="password" v-model="password" name="password" />
+					<input class="input-form" type="password" v-model="password" name="password" />
 				</div>
 
 				<input type="submit" value="Connection" class="btn" />
@@ -34,7 +40,6 @@ export default {
 	components: {
 		Button,
 	},
-	//get user id mounted()
 	methods: {
 		async fetchLogin(e) {
 			e.preventDefault();
@@ -66,8 +71,4 @@ export default {
 };
 </script>
 
-<style scoped>
-form {
-	margin: 30px;
-}
-</style>
+<style></style>

@@ -6,19 +6,32 @@
 			<router-link to="/" class="btn">connexion</router-link>
 		</header>
 		<div class="bloc">
-			<form @submit="onSubmit" enctype="multipart/form-data">
-				<div>
+			<form class="form" @submit="onSubmit" enctype="multipart/form-data">
+				<div class="field-bloc">
 					<label>Prénom</label>
-					<input type="text" v-model="firstName" name="firstName" required />
+					<input
+						class="input-form"
+						type="text"
+						v-model="firstName"
+						name="firstName"
+						required
+					/>
 				</div>
-				<div>
+				<div class="field-bloc">
 					<label>Nom</label>
 
-					<input type="text" v-model="lastName" name="lastName" required />
+					<input
+						class="input-form"
+						type="text"
+						v-model="lastName"
+						name="lastName"
+						required
+					/>
 				</div>
-				<div>
+				<div class="field-bloc">
 					<label>Email</label>
 					<input
+						class="input-form"
 						type="email"
 						v-model="email"
 						name="email"
@@ -27,13 +40,15 @@
 						required
 					/>
 				</div>
-				<div>
+				<div class="field-bloc">
 					<label>Mot de passe</label>
 					<legend>
 						Le mot de passse doit contenir au moins huit caractères dont une lettre
 						majuscule, une lettre minuscule et un chiffre
 					</legend>
+
 					<input
+						class="input-form"
 						type="password"
 						v-model="password"
 						name="password"
@@ -42,9 +57,15 @@
 					/>
 				</div>
 
-				<div>
+				<div class="field-bloc">
 					<label>Secteur d'activité</label>
-					<select id="secteurs" v-model="secteur" name="secteur" required>
+					<select
+						class="input-form"
+						id="secteurs"
+						v-model="secteur"
+						name="secteur"
+						required
+					>
 						<option value="communication">Communication</option>
 						<option value="vente">Vente</option>
 						<option value="management">Management</option>
@@ -53,15 +74,22 @@
 						<option value="alimentation">Alimentation</option>
 					</select>
 				</div>
-
-				<label>Photo de profil</label>
-				<i v-if="!uploadFile" class="fas fa-file-image profilPic-img"></i>
-				<!-- si changement de photo affiche la prévisualisation -->
-				<img v-if="uploadFile" :src="uploadFile" class="profilPic-img" />
-				<input type="file" ref="file" @change="uploadImage" name="imageUrl" required />
-
+				<div class="field-bloc">
+					<label>Photo de profil</label>
+					<i v-if="!uploadFile" class="fas fa-file-image profil-img"></i>
+					<!-- si changement de photo affiche la prévisualisation -->
+					<img v-if="uploadFile" :src="uploadFile" class="profil-img" />
+					<input
+						class="input-form"
+						type="file"
+						ref="file"
+						@change="uploadImage"
+						name="imageUrl"
+						required
+					/>
+					<i v-if="imageUrl" @click="removeImageLoaded" class="fas fa-times"></i>
+				</div>
 				<input type="submit" value="Inscription" class="btn" />
-				<i @click="removeImageLoaded" class="fas fa-times"></i>
 			</form>
 		</div>
 		<!-- 
@@ -154,12 +182,15 @@ export default {
 };
 </script>
 
-<style>
-img.profilPic-img {
+<style lang="scss">
+.profil-img {
 	margin: auto;
 	display: flex;
+	border-radius: 10rem;
+	width: 60px;
+	height: 60px;
 }
-i.profilPic-img {
+i.profil-img {
 	margin: auto;
 	color: white;
 	background-color: black;
@@ -167,5 +198,35 @@ i.profilPic-img {
 	justify-content: center;
 	align-items: center;
 	font-size: 30px;
+}
+
+.input-form {
+	border: 2px dotted black;
+	height: 30px;
+	width: 70%;
+	margin: auto;
+	margin-bottom: 20px;
+	&:focus {
+		outline: none;
+		background-color: whitesmoke;
+		border: 2px solid black;
+	}
+}
+
+legend {
+	font-size: 12px;
+	text-align: left;
+}
+
+.field-bloc {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.form {
+	margin: 30px;
+	/* display: flex;
+	flex-direction: column; */
 }
 </style>

@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Post = require('../models/Post');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const validator = require('email-validator');
@@ -131,12 +132,20 @@ exports.deleteProfil = (req, res) => {
 		.then((user) => {
 			if (!user) {
 				return res.status(400).json({ message: 'utiliasateur incorrect' });
+			} else if (user) {
+				Post.findAll({ where: { idUser: req.params.id } }).then((posts) => {
+					posts.forEach((post) => {
+						const filename = post.imageUrl.split('/images/')[1]; //suprime les images des post de l'user à supprimer
+						fs.unlink(`images/${filename}`, () => {
+							User.destroy({
+								where: { id: req.params.id }, // recuperer l'id dans l l'url
+							})
+								.then(() => res.status(200).json({ message: 'Compte suprimé !' }))
+								.catch((user) => res.status(404).json(user));
+						});
+					});
+				});
 			}
-			User.destroy({
-				where: { id: req.params.id }, // recuperer l'id dans l l'url
-			})
-				.then(() => res.status(200).json({ message: 'Compte suprimé !' }))
-				.catch((user) => res.status(404).json(user));
 		})
 		.catch((error) => res.status(404).json(error));
 };

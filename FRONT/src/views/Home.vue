@@ -121,6 +121,10 @@ $litle-radius: 0.7rem;
 	font-family: 'title-bold';
 	src: url('../assets/fonts/title-bold.otf');
 }
+@font-face {
+	font-family: 'form';
+	src: url('../assets/fonts/form.otf');
+}
 
 @mixin font-subtitle {
 	font-family: 'title', sans-serif;
@@ -131,9 +135,6 @@ $litle-radius: 0.7rem;
 }
 @mixin font-title {
 	font-family: 'title', sans-serif;
-
-	// font-family: 'ag', sans-serif;
-	// text-transform: uppercase;
 
 	// font-size: min(1.5vmax, 3rem);
 	font-size: 20px;
@@ -153,5 +154,11 @@ body {
 	color: $second-color;
 	padding: $padding-btn;
 	border-radius: $litle-radius;
+}
+
+input:focus,
+select:focus {
+	outline: none;
+	background-color: whitesmoke;
 }
 </style>

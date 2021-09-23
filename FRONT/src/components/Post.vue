@@ -115,7 +115,7 @@ export default {
 			object-fit: cover;
 			height: 60px;
 			width: 60px;
-			margin: 0 10px 0 10px;
+			margin: 0 0 0 10px;
 			align-self: center;
 		}
 
@@ -124,6 +124,7 @@ export default {
 			font-size: 15px;
 			line-height: 105%;
 			align-self: center;
+			text-transform: capitalize;
 		}
 	}
 
@@ -153,7 +154,7 @@ export default {
 }
 
 .bloc-content {
-	box-shadow: 1px 1px 7px 2px rgb(212, 212, 212);
+	box-shadow: 1px 1px 7px 2px rgb(175, 175, 175);
 	border-radius: 1rem;
 	background-color: whitesmoke;
 	&_text {

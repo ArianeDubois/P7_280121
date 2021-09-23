@@ -6,7 +6,7 @@
 				type="text"
 				v-model="content"
 				name="content"
-				placeholder="Content"
+				placeholder="..."
 			/>
 
 			<div class="bloc-post-image">
@@ -101,25 +101,20 @@ $litle-radius: 0.7rem;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		width: 75%;
-		height: 50%;
-		margin: 1vw;
+		width: 80%;
+		height: 100%;
 		border: none;
-		&:active {
-		}
-		&:focus {
-			outline: none;
-			background-color: white;
-
-			border-bottom: 2px solid black;
-		}
+		font-family: 'title-bold';
+		font-size: 2vw;
+		padding-left: 3%;
 	}
 
 	.bloc-post-image {
 		display: flex;
+		border-radius: 0 1em 1em 0;
 		flex-direction: column-reverse;
 		position: absolute;
-		top: 0%;
+		top: 0;
 		right: 0;
 		bottom: 0;
 		background-color: black;
@@ -131,7 +126,7 @@ $litle-radius: 0.7rem;
 			// transition: ease-in;
 
 			&_icone {
-				font-size: 3vw;
+				font-size: 2vw;
 				color: white;
 			}
 		}

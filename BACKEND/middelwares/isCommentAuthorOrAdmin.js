@@ -8,7 +8,6 @@ module.exports = (req, res, next) => {
 			const token = req.headers.authorization.split(' ')[1]; //
 			const decodeToken = jwt.verify(token, process.env.DB_SECRET_TOKEN);
 			const idUser = decodeToken.idUser;
-
 			//si le  post user  ne correspond pas au token utilisateur
 			if (comment.idUser !== idUser) {
 				User.findOne({ where: { isAdmin: true } })

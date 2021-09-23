@@ -55,7 +55,7 @@ header {
 	align-items: center;
 	margin: auto;
 	padding-bottom: 20px;
-	border-bottom: 13px solid black;
+	/* border-bottom: 13px solid black; */
 }
 
 .profil {
