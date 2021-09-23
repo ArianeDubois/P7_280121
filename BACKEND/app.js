@@ -37,10 +37,11 @@ sequelize
 	.then(() => {
 		// sequelize.sync({ force: true }).catch((err) => {
 		// 	console.error('Unable to connect to the database:', err);
+		// });
 		sequelize.sync().catch((err) => {
 			console.error('Unable to connect to the database:', err);
 		}); //Sync all models that are not)
-		// sequelize.sync({ force: true });
+		// // sequelize.sync({ force: true });
 	})
 	.catch((err) => {
 		console.error('Unable to connect to the database:', err);

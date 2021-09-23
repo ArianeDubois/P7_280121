@@ -133,21 +133,33 @@ exports.deleteProfil = (req, res) => {
 			if (!user) {
 				return res.status(400).json({ message: 'utiliasateur incorrect' });
 			} else if (user) {
-				Post.findAll({ where: { idUser: req.params.id } }).then((posts) => {
-					posts.forEach((post) => {
-						const filename = post.imageUrl.split('/images/')[1]; //suprime les images des post de l'user à supprimer
-						fs.unlink(`images/${filename}`, () => {
-							User.destroy({
-								where: { id: req.params.id }, // recuperer l'id dans l l'url
-							})
-								.then(() => res.status(200).json({ message: 'Compte suprimé !' }))
-								.catch((user) => res.status(404).json(user));
+				//delete several files
+				const filename = [];
+				filename.push(user.imageUrl.split('/images/')[1]); //suprime les photos de profils de l'user à supprimer
+
+				Post.findAll({ where: { idUser: req.params.id } })
+					.then((posts) => {
+						posts.forEach((post) => {
+							filename.push(post.imageUrl.split('/images/')[1]); //suprime les images des post de l'user à supprimer
 						});
-					});
-				});
+						filename
+							.forEach((files) => {
+								fs.unlink(`images/${files}`, () => {
+									User.destroy({
+										where: { id: req.params.id }, // recuperer l'id dans l l'url
+									})
+										.then(() =>
+											res.status(200).json({ message: 'Compte suprimé !' })
+										)
+										.catch((user) => res.status(404).json(user));
+								});
+							})
+							.catch((error) => res.status(404).json(error)); //for each files
+					})
+					.catch((error) => res.status(404).json(error)); // find post user
 			}
 		})
-		.catch((error) => res.status(404).json(error));
+		.catch((error) => res.status(404).json(error)); //find user
 };
 
 exports.updateProfil = (req, res, next) => {
@@ -209,18 +221,3 @@ exports.getAllUsers = (req, res, next) => {
 		})
 		.catch((error) => res.status(400).json({ error }));
 };
-
-//test envoeyr id ou admin
-// exports.getAllUsers = (req, res, next) => {
-// 	User.findOne({ where: { id: req.params.id } || { isAdmin: true } })
-// 		.then((user) => {
-// 			if (user) {
-// 				return res.status(401).json(user);
-// 			} else {
-// 				User.findAll()
-// 					.then((users) => res.status(200).json(users))
-// 					.catch((error) => res.status(400).json({ error }));
-// 			}
-// 		})
-// 		.catch((error) => res.status(400).json({ error }));
-// };
