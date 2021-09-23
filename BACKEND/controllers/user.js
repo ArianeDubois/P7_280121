@@ -72,13 +72,13 @@ exports.login = (req, res, next) => {
 	User.findOne({ where: { email: req.body.email } })
 		.then((user) => {
 			if (!user) {
-				return res.status(401).json({ error: 'email incorect !' });
+				return res.status(401).json({ error: 'identifiants incorects' });
 			} else {
 				bcrypt
 					.compare(req.body.password, user.password)
 					.then((valid) => {
 						if (!valid) {
-							return res.status(401).json({ error: 'Mot de passe incorrect !' });
+							return res.status(401).json({ error: 'identifiants incorects' });
 						} else {
 							return res
 								.status(200)

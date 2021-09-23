@@ -59,7 +59,7 @@ export default {
 			const data = await res.json();
 			localStorage.setItem('idUser', data.idUser);
 			localStorage.setItem('token', data.token);
-			console.log(localStorage);
+			console.log(localStorage.idUser);
 			//navigation gards
 			this.$router.push('/home');
 

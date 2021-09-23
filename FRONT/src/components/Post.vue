@@ -75,7 +75,7 @@ export default {
 			}
 		},
 	},
-	async created() {
+	async mounted() {
 		this.showDeleteIcon = await this.showIcon();
 	},
 };

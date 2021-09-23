@@ -12,8 +12,6 @@
 			<div class="bloc-post-image">
 				<label class="bloc-post-image_button">
 					<i class="fas fa-file-upload bloc-post-image_button_icone "></i>
-					<!-- <i class="fas fa-file-upload iconeUpload"> </i> -->
-					<!-- {{ imageUrl.name }} -->
 				</label>
 			</div>
 			<input
@@ -25,9 +23,8 @@
 			/>
 		</div>
 		<input type="submit" value="Poster un message" class="btn btn-block" />
-		<div class="bloc-img-caption">
+		<div v-if="imageUrl" class="bloc-img-caption">
 			<i
-				v-if="imageUrl"
 				@click="removeImageLoaded"
 				class="fas fa-times bloc-post-image_button_icone close"
 			></i>
@@ -47,24 +44,28 @@ export default {
 		};
 	},
 	methods: {
-		onSubmit(e) {
+		async onSubmit(e) {
 			e.preventDefault();
 
 			let formData = new FormData();
 			formData.append('content', this.content),
 				formData.append('idUser', JSON.parse(localStorage.getItem('idUser'))),
-				formData.append('imageUrl', this.imageUrl),
+				formData.append('imageUrl', this.imageUrl);
+			//ne pas envoyer les données si contenu vide
+			if (this.content || this.imageUrl) {
 				this.$emit('create-post', formData);
-			//permet de netoyer les champs après envoie du contenu
-			this.content = '';
-			this.imageUrl = '';
-			this.$refs.file.value = '';
+				//permet de netoyer les champs après envoie du contenu
+				this.content = '';
+				this.imageUrl = '';
+				this.$refs.file.value = '';
+			} else {
+				alert('contenu vide');
+			}
 		},
 
 		//on Chnage
 		async uploadImage() {
 			this.imageUrl = this.$refs.file.files[0]; //
-			console.log(this.imageUrl.name);
 		},
 
 		async removeImageLoaded() {
@@ -73,7 +74,7 @@ export default {
 			console.log(this.$refs.file);
 		},
 	},
-	async created() {
+	async mounted() {
 		this.imageUrl = await this.uploadImage();
 	},
 };

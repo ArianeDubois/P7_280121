@@ -23,7 +23,6 @@ export default {
 		};
 	},
 	methods: {
-		//data posts = les posts existant + newPost
 		async createPost(newPost) {
 			const res = await fetch('http://localhost:3000/home/post', {
 				'Content-Type': 'multipart/form-data',
@@ -33,7 +32,6 @@ export default {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 				body: newPost,
-				// body: JSON.stringify(newPost),
 			});
 			const data = await res.json();
 
@@ -53,8 +51,6 @@ export default {
 					},
 				});
 				console.log(res);
-				console.log(localStorage.getItem('token'));
-				console.log(localStorage.getItem('idUser'));
 				if (res.status === 200) {
 					this.posts = this.posts.filter((post) => post.id !== id); // compare les id post de la db avec l'id envoyer
 				} else {
@@ -70,10 +66,7 @@ export default {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 			});
-			//	body:
-			//mount
 			const data = await res.json();
-
 			return data;
 		},
 		async fetchAccount() {

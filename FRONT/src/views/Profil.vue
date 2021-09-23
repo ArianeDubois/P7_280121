@@ -1,9 +1,6 @@
 <template>
 	<div>
 		<Header :user="user" :userUptated="userUptated" />
-
-		<!-- on submit ubdate -->
-		<!-- faire un place holder dynamique avec un fetch sur mes donnée  -->
 		<div class="bloc">
 			<form @submit="updateProfil" enctype="multipart/form-data">
 				<div class="blocForm">
@@ -48,18 +45,6 @@
 							pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
 							class="input-form"
 						/>
-
-						<!-- <label>Password</label>
-						<legend>
-							Le mot de passse doit contenir au moins huit caractères dont une lettre
-							majuscule, une lettre minuscule et un chiffre
-						</legend>
-						<input
-							type="password"
-							v-model="userUptated.password"
-							name="password"
-							pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
-						/> -->
 
 						<label>Secteur d'activité</label>
 						<select
@@ -150,10 +135,11 @@ export default {
 			this.uploadFile = URL.createObjectURL(this.userUptated.imageUrl); // previsualisatoin
 		},
 		async removeImageLoaded() {
-			this.imageUrl = this.user.imageUrl;
-			this.$refs.file.value = '';
+			this.userUptated.imageUrl = this.user.imageUrl; //garde l'image actuelle
+			this.$refs.file.value = null; //ne mémorise plus l'image chargée
 			this.uploadFile = ''; // previsualisatoin
 		},
+
 		//DELETE
 		async deleteAccount() {
 			if (confirm('are you sure ?')) {

@@ -92,15 +92,6 @@
 				<input type="submit" value="Inscription" class="btn" />
 			</form>
 		</div>
-		<!-- 
-		<div class="bloc" v-if="errors.length">
-			<p>Veillez revoir ces champs:</p>
-			<ul>
-				<li :key="error" v-for="error in errors">
-					{{ error }}
-				</li>
-			</ul>
-		</div> -->
 	</div>
 </template>
 
@@ -126,11 +117,6 @@ export default {
 		Button,
 	},
 	methods: {
-		// async validEmail(this.email) {
-		// 	const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		// 	return regex.test(email);
-		// },
-
 		async onSubmit(e) {
 			e.preventDefault();
 			//verifications des champs et retourne erreurs
@@ -141,8 +127,7 @@ export default {
 				formData.append('password', this.password),
 				formData.append('secteur', this.secteur),
 				formData.append('imageUrl', this.imageUrl);
-			// console.log(newUser);
-			//fetch
+
 			const res = await fetch('http://localhost:3000/home/signup', {
 				'Content-Type': 'multipart/form-data',
 
@@ -175,10 +160,9 @@ export default {
 			this.$refs.file.value = '';
 		},
 	},
-	async mounted() {
-		this.imageUrl = await this.uploadImage();
-		// this.errors = await this.onSubmit();
-	},
+	// async mounted() {
+	// 	this.imageUrl = await this.uploadImage();
+	// },
 };
 </script>
 

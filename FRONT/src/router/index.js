@@ -8,8 +8,6 @@ import Moderate from '../views/Moderate';
 const routes = [
 	{ path: '/', name: 'Login', component: Login, meta: { requiresAuth: false } },
 	{ path: '/signup', name: 'Signup', component: Signup, meta: { requiresAuth: false } },
-
-	//navigation guards
 	{ path: '/moderate', name: 'Moderate', component: Moderate, meta: { requiresAuth: true } },
 	{ path: '/home', name: 'Home', component: Home, meta: { requiresAuth: true } },
 	{ path: '/profil', name: 'Profil', component: Profil, meta: { requiresAuth: true } },
@@ -32,16 +30,16 @@ router.beforeEach((to, from, next) => {
 		} else {
 			next();
 		}
-		//routes qui demandent de ne pas être auth
-		// } else if (!to.meta.requiresAuth) {
-		// 	//localstorage undefined = errreur de connexions
-		// 	if (!localStorage.idUser == 'undefined' || localStorage.idUser) {
-		// 		next({
-		// 			name: 'Home',
-		// 		});
-		// 	} else {
-		// 		next();
-		// 	}
+		// routes qui demandent de ne pas être auth
+	} else if (!to.meta.requiresAuth) {
+		//localstorage undefined = errreur de connexions
+		if (localStorage.idUser) {
+			next({
+				name: 'Home',
+			});
+		} else {
+			next();
+		}
 	} else {
 		next();
 	}
