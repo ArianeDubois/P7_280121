@@ -4,11 +4,7 @@
 			<img alt="Vue logo" src="./assets/logo.png" class="logo-img" />
 		</div>
 		<Header :user="user" />
-		<router-view
-			@uptate-profil="updateProfil"
-			:user="user"
-			@fetch-user="fetchUser"
-		></router-view>
+		<router-view :user="user" @fetch-user="fetchUser"></router-view>
 	</div>
 </template>
 

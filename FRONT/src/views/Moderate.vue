@@ -1,12 +1,13 @@
 <template>
 	<div class="users">
 		<div v-for="user in users" :key="user.id">
-			<div class=" blocModerate">
+			<!-- //ne montre pas le compte de l'utilisateur -->
+			<div v-if="id !== user.id" class=" blocModerate">
 				<p>{{ user.firstName }}</p>
 				<p>{{ user.lastName }}</p>
 				<p>{{ user.email }}</p>
 				<!-- <img :src="post.imageUrl" /> -->
-				<i @click="deleteAccount(user.id)" class="fas fa-times"></i>
+				<i @click="deleteAccount(id)" class="fas fa-times"></i>
 			</div>
 		</div>
 	</div>
@@ -20,12 +21,14 @@ export default {
 		return {
 			users: [],
 			user: {},
+			id: JSON.parse(localStorage.getItem('idUser')),
 		};
 	},
+
 	methods: {
-		async getAllUsers() {
+		async fetchAccount() {
 			const id = JSON.parse(localStorage.getItem('idUser'));
-			const res = await fetch(`http://localhost:3000/home/${id}/profil`, {
+			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -33,12 +36,12 @@ export default {
 				},
 			});
 			const data = await res.json();
+			console.Log;
 			return data;
 		},
-		async fetchAccount() {
-			const id = JSON.parse(localStorage.getItem('idUser'));
 
-			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
+		async getAllUsers() {
+			const res = await fetch(`http://localhost:3000/home/${this.id}/profil`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
@@ -67,9 +70,11 @@ export default {
 			}
 		},
 	},
+
 	async created() {
 		this.users = await this.getAllUsers();
 		this.user = await this.fetchAccount();
+		this.$emit('fetch-user', this.user); //envoit les informations modifiée au header
 	},
 };
 </script>

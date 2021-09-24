@@ -1,18 +1,21 @@
 <template>
 	<header>
-		<router-link v-if="['Profil', 'Home'].includes($route.name)" to="/home" class="btn"
+		<!-- affiche le header que sur les routes après la connections -->
+		<router-link
+			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
+			to="/home"
+			class="btn"
 			>Acceuil</router-link
 		>
 
 		<div class="profil">
-			<!-- <img v-if="uploadFile" :src="uploadFile" class="profilPic-img" /> -->
 			<img
-				v-if="['Profil', 'Home'].includes($route.name)"
+				v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
 				:src="user.imageUrl"
 				class="profil-img"
 			/>
 			<router-link
-				v-if="['Profil', 'Home'].includes($route.name)"
+				v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
 				to="/profil"
 				:user="user"
 				class="btn"
@@ -22,13 +25,13 @@
 		</div>
 
 		<Button
-			v-if="['Profil', 'Home'].includes($route.name)"
+			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
 			@click="deconnectUser"
 			text="déconnexion"
 		/>
 
 		<router-link
-			v-if="user.isAdmin && ['Profil', 'Home'].includes($route.name)"
+			v-if="user.isAdmin && ['Profil', 'Home', 'Moderate'].includes($route.name)"
 			to="/moderate"
 			:user="user"
 			class="btn"

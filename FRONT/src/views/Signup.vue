@@ -102,7 +102,6 @@ export default {
 	data() {
 		return {
 			errors: [],
-
 			uploadFile: '',
 			firstName: '',
 			lastName: '',
@@ -112,7 +111,6 @@ export default {
 			imageUrl: '',
 		};
 	},
-
 	components: {
 		Button,
 	},
@@ -127,19 +125,15 @@ export default {
 				formData.append('password', this.password),
 				formData.append('secteur', this.secteur),
 				formData.append('imageUrl', this.imageUrl);
-
 			const res = await fetch('http://localhost:3000/home/signup', {
 				'Content-Type': 'multipart/form-data',
-
 				method: 'POST',
 				headers: {
 					Authorization: 'Bearer ' + localStorage.getItem('token'),
 				},
 				body: formData,
 			});
-
 			const data = await res.json();
-
 			if (res.status === 400 || res.status === 401) {
 				alert(data.error);
 				this.errors = [...this.errors, data.error];
@@ -148,12 +142,10 @@ export default {
 				alert('inscription enregistrée, vous pouvez maintenant vous connecter');
 			}
 		},
-
 		async uploadImage() {
 			this.imageUrl = this.$refs.file.files[0]; // image de la requête
 			this.uploadFile = URL.createObjectURL(this.imageUrl); // previsualisatoin
 		},
-
 		async removeImageLoaded() {
 			this.imageUrl = '';
 			this.uploadFile = ''; // previsualisatoin
@@ -183,7 +175,6 @@ i.profil-img {
 	align-items: center;
 	font-size: 30px;
 }
-
 .input-form {
 	border: 2px dotted black;
 	height: 30px;
@@ -196,18 +187,15 @@ i.profil-img {
 		border: 2px solid black;
 	}
 }
-
 legend {
 	font-size: 12px;
 	text-align: left;
 }
-
 .field-bloc {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
-
 .form {
 	margin: 30px;
 	/* display: flex;

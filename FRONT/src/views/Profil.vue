@@ -81,9 +81,11 @@ export default {
 			uploadFile: '',
 		};
 	},
-
+	// props: {
+	// 	user: Object,
+	// },
 	methods: {
-		//fetche sur les infos user
+		//UBDATE
 		async fetchAccount() {
 			const id = JSON.parse(localStorage.getItem('idUser'));
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
@@ -94,9 +96,10 @@ export default {
 				},
 			});
 			const data = await res.json();
+			console.Log;
 			return data;
 		},
-		//UBDATE
+
 		async updateProfil(e) {
 			e.preventDefault();
 			//alert champs null
@@ -116,16 +119,14 @@ export default {
 				},
 				body: modifyUser,
 			});
-			//mise a jour des infos dans le header
-			// this.user = await this.fetchAccount();
+
 			const data = await res.json();
 			if (res.status === 400 || res.status === 401) {
 				alert(data.error);
 			} else if (res.status === 201) {
 				alert('modiffications effectuées');
 			}
-			//envoi les nouvelle infos pour la synco avec le hea
-			this.$emit('uptate-profil', this.userUptated);
+
 			return data;
 		},
 		async uploadImage() {
@@ -159,10 +160,10 @@ export default {
 		},
 	},
 	async mounted() {
-		this.user = await this.fetchAccount();
 		this.userUptated = await this.fetchAccount();
+		this.user = await this.fetchAccount();
+		this.$emit('fetch-user', this.user); //envoit les informations  au header
 	},
-	//watch
 };
 </script>
 

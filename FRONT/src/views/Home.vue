@@ -86,9 +86,7 @@ export default {
 	async created() {
 		this.posts = await this.fetchPosts();
 		this.user = await this.fetchAccount();
-		this.$emit('fetch-user', this.user);
-
-		console.log(this.user);
+		this.$emit('fetch-user', this.user); //envoit les informations modifiée au header
 	},
 };
 </script>

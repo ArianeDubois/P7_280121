@@ -137,26 +137,24 @@ exports.deleteProfil = (req, res) => {
 				const filename = [];
 				filename.push(user.imageUrl.split('/images/')[1]); //suprime les photos de profils de l'user à supprimer
 
-				Post.findAll({ where: { idUser: req.params.id } })
-					.then((posts) => {
-						posts.forEach((post) => {
-							filename.push(post.imageUrl.split('/images/')[1]); //suprime les images des post de l'user à supprimer
-						});
-						filename
-							.forEach((files) => {
-								fs.unlink(`images/${files}`, () => {
-									User.destroy({
-										where: { id: req.params.id }, // recuperer l'id dans l l'url
-									})
-										.then(() =>
-											res.status(200).json({ message: 'Compte suprimé !' })
-										)
-										.catch((user) => res.status(404).json(user));
-								});
-							})
-							.catch((error) => res.status(404).json(error)); //for each files
-					})
-					.catch((error) => res.status(404).json(error)); // find post user
+				Post.findAll({ where: { idUser: req.params.id } }).then((posts) => {
+					posts.forEach((post) => {
+						filename.push(post.imageUrl.split('/images/')[1]); //suprime les images des post de l'user à supprimer
+					});
+					filename
+						.forEach((files) => {
+							fs.unlink(`images/${files}`, () => {
+								User.destroy({
+									where: { id: req.params.id }, // recuperer l'id dans l l'url
+								})
+									.then(() =>
+										res.status(200).json({ message: 'Compte suprimé !' })
+									)
+									.catch((user) => res.status(404).json(user));
+							});
+						})
+						.catch((error) => res.status(404).json(error)); //for each files
+				});
 			}
 		})
 		.catch((error) => res.status(404).json(error)); //find user

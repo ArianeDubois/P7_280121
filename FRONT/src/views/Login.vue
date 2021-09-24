@@ -30,7 +30,6 @@
 import Button from '../components/Button.vue';
 export default {
 	name: 'Login',
-
 	data() {
 		return {
 			email: '',
@@ -47,7 +46,6 @@ export default {
 				email: this.email,
 				password: this.password,
 			};
-
 			const res = await fetch('http://localhost:3000/home/login', {
 				method: 'POST',
 				headers: {
@@ -60,9 +58,8 @@ export default {
 			localStorage.setItem('idUser', data.idUser);
 			localStorage.setItem('token', data.token);
 			console.log(localStorage.idUser);
-
+			//navigation gards
 			this.$router.push('/home');
-
 			if (localStorage.idUser === 'undefined') {
 				alert(data.error);
 			}

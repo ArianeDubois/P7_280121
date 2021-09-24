@@ -20,7 +20,7 @@ const router = createRouter({
 
 // //navigation guards
 router.beforeEach((to, from, next) => {
-	//routes qui demandent une auth
+	// routes qui demandent une auth
 	if (to.meta.requiresAuth) {
 		if (localStorage.idUser == 'undefined' || localStorage.idUser == undefined) {
 			//on donne le nom du composant vers lequel rediriger l'user invalide
@@ -32,8 +32,8 @@ router.beforeEach((to, from, next) => {
 		}
 		// routes qui demandent de ne pas être auth
 	} else if (!to.meta.requiresAuth) {
-		//localstorage undefined = errreur de connexions
-		if (localStorage.idUser) {
+		// localstorage undefined = errreur de connexions
+		if (localStorage.idUser && localStorage.idUser == !undefined) {
 			next({
 				name: 'Home',
 			});
