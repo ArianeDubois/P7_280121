@@ -1,7 +1,5 @@
 <template>
 	<div class="users">
-		<Header :user="user" />
-
 		<div v-for="user in users" :key="user.id">
 			<div class=" blocModerate">
 				<p>{{ user.firstName }}</p>
@@ -15,12 +13,8 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue';
 export default {
 	name: 'Moderate',
-	components: {
-		Header,
-	},
 
 	data() {
 		return {

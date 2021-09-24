@@ -60,7 +60,7 @@ export default {
 			localStorage.setItem('idUser', data.idUser);
 			localStorage.setItem('token', data.token);
 			console.log(localStorage.idUser);
-			//navigation gards
+
 			this.$router.push('/home');
 
 			if (localStorage.idUser === 'undefined') {

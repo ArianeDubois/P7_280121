@@ -1,20 +1,17 @@
 <template>
 	<div>
-		<Header :user="user" />
 		<CreatePost @create-post="createPost" />
 		<Posts @delete-post="deletePost" :user="user" :posts="posts" />
 	</div>
 </template>
 <script>
 import CreatePost from '../components/CreatePost.vue';
-import Header from '../components/Header.vue';
 import Posts from '../components/Posts.vue';
 export default {
 	name: 'Home',
 	components: {
 		Posts,
 		CreatePost,
-		Header,
 	},
 	data() {
 		return {
@@ -22,6 +19,7 @@ export default {
 			user: {},
 		};
 	},
+
 	methods: {
 		async createPost(newPost) {
 			const res = await fetch('http://localhost:3000/home/post', {
@@ -69,6 +67,7 @@ export default {
 			const data = await res.json();
 			return data;
 		},
+
 		async fetchAccount() {
 			const id = JSON.parse(localStorage.getItem('idUser'));
 			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
@@ -79,13 +78,17 @@ export default {
 				},
 			});
 			const data = await res.json();
+			console.Log;
 			return data;
 		},
 	},
 
 	async created() {
-		this.user = await this.fetchAccount();
 		this.posts = await this.fetchPosts();
+		this.user = await this.fetchAccount();
+		this.$emit('fetch-user', this.user);
+
+		console.log(this.user);
 	},
 };
 </script>

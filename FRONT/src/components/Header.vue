@@ -1,18 +1,38 @@
 <template>
 	<header>
-		<router-link to="/home" class="btn">Acceuil</router-link>
+		<router-link v-if="['Profil', 'Home'].includes($route.name)" to="/home" class="btn"
+			>Acceuil</router-link
+		>
 
 		<div class="profil">
 			<!-- <img v-if="uploadFile" :src="uploadFile" class="profilPic-img" /> -->
-			<img :src="user.imageUrl" class="profil-img" />
-			<router-link to="/profil" :user="user" class="btn">
+			<img
+				v-if="['Profil', 'Home'].includes($route.name)"
+				:src="user.imageUrl"
+				class="profil-img"
+			/>
+			<router-link
+				v-if="['Profil', 'Home'].includes($route.name)"
+				to="/profil"
+				:user="user"
+				class="btn"
+			>
 				{{ user.firstName }} {{ user.lastName }}
 			</router-link>
 		</div>
 
-		<Button @click="deconnectUser" text="déconnexion" />
+		<Button
+			v-if="['Profil', 'Home'].includes($route.name)"
+			@click="deconnectUser"
+			text="déconnexion"
+		/>
 
-		<router-link v-if="user.isAdmin" to="/moderate" :user="user" class="btn">
+		<router-link
+			v-if="user.isAdmin && ['Profil', 'Home'].includes($route.name)"
+			to="/moderate"
+			:user="user"
+			class="btn"
+		>
 			Modération
 		</router-link>
 	</header>

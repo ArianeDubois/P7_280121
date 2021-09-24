@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<Header :user="user" :userUptated="userUptated" />
 		<div class="bloc">
 			<form @submit="updateProfil" enctype="multipart/form-data">
 				<div class="blocForm">
@@ -72,7 +71,6 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue';
 export default {
 	name: 'Profil',
 	data() {
@@ -83,9 +81,7 @@ export default {
 			uploadFile: '',
 		};
 	},
-	components: {
-		Header,
-	},
+
 	methods: {
 		//fetche sur les infos user
 		async fetchAccount() {
@@ -121,13 +117,15 @@ export default {
 				body: modifyUser,
 			});
 			//mise a jour des infos dans le header
-			this.user = await this.fetchAccount();
+			// this.user = await this.fetchAccount();
 			const data = await res.json();
 			if (res.status === 400 || res.status === 401) {
 				alert(data.error);
 			} else if (res.status === 201) {
 				alert('modiffications effectuées');
 			}
+			//envoi les nouvelle infos pour la synco avec le hea
+			this.$emit('uptate-profil', this.userUptated);
 			return data;
 		},
 		async uploadImage() {
@@ -139,7 +137,6 @@ export default {
 			this.$refs.file.value = null; //ne mémorise plus l'image chargée
 			this.uploadFile = ''; // previsualisatoin
 		},
-
 		//DELETE
 		async deleteAccount() {
 			if (confirm('are you sure ?')) {
@@ -176,7 +173,6 @@ export default {
 	padding: 2%;
 	position: relative;
 }
-
 .content-form,
 .image-form {
 	display: flex;
@@ -188,11 +184,9 @@ img {
 	height: 100px;
 	width: 100px;
 }
-
 .button-form {
 	position: absolute;
 	display: flex;
-
 	justify-content: space-between;
 	bottom: -50px;
 	left: 0;
@@ -202,7 +196,6 @@ img {
 		width: auto;
 	}
 }
-
 .profil-img {
 	border-radius: 10rem;
 	object-fit: cover;

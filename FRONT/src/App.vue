@@ -3,13 +3,33 @@
 		<div class="logo">
 			<img alt="Vue logo" src="./assets/logo.png" class="logo-img" />
 		</div>
-		<router-view @updateProfil="updateProfil(modifyUser)"></router-view>
+		<Header :user="user" />
+		<router-view
+			@uptate-profil="updateProfil"
+			:user="user"
+			@fetch-user="fetchUser"
+		></router-view>
 	</div>
 </template>
 
 <script>
+import Header from './components/Header.vue';
+
 export default {
 	name: 'App',
+	components: {
+		Header,
+	},
+	data() {
+		return {
+			user: {},
+		};
+	},
+	methods: {
+		fetchUser(data) {
+			this.user = data;
+		},
+	},
 };
 </script>
 
