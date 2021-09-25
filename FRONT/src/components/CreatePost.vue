@@ -95,13 +95,9 @@ $litle-radius: 0.7rem;
 	margin: 100px auto 0 auto;
 	max-width: 650px;
 	width: 90vw;
-
 	height: 7vmax;
 	border-radius: $radius;
 	position: relative;
-	@media (max-width: 750px) {
-		margin: 60px 5vw 0 5vw;
-	}
 
 	.bloc-post-content {
 		display: flex;

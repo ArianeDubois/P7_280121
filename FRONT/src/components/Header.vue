@@ -7,21 +7,22 @@
 			class="btn"
 			>Acceuil</router-link
 		>
-		<img
-			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
-			:src="user.imageUrl"
-			class="profil-img"
-		/>
+		<div class="bloc-user">
+			<img
+				v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
+				:src="user.imageUrl"
+				class="profil-img"
+			/>
 
-		<router-link
-			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
-			to="/profil"
-			:user="user"
-			class="btn"
-		>
-			{{ user.firstName }} {{ user.lastName }}
-		</router-link>
-
+			<router-link
+				v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
+				to="/profil"
+				:user="user"
+				class="btn"
+			>
+				{{ user.firstName }} {{ user.lastName }}
+			</router-link>
+		</div>
 		<Button
 			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
 			@click="deconnectUser"
@@ -75,20 +76,28 @@ header {
 	align-items: center;
 	max-width: 800px;
 	width: 85vw;
-
 	margin: auto;
 	padding-bottom: 20px;
-	@media (max-width: 1050px) {
-		flex-wrap: wrap;
+	& > * {
+		margin: 10px;
+		max-height: 40px;
 	}
-	/* border-bottom: 13px solid black; */
+
+	@media (max-width: 800px) {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
 }
 
 .profil-img {
 	border-radius: 10rem;
 	object-fit: cover;
-	height: max(3vw, 2.5rem);
-	width: max(3vw, 2.5rem);
+	height: 40px;
+	width: 40px;
 	margin: 0 5px 0 5px;
+}
+
+.bloc-user {
+	display: flex;
 }
 </style>

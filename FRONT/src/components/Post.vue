@@ -62,7 +62,6 @@ export default {
 		},
 		async showIcon() {
 			// si l'user est admin ou si l'user connecté est l'useur du post
-
 			if (
 				this.$props.user.id === this.$props.post.idUser ||
 				this.$props.user.isAdmin === true
@@ -73,7 +72,7 @@ export default {
 			}
 		},
 	},
-	async mounted() {
+	async created() {
 		this.showDeleteIcon = await this.showIcon();
 	},
 };
@@ -102,6 +101,7 @@ export default {
 	max-height: 70px;
 	position: relative;
 	padding: 5px 20px 5px 5px;
+	margin-right: 20px;
 	@media (max-width: 460px) {
 		flex-wrap: wrap;
 		max-height: 80px;
@@ -109,12 +109,18 @@ export default {
 
 	&_user_img-profil {
 		position: absolute;
+		top: 5px;
 		border-radius: 10rem;
 		object-fit: cover;
-		height: 60px;
-		width: 60px;
+		height: 50px;
+		width: 50px;
 		margin: 0 0 0 10px;
 		align-self: center;
+
+		@media (max-width: 460px) {
+			height: max(3vw, 2.5rem);
+			width: max(3vw, 2.5rem);
+		}
 	}
 
 	&_user_name {
@@ -124,6 +130,9 @@ export default {
 		line-height: 105%;
 		align-self: center;
 		text-transform: capitalize;
+		@media (max-width: 460px) {
+			margin: 0 0 0 80px;
+		}
 	}
 
 	&_secteur {
@@ -134,6 +143,9 @@ export default {
 		align-self: baseline;
 		border: 1px solid black;
 		align-self: center;
+		@media (max-width: 460px) {
+			margin: 0;
+		}
 	}
 
 	&_date_jour,
@@ -143,38 +155,44 @@ export default {
 		justify-content: space-around;
 		margin: 10px;
 		font-size: 15px;
-		min-width: 25%;
+		// min-width: 25%;
 		flex-direction: row-reverse;
 		flex-wrap: wrap;
 
 		@media (max-width: 460px) {
-			margin-top: 0px;
+			// min-width: 100%;
+			justify-content: flex-end;
+			margin: 3px 10px 0 80px;
 		}
 	}
 
-	&_date_jour {
-		margin-left: 25%;
-	}
-	&_date_jour {
-		margin-left: 25%;
-	}
 	.close {
 		font-size: 20px;
 		margin: 20px;
 		position: absolute;
-		right: -10px;
+		right: -25px;
 		top: -10px;
 	}
 }
 
 .bloc-content {
+	display: flex;
+	align-self: center;
+	flex-direction: column;
+	width: 100%;
 	box-shadow: 1px 1px 7px 2px rgb(175, 175, 175);
 	border-radius: 1rem;
 	background-color: whitesmoke;
+
 	&_text {
+		//
+		align-self: center;
 		font-family: 'title-bold';
 		font-size: max(25px, 2.3vw);
-		margin: 2%;
+		margin: 25px;
+		@media (max-width: 460px) {
+			margin: 15px;
+		}
 	}
 	&_img {
 		width: 100%;

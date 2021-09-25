@@ -5,6 +5,7 @@
 				<div class="blocForm">
 					<div class="image-form">
 						<label>Photo de profil</label>
+
 						<!-- si pas de changement de photo affiche la phoot actuelle -->
 						<img v-if="!uploadFile" :src="user.imageUrl" class="profil-img" />
 						<!-- si changement de photo affiche la prévisualisation -->
@@ -14,9 +15,10 @@
 							ref="file"
 							@change="uploadImage"
 							name="imageUrl"
-							class="input-form"
+							class="input-form file-button"
 							placeholder="url"
 						/>
+
 						<i v-if="uploadFile" @click="removeImageLoaded" class="fas fa-times"></i>
 					</div>
 					<div class="content-form">
@@ -169,8 +171,9 @@ export default {
 
 <style scoped lang="scss">
 .bloc {
-	margin-top: 50px;
-	max-width: 25%;
+	max-width: 650px;
+	width: 90vw;
+	margin: 50px auto 200px auto;
 	padding: 2%;
 	position: relative;
 }
@@ -180,6 +183,7 @@ export default {
 	justify-content: space-around;
 	flex-direction: column;
 	align-items: center;
+	position: relative;
 }
 img {
 	height: 100px;
@@ -204,5 +208,24 @@ img {
 	width: 70px;
 	margin: 5px;
 	border-bottom: 2px solid black;
+}
+
+.file-button {
+	position: relative;
+}
+.file-button::after {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	content: 'choisir un fichier';
+	color: black;
+	font-family: 'title';
+	font-size: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: white;
+	height: 100%;
+	width: 100%;
 }
 </style>

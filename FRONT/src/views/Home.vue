@@ -48,7 +48,6 @@ export default {
 						Authorization: 'Bearer ' + localStorage.getItem('token'),
 					},
 				});
-				console.log(res);
 				if (res.status === 200) {
 					this.posts = this.posts.filter((post) => post.id !== id); // compare les id post de la db avec l'id envoyer
 				} else {
@@ -124,6 +123,14 @@ body {
 	color: $second-color;
 	padding: $padding-btn;
 	border-radius: $litle-radius;
+	input:focus,
+	select:focus {
+		background-color: black;
+	}
+
+	@media (max-width: 500px) {
+		font-size: max(4vw, 16px);
+	}
 }
 
 // desactive stle par deffaut
@@ -133,6 +140,5 @@ input:-webkit-autofill {
 input:focus,
 select:focus {
 	outline: none;
-	background-color: black;
 }
 </style>

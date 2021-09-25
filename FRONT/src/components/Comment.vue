@@ -14,17 +14,15 @@
 					{{ comment.User.secteur }}
 				</h4>
 
-				<div class="bloc-header_date">
-					<p class="bloc-header_date_jour">{{ comment.createdAt.split('T')[0] }}</p>
-					<p class="bloc-header_date_heure">
-						{{
-							comment.createdAt
-								.split('T')[1]
-								.split('', 5)
-								.join('')
-						}}
-					</p>
-				</div>
+				<p class="bloc-header_date_jour">{{ comment.createdAt.split('T')[0] }}</p>
+				<p class="bloc-header_date_heure">
+					{{
+						comment.createdAt
+							.split('T')[1]
+							.split('', 5)
+							.join('')
+					}}
+				</p>
 				<i
 					v-if="showDeleteIcon"
 					@click="deleteComment(comment.id)"
@@ -85,29 +83,19 @@ export default {
 		margin-left: 80px;
 	}
 }
-
-.bloc-header_date {
-	min-width: 55%;
+.bloc_header {
+	margin-right: 10px;
+}
+.bloc-header_date_jour,
+.bloc-header_date_heure {
+	// min-width: 55%;
 	display: flex;
-	justify-content: space-around;
 	@media (max-width: 460px) {
-		width: 100%;
-	}
-	&_jour {
-		@media (max-width: 460px) {
-			position: absolute;
-			left: -10px;
-		}
-	}
-	&_heure {
-		@media (max-width: 460px) {
-			position: absolute;
-			right: 0;
-		}
+		flex-wrap: wrap;
 	}
 }
 .comment-list {
-	margin: -2px auto -2px auto;
+	margin: 0 auto 0 auto;
 	max-width: 550px;
 	width: 80vw;
 	@media (max-width: 460px) {

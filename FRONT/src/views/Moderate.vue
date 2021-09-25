@@ -1,5 +1,5 @@
 <template>
-	<div class="users">
+	<div class="users bloc">
 		<div v-for="user in users" :key="user.id">
 			<!-- //ne montre pas le compte de l'utilisateur -->
 			<div v-if="id !== user.id" class=" blocModerate">
@@ -7,7 +7,7 @@
 				<p>{{ user.lastName }}</p>
 				<p>{{ user.email }}</p>
 				<!-- <img :src="post.imageUrl" /> -->
-				<i @click="deleteAccount(id)" class="fas fa-times"></i>
+				<i @click="deleteAccount(id)" class="fas fa-times close"></i>
 			</div>
 		</div>
 	</div>
@@ -81,10 +81,9 @@ export default {
 <style scoped>
 .blocModerate {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-around;
+	align-items: center;
 	margin: 20px auto 20px auto;
-	max-width: 35vw;
-	border: 2px solid black;
-	border-radius: 1em;
 }
 </style>
