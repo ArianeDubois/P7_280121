@@ -1,9 +1,5 @@
 <template>
 	<div>
-		<header>
-			<router-link to="/signup" class="btn">inscription</router-link>
-			<Button text="connexion" class="btn" />
-		</header>
 		<div class="bloc">
 			<form class="form" @submit="fetchLogin">
 				<div class="field-bloc">
@@ -27,7 +23,6 @@
 	</div>
 </template>
 <script>
-import Button from '../components/Button.vue';
 export default {
 	name: 'Login',
 	data() {
@@ -36,9 +31,7 @@ export default {
 			password: '',
 		};
 	},
-	components: {
-		Button,
-	},
+
 	methods: {
 		async fetchLogin(e) {
 			e.preventDefault();

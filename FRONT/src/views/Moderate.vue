@@ -36,7 +36,6 @@ export default {
 				},
 			});
 			const data = await res.json();
-			console.Log;
 			return data;
 		},
 
@@ -85,5 +84,8 @@ export default {
 	justify-content: space-around;
 	align-items: center;
 	margin: 20px auto 20px auto;
+	position: relative;
+	border-bottom: 2px solid black;
+	width: 90%;
 }
 </style>

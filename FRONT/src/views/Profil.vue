@@ -19,7 +19,11 @@
 							placeholder="url"
 						/>
 
-						<i v-if="uploadFile" @click="removeImageLoaded" class="fas fa-times"></i>
+						<i
+							v-if="uploadFile"
+							@click="removeImageLoaded"
+							class="fas fa-times close"
+						></i>
 					</div>
 					<div class="content-form">
 						<label>Firstname</label>
@@ -207,7 +211,6 @@ img {
 	height: 70px;
 	width: 70px;
 	margin: 5px;
-	border-bottom: 2px solid black;
 }
 
 .file-button {

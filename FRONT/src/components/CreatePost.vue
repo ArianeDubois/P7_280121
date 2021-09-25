@@ -22,12 +22,11 @@
 				name="imageUrl"
 			/>
 		</div>
+
 		<input type="submit" value="Poster un message" class="btn btn-block" />
+
 		<div v-if="imageUrl" class="bloc-img-caption">
-			<i
-				@click="removeImageLoaded"
-				class="fas fa-times bloc-post-image_button_icone close"
-			></i>
+			<i @click="removeImageLoaded" class="fas fa-times bloc-post-image_button_icone "></i>
 			<p>{{ imageUrl.name }}</p>
 		</div>
 	</form>
@@ -107,9 +106,9 @@ $litle-radius: 0.7rem;
 		height: 100%;
 		border: none;
 		font-family: 'title-bold';
-		font-size: 2vw;
+		font-size: max(2vw, 20px);
 		padding-left: 3%;
-		border-radius: 0.5em;
+		border-radius: 1em;
 	}
 
 	.bloc-post-image {
@@ -146,14 +145,21 @@ $litle-radius: 0.7rem;
 		}
 	}
 }
-.close {
-	font-size: 20px;
-	margin: 20px;
+
+.bloc-img {
+	position: relative;
+	display: flex;
+	margin: auto;
+	justify-content: center;
 }
 .bloc-img-caption {
 	display: flex;
+	flex-direction: row-reverse;
 	align-items: center;
 	justify-content: center;
 	color: gray;
+	i {
+		margin-left: 10px;
+	}
 }
 </style>

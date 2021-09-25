@@ -77,7 +77,6 @@ export default {
 				},
 			});
 			const data = await res.json();
-			console.Log;
 			return data;
 		},
 	},
@@ -114,6 +113,9 @@ body {
 	color: $main-color;
 	margin-top: 60px;
 	text-decoration: none;
+	@media (max-width: 500px) {
+		font-size: max(5vw, 18px);
+	}
 }
 
 .btn {

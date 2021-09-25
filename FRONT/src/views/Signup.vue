@@ -1,10 +1,5 @@
 <template>
 	<div>
-		<header>
-			<Button text="inscription" class="btn" />
-
-			<router-link to="/" class="btn">connexion</router-link>
-		</header>
 		<div class="bloc">
 			<form class="form" @submit="onSubmit" enctype="multipart/form-data">
 				<div class="field-bloc">
@@ -74,20 +69,20 @@
 						<option value="alimentation">Alimentation</option>
 					</select>
 				</div>
-				<div class="field-bloc">
+				<div class="field-bloc ">
 					<label>Photo de profil</label>
 					<i v-if="!uploadFile" class="fas fa-file-image profil-img"></i>
 					<!-- si changement de photo affiche la prévisualisation -->
 					<img v-if="uploadFile" :src="uploadFile" class="profil-img" />
 					<input
-						class="input-form"
+						class="input-form file-button"
 						type="file"
 						ref="file"
 						@change="uploadImage"
 						name="imageUrl"
 						required
 					/>
-					<i v-if="imageUrl" @click="removeImageLoaded" class="fas fa-times"></i>
+					<i v-if="imageUrl" @click="removeImageLoaded" class="fas fa-times close"></i>
 				</div>
 				<input type="submit" value="Inscription" class="btn" />
 			</form>
@@ -96,7 +91,6 @@
 </template>
 
 <script>
-import Button from '../components/Button.vue';
 export default {
 	name: 'Signup',
 	data() {
@@ -111,9 +105,7 @@ export default {
 			imageUrl: '',
 		};
 	},
-	components: {
-		Button,
-	},
+
 	methods: {
 		async onSubmit(e) {
 			e.preventDefault();
@@ -188,17 +180,45 @@ i.profil-img {
 	}
 }
 legend {
+	display: flex;
 	font-size: 12px;
 	text-align: left;
+	margin: 10px auto 10px auto;
+	width: 70%;
 }
 .field-bloc {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-items: center;
+	position: relative;
 }
 .form {
 	margin: 30px;
 	/* display: flex;
 	flex-direction: column; */
+}
+
+.file-button {
+	position: relative;
+}
+.close {
+	position: absolute;
+	right: 20px;
+	bottom: 25px;
+}
+.file-button::after {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	content: 'choisir un fichier';
+	color: black;
+	font-family: 'title';
+	font-size: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: white;
+	height: 100%;
+	width: 100%;
 }
 </style>

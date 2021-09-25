@@ -46,26 +46,36 @@ export default {
 	data() {
 		return {
 			showDeleteIcon: false,
+			user: {},
 		};
 	},
 
 	props: {
 		post: Object,
-		user: Object,
 	},
 	components: {
 		Comments,
 	},
 	methods: {
+		async fetchAccount() {
+			const id = JSON.parse(localStorage.getItem('idUser'));
+			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
+				},
+			});
+			const data = await res.json();
+			return data;
+		},
+
 		onDelete(id) {
 			this.$emit('delete-post', id);
 		},
 		async showIcon() {
 			// si l'user est admin ou si l'user connecté est l'useur du post
-			if (
-				this.$props.user.id === this.$props.post.idUser ||
-				this.$props.user.isAdmin === true
-			) {
+			if (this.user.id === this.$props.post.idUser || this.user.isAdmin === true) {
 				return true;
 			} else {
 				return false;
@@ -73,6 +83,7 @@ export default {
 		},
 	},
 	async created() {
+		this.user = await this.fetchAccount();
 		this.showDeleteIcon = await this.showIcon();
 	},
 };
@@ -107,6 +118,14 @@ export default {
 		max-height: 80px;
 	}
 
+	.close {
+		font-size: 20px;
+		margin: 20px;
+		position: absolute;
+		right: -25px;
+		top: -10px;
+	}
+
 	&_user_img-profil {
 		position: absolute;
 		top: 5px;
@@ -118,8 +137,8 @@ export default {
 		align-self: center;
 
 		@media (max-width: 460px) {
-			height: max(3vw, 2.5rem);
-			width: max(3vw, 2.5rem);
+			height: max(3vw, 2rem);
+			width: max(3vw, 2rem);
 		}
 	}
 
@@ -132,6 +151,7 @@ export default {
 		text-transform: capitalize;
 		@media (max-width: 460px) {
 			margin: 0 0 0 80px;
+			font-size: 12px;
 		}
 	}
 
@@ -145,6 +165,7 @@ export default {
 		align-self: center;
 		@media (max-width: 460px) {
 			margin: 0;
+			font-size: 12px;
 		}
 	}
 
@@ -155,23 +176,16 @@ export default {
 		justify-content: space-around;
 		margin: 10px;
 		font-size: 15px;
-		// min-width: 25%;
 		flex-direction: row-reverse;
 		flex-wrap: wrap;
 
 		@media (max-width: 460px) {
 			// min-width: 100%;
-			justify-content: flex-end;
-			margin: 3px 10px 0 80px;
-		}
-	}
+			// justify-content: flex-end;
+			margin: 0 0 0 80px;
 
-	.close {
-		font-size: 20px;
-		margin: 20px;
-		position: absolute;
-		right: -25px;
-		top: -10px;
+			font-size: 12px;
+		}
 	}
 }
 

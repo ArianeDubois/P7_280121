@@ -1,10 +1,18 @@
 <template>
 	<header>
 		<!-- affiche le header que sur les routes après la connections -->
+		<router-link v-if="['Login', 'Signup'].includes($route.name)" to="/Signup" class="btn" exact
+			>Inscription</router-link
+		>
+		<router-link v-if="['Login', 'Signup'].includes($route.name)" to="/" class="btn" exact
+			>Connexion</router-link
+		>
+
 		<router-link
 			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
 			to="/home"
 			class="btn"
+			exact
 			>Acceuil</router-link
 		>
 		<div class="bloc-user">
@@ -41,13 +49,8 @@
 </template>
 
 <script>
-import Button from './Button.vue';
-
 export default {
 	name: 'Header',
-	components: {
-		Button,
-	},
 
 	props: {
 		user: Object,
@@ -72,7 +75,7 @@ a {
 }
 header {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
 	max-width: 800px;
 	width: 85vw;
@@ -99,5 +102,11 @@ header {
 
 .bloc-user {
 	display: flex;
+}
+
+.router-link-exact-active {
+	background-color: white;
+	color: black;
+	border: 2px solid black;
 }
 </style>
