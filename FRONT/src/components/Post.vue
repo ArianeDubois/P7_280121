@@ -4,27 +4,25 @@
 	<div>
 		<div class="bloc post">
 			<div class="bloc-header">
-				<div class="bloc-header_user">
-					<img :src="post.User.imageUrl" class="bloc-header_user_img-profil" />
-					<h2 class="bloc-header_user_name">
-						{{ post.User.firstName }}
-						{{ post.User.lastName }}
-					</h2>
-				</div>
+				<img :src="post.User.imageUrl" class="bloc-header_user_img-profil" />
+				<h2 class="bloc-header_user_name">
+					{{ post.User.firstName }}
+					{{ post.User.lastName }}
+				</h2>
 				<h3 :class="`bloc-header_secteur ${post.User.secteur}`">
 					{{ post.User.secteur }}
 				</h3>
-				<div class="bloc-header_date">
-					<p class="bloc-header_date_jour">{{ post.createdAt.split('T')[0] }}</p>
-					<p class="bloc-header_date_heure">
-						{{
-							post.createdAt
-								.split('T')[1]
-								.split('', 5)
-								.join('')
-						}}
-					</p>
-				</div>
+
+				<p class="bloc-header_date_jour">{{ post.createdAt.split('T')[0] }}</p>
+				<p class="bloc-header_date_heure">
+					{{
+						post.createdAt
+							.split('T')[1]
+							.split('', 5)
+							.join('')
+					}}
+				</p>
+
 				<i v-if="showDeleteIcon" @click="onDelete(post.id)" class="close fas fa-times"></i>
 			</div>
 
@@ -84,8 +82,8 @@ export default {
 <style lang="scss">
 .bloc {
 	// border-top: 10px solid black;
-	max-width: 35%;
-
+	max-width: 650px;
+	width: 90vw;
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
@@ -102,54 +100,70 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	max-height: 70px;
+	position: relative;
+	padding: 5px 20px 5px 5px;
+	@media (max-width: 460px) {
+		flex-wrap: wrap;
+		max-height: 80px;
+	}
 
-	// border-bottom: 10px solid black;
+	&_user_img-profil {
+		position: absolute;
+		border-radius: 10rem;
+		object-fit: cover;
+		height: 60px;
+		width: 60px;
+		margin: 0 0 0 10px;
+		align-self: center;
+	}
 
-	&_user {
-		display: flex;
-		// border-right: 10px solid rgb(235, 235, 235);
-		max-width: 25%;
-
-		&_img-profil {
-			border-radius: 10rem;
-			object-fit: cover;
-			height: 60px;
-			width: 60px;
-			margin: 0 0 0 10px;
-			align-self: center;
-		}
-
-		&_name {
-			font-family: 'title';
-			font-size: 15px;
-			line-height: 105%;
-			align-self: center;
-			text-transform: capitalize;
-		}
+	&_user_name {
+		margin-left: 90px;
+		font-family: 'title';
+		font-size: 15px;
+		line-height: 105%;
+		align-self: center;
+		text-transform: capitalize;
 	}
 
 	&_secteur {
 		border-radius: 1em;
-		margin: 5px 0 0 10px;
+		margin-left: 10px;
 		padding: 1px 5px 1px 5px;
 		font-size: 15px;
 		align-self: baseline;
 		border: 1px solid black;
+		align-self: center;
 	}
 
-	&_date {
+	&_date_jour,
+	&_date_heure {
 		display: flex;
-		align-self: baseline;
-
-		justify-content: space-between;
+		align-self: center;
+		justify-content: space-around;
 		margin: 10px;
 		font-size: 15px;
 		min-width: 25%;
 		flex-direction: row-reverse;
+		flex-wrap: wrap;
+
+		@media (max-width: 460px) {
+			margin-top: 0px;
+		}
+	}
+
+	&_date_jour {
+		margin-left: 25%;
+	}
+	&_date_jour {
+		margin-left: 25%;
 	}
 	.close {
 		font-size: 20px;
 		margin: 20px;
+		position: absolute;
+		right: -10px;
+		top: -10px;
 	}
 }
 
@@ -159,7 +173,7 @@ export default {
 	background-color: whitesmoke;
 	&_text {
 		font-family: 'title-bold';
-		font-size: 2vw;
+		font-size: max(25px, 2.3vw);
 		margin: 2%;
 	}
 	&_img {

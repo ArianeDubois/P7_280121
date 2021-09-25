@@ -7,27 +7,26 @@
 			class="btn"
 			>Acceuil</router-link
 		>
+		<img
+			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
+			:src="user.imageUrl"
+			class="profil-img"
+		/>
 
-		<div class="profil">
-			<img
-				v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
-				:src="user.imageUrl"
-				class="profil-img"
-			/>
-			<router-link
-				v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
-				to="/profil"
-				:user="user"
-				class="btn"
-			>
-				{{ user.firstName }} {{ user.lastName }}
-			</router-link>
-		</div>
+		<router-link
+			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
+			to="/profil"
+			:user="user"
+			class="btn"
+		>
+			{{ user.firstName }} {{ user.lastName }}
+		</router-link>
 
 		<Button
 			v-if="['Profil', 'Home', 'Moderate'].includes($route.name)"
 			@click="deconnectUser"
 			text="déconnexion"
+			class="btn"
 		/>
 
 		<router-link
@@ -35,8 +34,7 @@
 			to="/moderate"
 			:user="user"
 			class="btn"
-		>
-			Modération
+			>Modération
 		</router-link>
 	</header>
 </template>
@@ -66,7 +64,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 a {
 	color: white;
 	text-decoration: none;
@@ -74,25 +72,23 @@ a {
 header {
 	display: flex;
 	justify-content: space-around;
-	max-width: 50vw;
 	align-items: center;
+	max-width: 800px;
+	width: 85vw;
+
 	margin: auto;
 	padding-bottom: 20px;
+	@media (max-width: 1050px) {
+		flex-wrap: wrap;
+	}
 	/* border-bottom: 13px solid black; */
-}
-
-.profil {
-	display: flex;
-	align-items: center;
-	margin: 0;
 }
 
 .profil-img {
 	border-radius: 10rem;
 	object-fit: cover;
-	height: 60px;
-	width: 60px;
-	margin: 5px;
-	border-bottom: 2px solid black;
+	height: max(3vw, 2.5rem);
+	width: max(3vw, 2.5rem);
+	margin: 0 5px 0 5px;
 }
 </style>

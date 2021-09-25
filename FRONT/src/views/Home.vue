@@ -99,15 +99,6 @@ $padding-btn: 0.5rem 1rem 0.5rem 1rem;
 $litle-radius: 0.7rem;
 
 @font-face {
-	font-family: 'nb';
-	src: url('../assets/fonts/nb.ttf') format('truetype');
-}
-@font-face {
-	font-family: 'nb-light';
-	src: url('../assets/fonts/nb-light.ttf') format('truetype');
-}
-
-@font-face {
 	font-family: 'title';
 	src: url('../assets/fonts/title.otf');
 }
@@ -115,27 +106,11 @@ $litle-radius: 0.7rem;
 	font-family: 'title-bold';
 	src: url('../assets/fonts/title-bold.otf');
 }
-@font-face {
-	font-family: 'form';
-	src: url('../assets/fonts/form.otf');
-}
-
-@mixin font-subtitle {
-	font-family: 'title', sans-serif;
-	// text-transform: uppercase;
-
-	// font-size: min(1.5vmax, 3rem);
-	font-size: 15px;
-}
-@mixin font-title {
-	font-family: 'title', sans-serif;
-
-	// font-size: min(1.5vmax, 3rem);
-	font-size: 20px;
-}
 
 body {
-	@include font-subtitle;
+	font-family: 'title', sans-serif;
+	font-size: 20px;
+
 	text-align: center;
 	color: $main-color;
 	margin-top: 60px;
@@ -143,16 +118,21 @@ body {
 }
 
 .btn {
-	@include font-title;
+	font-family: 'title', sans-serif;
+	font-size: 20px;
 	background-color: $main-color;
 	color: $second-color;
 	padding: $padding-btn;
 	border-radius: $litle-radius;
 }
 
+// desactive stle par deffaut
+input:-webkit-autofill {
+	-webkit-background-clip: text;
+}
 input:focus,
 select:focus {
 	outline: none;
-	background-color: whitesmoke;
+	background-color: black;
 }
 </style>

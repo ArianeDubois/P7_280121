@@ -29,25 +29,24 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .btn {
 	background-color: black;
 	color: white;
-	font-weight: 800;
-	font-size: 18px;
 	padding: 0.5rem 1rem 0.5rem 1rem;
 	border-radius: 0.8rem;
+	border: none;
 }
 
 .logo {
-	max-height: 10vw;
+	max-height: 15vw;
 	display: flex;
 	justify-content: center;
 }
 .logo-img {
 	object-fit: cover;
-
-	width: 50vw;
+	max-width: 800px;
+	width: 75vw;
 	height: auto;
 	margin: 0;
 }

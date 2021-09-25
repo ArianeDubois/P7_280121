@@ -93,10 +93,15 @@ $litle-radius: 0.7rem;
 	display: flex;
 	justify-content: space-between;
 	margin: 100px auto 0 auto;
-	max-width: $max-width-bloc;
-	height: 100px;
+	max-width: 650px;
+	width: 90vw;
+
+	height: 7vmax;
 	border-radius: $radius;
 	position: relative;
+	@media (max-width: 750px) {
+		margin: 60px 5vw 0 5vw;
+	}
 
 	.bloc-post-content {
 		display: flex;
@@ -108,6 +113,7 @@ $litle-radius: 0.7rem;
 		font-family: 'title-bold';
 		font-size: 2vw;
 		padding-left: 3%;
+		border-radius: 0.5em;
 	}
 
 	.bloc-post-image {
@@ -123,12 +129,13 @@ $litle-radius: 0.7rem;
 		// overflow: hidden;
 		&_button {
 			display: flex;
-			margin: 30px;
+			margin: auto 30px auto 30px;
 			// transition: ease-in;
 
 			&_icone {
-				font-size: 2vw;
+				font-size: max(2vmax, 30px);
 				color: white;
+				align-self: center;
 			}
 		}
 
@@ -139,9 +146,7 @@ $litle-radius: 0.7rem;
 			right: 0;
 			opacity: 0;
 			cursor: pointer;
-
 			height: 100%;
-			background-color: blueviolet;
 		}
 	}
 }

@@ -74,7 +74,7 @@ export default {
 	async created() {
 		this.users = await this.getAllUsers();
 		this.user = await this.fetchAccount();
-		this.$emit('fetch-user', this.user); //envoit les informations modifiée au header
+		this.$emit('fetch-user', this.user); //envoit les informations  au header
 	},
 };
 </script>

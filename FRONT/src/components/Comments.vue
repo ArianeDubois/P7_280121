@@ -107,7 +107,8 @@ export default {
 	margin-top: -2px;
 	background-color: rgb(255, 255, 255);
 	border: 4px dotted black;
-	max-width: 35%;
+	max-width: 650px;
+	width: 90vw;
 	display: flex;
 	justify-content: space-between;
 	border-radius: 1rem;

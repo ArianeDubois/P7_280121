@@ -78,25 +78,46 @@ export default {
 };
 </script>
 
-<style scoped>
-.bloc {
-	max-width: 35%;
+<style scoped lang="scss">
+.bloc-header_user {
 	display: flex;
-	justify-content: space-between;
-	flex-direction: column;
-	border-radius: 1rem;
-	margin: 0 auto 0 auto;
-	background-color: white;
-	box-shadow: 1px 1px 7px 2px rgb(175, 175, 175);
+	&_name {
+		margin-left: 80px;
+	}
 }
 
+.bloc-header_date {
+	min-width: 55%;
+	display: flex;
+	justify-content: space-around;
+	@media (max-width: 460px) {
+		width: 100%;
+	}
+	&_jour {
+		@media (max-width: 460px) {
+			position: absolute;
+			left: -10px;
+		}
+	}
+	&_heure {
+		@media (max-width: 460px) {
+			position: absolute;
+			right: 0;
+		}
+	}
+}
 .comment-list {
 	margin: -2px auto -2px auto;
-	max-width: 30%;
+	max-width: 550px;
+	width: 80vw;
+	@media (max-width: 460px) {
+		flex-wrap: wrap;
+		width: 85vw;
+	}
 }
 .bloc-content_text {
 	font-family: 'title';
 	margin-left: 10px;
-	font-size: 1vw;
+	font-size: 20px;
 }
 </style>
