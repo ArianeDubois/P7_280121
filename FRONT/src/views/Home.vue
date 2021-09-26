@@ -40,7 +40,7 @@ export default {
 		},
 		async deletePost(id) {
 			if (confirm('are you sure ?')) {
-				console.log(id);
+				console.log(this.user.id);
 
 				const res = await fetch(`http://localhost:3000/home/post/${id}`, {
 					method: 'DELETE',
@@ -108,7 +108,6 @@ $litle-radius: 0.7rem;
 body {
 	font-family: 'title', sans-serif;
 	font-size: 20px;
-
 	text-align: center;
 	color: $main-color;
 	margin-top: 60px;

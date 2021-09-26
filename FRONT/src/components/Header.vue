@@ -49,12 +49,16 @@
 </template>
 
 <script>
+import Button from './Button.vue';
 export default {
 	name: 'Header',
 
 	props: {
 		user: Object,
 		// uploadFile: String,
+	},
+	components: {
+		Button,
 	},
 
 	methods: {

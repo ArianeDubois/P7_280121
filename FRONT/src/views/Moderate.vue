@@ -7,7 +7,7 @@
 				<p>{{ user.lastName }}</p>
 				<p>{{ user.email }}</p>
 				<!-- <img :src="post.imageUrl" /> -->
-				<i @click="deleteAccount(id)" class="fas fa-times close"></i>
+				<i @click="deleteAccount(user.id)" class="fas fa-times close"></i>
 			</div>
 		</div>
 	</div>
@@ -16,7 +16,6 @@
 <script>
 export default {
 	name: 'Moderate',
-
 	data() {
 		return {
 			users: [],
@@ -24,7 +23,6 @@ export default {
 			id: JSON.parse(localStorage.getItem('idUser')),
 		};
 	},
-
 	methods: {
 		async fetchAccount() {
 			const id = JSON.parse(localStorage.getItem('idUser'));
@@ -38,7 +36,6 @@ export default {
 			const data = await res.json();
 			return data;
 		},
-
 		async getAllUsers() {
 			const res = await fetch(`http://localhost:3000/home/${this.id}/profil`, {
 				method: 'GET',
@@ -50,7 +47,6 @@ export default {
 			const data = await res.json();
 			return data;
 		},
-
 		async deleteAccount(id) {
 			if (confirm('are you sure ?')) {
 				const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
@@ -69,7 +65,6 @@ export default {
 			}
 		},
 	},
-
 	async created() {
 		this.users = await this.getAllUsers();
 		this.user = await this.fetchAccount();

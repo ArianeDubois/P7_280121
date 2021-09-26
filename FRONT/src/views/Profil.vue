@@ -102,10 +102,8 @@ export default {
 				},
 			});
 			const data = await res.json();
-			console.Log;
 			return data;
 		},
-
 		async updateProfil(e) {
 			e.preventDefault();
 			//alert champs null
@@ -125,14 +123,13 @@ export default {
 				},
 				body: modifyUser,
 			});
-
 			const data = await res.json();
 			if (res.status === 400 || res.status === 401) {
 				alert(data.error);
 			} else if (res.status === 201) {
 				alert('modiffications effectuées');
 			}
-
+			this.$emit('uptate-profil', this.userUptated);
 			return data;
 		},
 		async uploadImage() {
@@ -212,7 +209,6 @@ img {
 	width: 70px;
 	margin: 5px;
 }
-
 .file-button {
 	position: relative;
 }
