@@ -10,15 +10,13 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
+CRÉER un dossier .env comme suit avec votre propre contenu entre les ''
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+DB_NAME=groupomania
+DB_USER=root
+DB_PASS=root
+DB_HOST='localhost'
+DB_PORT='8889'
+DB_MAIL_KEY= 'youSecretKey'
+DB_SECRET_TOKEN= 'TOKEN'
