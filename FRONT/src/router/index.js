@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
 		// routes qui demandent de ne pas être auth
 	} else if (!to.meta.requiresAuth) {
 		// localstorage undefined = errreur de connexions
-		if (localStorage.idUser && localStorage.idUser == !undefined) {
+		if (localStorage.idUser && localStorage.idUser !== undefined) {
 			next({
 				name: 'Home',
 			});
