@@ -137,8 +137,8 @@ export default {
 		align-self: center;
 
 		@media (max-width: 460px) {
-			height: max(3vw, 2rem);
-			width: max(3vw, 2rem);
+			height: max(3vw, 2.5rem);
+			width: max(3vw, 2.5rem);
 		}
 	}
 
@@ -150,7 +150,7 @@ export default {
 		align-self: center;
 		text-transform: capitalize;
 		@media (max-width: 460px) {
-			margin: 0 0 0 80px;
+			margin: 0 0 5px 80px;
 			font-size: 12px;
 		}
 	}
@@ -164,7 +164,7 @@ export default {
 		border: 1px solid black;
 		align-self: center;
 		@media (max-width: 460px) {
-			margin: 0;
+			margin: 0 0 0 80px;
 			font-size: 12px;
 		}
 	}
@@ -182,7 +182,7 @@ export default {
 		@media (max-width: 460px) {
 			// min-width: 100%;
 			// justify-content: flex-end;
-			margin: 0 0 0 80px;
+			margin: 5px 0 0 80px;
 
 			font-size: 12px;
 		}
@@ -210,6 +210,7 @@ export default {
 	}
 	&_img {
 		width: 100%;
+		border-radius: 1rem;
 	}
 }
 
