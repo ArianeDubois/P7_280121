@@ -105,6 +105,7 @@ $litle-radius: 0.7rem;
 	src: url('../assets/fonts/title-bold.otf');
 }
 
+
 body {
 	font-family: 'title', sans-serif;
 	font-size: 20px;

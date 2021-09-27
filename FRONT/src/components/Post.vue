@@ -180,10 +180,7 @@ export default {
 		flex-wrap: wrap;
 
 		@media (max-width: 460px) {
-			// min-width: 100%;
-			// justify-content: flex-end;
 			margin: 5px 0 0 80px;
-
 			font-size: 12px;
 		}
 	}
@@ -197,9 +194,9 @@ export default {
 	box-shadow: 1px 1px 7px 2px rgb(175, 175, 175);
 	border-radius: 1rem;
 	background-color: whitesmoke;
+	margin: 0;
 
 	&_text {
-		//
 		align-self: center;
 		font-family: 'title-bold';
 		font-size: max(25px, 2.3vw);

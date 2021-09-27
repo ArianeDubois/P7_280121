@@ -109,6 +109,10 @@ $litle-radius: 0.7rem;
 		font-size: max(2vw, 20px);
 		padding-left: 3%;
 		border-radius: 1em;
+
+		@media (max-width: 460px) {
+			width: 70%;
+		}
 	}
 
 	.bloc-post-image {
