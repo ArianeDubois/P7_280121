@@ -1,17 +1,24 @@
 # p7
 
 ## Project setup
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### front
+
 ```
 npm run serve
 ```
 
+### back
 
-CRÉER un dossier .env comme suit avec votre propre contenu entre les ''
+```
+nodemon server
+
+
+vous pouvet créer un fichier .env comme suit avec vos propre valeurs
 
 DB_NAME=groupomania
 
@@ -23,6 +30,5 @@ DB_HOST='localhost'
 
 DB_PORT='8889'
 
-DB_MAIL_KEY= 'youSecretKey'
-
 DB_SECRET_TOKEN= 'TOKEN'
+```
