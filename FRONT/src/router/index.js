@@ -13,7 +13,6 @@ const routes = [
 	{ path: '/profil', name: 'Profil', component: Profil, meta: { requiresAuth: true } },
 ];
 const router = createRouter({
-	// history: createWebHistory(process.env.BASE_URL),
 	history: createWebHistory(),
 	routes,
 });

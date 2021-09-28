@@ -106,7 +106,6 @@ export default {
 		},
 		async updateProfil(e) {
 			e.preventDefault();
-			//alert champs null
 			const id = JSON.parse(localStorage.getItem('idUser'));
 			let modifyUser = new FormData();
 			modifyUser.append('firstName', this.userUptated.firstName),

@@ -1,6 +1,4 @@
 <template>
-	<!-- si l'user id du post = user id de la demande => v-show cross  -->
-
 	<div>
 		<div class="bloc post">
 			<div class="bloc-header">
@@ -35,7 +33,7 @@
 			</div>
 		</div>
 
-		<Comments :post="post" />
+		<Comments :post="post" :user="user" />
 	</div>
 </template>
 
@@ -91,7 +89,6 @@ export default {
 
 <style lang="scss">
 .bloc {
-	// border-top: 10px solid black;
 	max-width: 650px;
 	width: 90vw;
 	display: flex;
