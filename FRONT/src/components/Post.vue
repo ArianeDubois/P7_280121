@@ -35,7 +35,7 @@
 			</div>
 		</div>
 
-		<Comments :post="post" :user="user" />
+		<Comments :post="post" />
 	</div>
 </template>
 

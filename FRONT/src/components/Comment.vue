@@ -44,26 +44,35 @@ export default {
 	//recupère liste des précedents posts
 	data() {
 		return {
+			user: {},
 			showDeleteIcon: false,
 		};
 	},
 	props: {
-		user: Object,
 		comment: Object,
 	},
 
-	//get user id mounted()
 	methods: {
+		async fetchAccount() {
+			const id = JSON.parse(localStorage.getItem('idUser'));
+			const res = await fetch(`http://localhost:3000/home/profil/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: 'Bearer ' + localStorage.getItem('token'),
+				},
+			});
+			const data = await res.json();
+			return data;
+		},
+
 		deleteComment(id) {
 			this.$emit('delete-comment', id);
 		},
 
 		async showIcon() {
 			// si l'user est admin ou si l'user connecté est l'useur
-			if (
-				this.$props.user.id === this.$props.comment.idUser ||
-				this.$props.user.isAdmin === true
-			) {
+			if (this.user.id === this.comment.idUser || this.user.isAdmin === true) {
 				return true;
 			} else {
 				return false;
@@ -71,6 +80,7 @@ export default {
 		},
 	},
 	async created() {
+		this.user = await this.fetchAccount();
 		this.showDeleteIcon = await this.showIcon();
 	},
 };

@@ -15,11 +15,9 @@ exports.createPost = (req, res, next) => {
 			if (req.file) {
 				image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 			}
-			// console.log(req.file);
 			const newPost = {
 				content: req.body.content,
 				imageUrl: image,
-				// idUser: req.body.userId,
 				idUser: user.id,
 			};
 
