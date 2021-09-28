@@ -1,19 +1,9 @@
 const sequelize = require('./dbConnection'); // importe le module de connection
 const { Sequelize, DataTypes, Model } = require('sequelize');
 
-class User extends Model {
-	// getFullname() {
-	// 	return [this.firstname, this.lastname].join(' ');
-	// }
-}
+class User extends Model {}
 User.init(
 	{
-		// idUser: {
-		// 	type: DataTypes.INTEGER,
-		// 	primaryKey: true,
-		// 	autoIncrement: true,
-		// },
-
 		firstName: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -40,7 +30,7 @@ User.init(
 
 		secteur: {
 			type: DataTypes.STRING,
-			// allowNull defaults to true
+			allowNull: false,
 		},
 		isAdmin: {
 			type: DataTypes.BOOLEAN,

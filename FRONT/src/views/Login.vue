@@ -31,7 +31,6 @@ export default {
 			password: '',
 		};
 	},
-
 	methods: {
 		async fetchLogin(e) {
 			e.preventDefault();
@@ -50,17 +49,11 @@ export default {
 			const data = await res.json();
 			localStorage.setItem('idUser', data.idUser);
 			localStorage.setItem('token', data.token);
-			console.log(typeof localStorage);
-
 			console.log(localStorage.idUser);
 			//navigation gards
 			this.$router.push('/home');
-
-			if (localStorage.idUser === undefined) {
+			if (localStorage.idUser === 'undefined') {
 				alert(data.error);
-			}
-			if (localStorage.idUser !== undefined) {
-				console.log('hey');
 			}
 		},
 	},

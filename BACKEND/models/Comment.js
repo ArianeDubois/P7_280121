@@ -8,18 +8,10 @@ Comment.init(
 	{
 		idPost: {
 			type: DataTypes.INTEGER,
-			// references: {
-			// 	model: Post,
-			// 	key: 'id',
-			// },
 			allowNull: false,
 		},
 		idUser: {
 			type: DataTypes.INTEGER,
-			// references: {
-			// 	model: User,
-			// 	key: 'id',
-			// },
 			allowNull: false,
 		},
 

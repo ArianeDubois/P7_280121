@@ -13,7 +13,7 @@ const commentRoutes = require('./routes/comment');
 
 const helmet = require('helmet');
 
-// // //ASSOCIATION
+//ASSOCIATION
 User.hasMany(Post, { foreignKey: 'idPost', onDelete: 'CASCADE' });
 User.hasMany(Comment, { foreignKey: 'idComment', onDelete: 'CASCADE' });
 Post.belongsTo(User, {
@@ -25,7 +25,7 @@ Comment.belongsTo(User, { foreignKey: { name: 'idUser', allowNull: false }, onDe
 Comment.belongsTo(Post, {
 	foreignKey: { name: 'idPost', allowNull: false },
 	onDelete: 'CASCADE',
-}); // si on supriome le parent on suprrime ses commentaire
+});
 
 // test de connection sequelize
 sequelize

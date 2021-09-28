@@ -59,21 +59,3 @@ exports.deleteComment = (req, res, next) => {
 		})
 		.catch((error) => res.status(400).json({ error }));
 };
-// exports.deleteComment = (req, res, next) => {
-// 	Comment.findOne({ where: { id: req.params.id } })
-// 		.then((comments) => {
-// 			if (!comments) {
-// 				return res.status(400).json({ message: 'commentaire introuvable' });
-// 			} else if (req.body.idUser.isAdmin == true || comments.idUser == req.body.idUser) {
-// 				//if isOwner = true
-// 				Comment.destroy({ where: { id: req.params.id } })
-// 					.then(() => res.status(200).json({ message: 'commentaire supprimé' }))
-// 					.catch((error) => res.status(400).json({ error }));
-// 			} else {
-// 				return res
-// 					.status(400)
-// 					.json({ message: "vous n'êtes pas autorisez à supprimer ce commentaire" });
-// 			}
-// 		})
-// 		.catch((error) => res.status(400).json({ error }));
-// };

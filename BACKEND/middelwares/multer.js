@@ -1,5 +1,4 @@
 const multer = require('multer');
-//extension envoyées par le FRONT récuperées dans le dossier images
 const MIME_TYPES = {
 	//
 	'image/jpg': 'jpg',

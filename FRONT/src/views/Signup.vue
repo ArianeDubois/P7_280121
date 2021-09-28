@@ -105,7 +105,6 @@ export default {
 			imageUrl: '',
 		};
 	},
-
 	methods: {
 		async onSubmit(e) {
 			e.preventDefault();
@@ -197,7 +196,6 @@ legend {
 	/* display: flex;
 	flex-direction: column; */
 }
-
 .file-button {
 	position: relative;
 }

@@ -14,10 +14,6 @@ module.exports = (req, res, next) => {
 			next(); //passe au prochain middleware => les controlleurs
 		}
 	} catch {
-		// res.status(401).json({ error: new Error('invalid request!') });
 		res.status(401).json({ message: 'invalid request!' });
 	}
 };
-
-// protege les route qui on un body dans la req
-//auth = compare le token envoyer dans le header(qui chiffre le user id envoyer lors de la connection) avec l'user id envoyé dans le body de la req
