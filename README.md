@@ -34,7 +34,8 @@ nodemon server
 
 vous pouvet créer un fichier .env comme suit avec vos propre valeurs
 
-```DB_NAME=groupomania
+```
+DB_NAME=groupomania
 
 DB_USER=root
 
