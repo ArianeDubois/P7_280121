@@ -8,9 +8,9 @@ Construction d'un réseau social interne pour les employés de Groupomania leur 
 * Les administrateurs peuvent supprimer les posts, les commentaires ou les comptes des employés.
 
 # Technologies
-* node js
+* node.js
 * mySql
-* vue js
+* vue.js
 * css
 
 # Setup
