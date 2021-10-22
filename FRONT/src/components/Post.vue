@@ -116,11 +116,15 @@ export default {
 	}
 
 	.close {
-		font-size: 20px;
+		font-size: 15px;
 		margin: 20px;
 		position: absolute;
 		right: -25px;
-		top: -10px;
+		top: 2px;
+
+		@media (max-width: 460px) {
+			top: -10px;
+		}
 	}
 
 	&_user_img-profil {

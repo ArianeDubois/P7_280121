@@ -81,6 +81,10 @@ export default {
 	margin: 20px auto 20px auto;
 	position: relative;
 	border-bottom: 2px solid black;
-	width: 90%;
+	width: 96%;
+}
+
+.close {
+	font-size: 15px;
 }
 </style>

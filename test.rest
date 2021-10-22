@@ -1,0 +1,98 @@
+### 
+POST http://localhost:3000/auth/signup 
+Content-Type: application/json
+
+{
+    "firstName": "tino", 
+    "lastName": "rossi", s
+    "email": "tt@mail.fr", 
+    "password": "hey"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json 
+
+{
+      "email": "tt@mail.fr",
+    "password": "hey"
+} 
+
+// POST
+###
+GET http://localhost:3000/home/post
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjIsImlhdCI6MTYzMjIzNzQ4NiwiZXhwIjoxNjMyMzIzODg2fQ._Q21iiqzsGdQN7MzOuoQPnUhQA5qaegf2z6iNuby0F4
+
+###
+POST http://localhost:3000/home/post
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTg3MzEyOSwiZXhwIjoxNjMxOTU5NTI5fQ.nlXeaIOqHb7qx-RYJD-riNDFuZs9rR57cOpZmyzi8dE
+
+{       
+        "idUser": 6,
+ 		"content": "salut!"
+} 
+
+
+###
+DELETE  http://localhost:3000/home/post/31
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
+
+
+
+
+// COMMENTS
+
+###
+POST  http://localhost:3000/home/post/22
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+{     
+        "idUser": 4,
+ 		"content": "je commente ce post"
+} 
+
+###
+GET  http://localhost:3000/home/post/22/comment
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMTM5Mjc2OCwiZXhwIjoxNjMxNDc5MTY4fQ.JdFWIJnvJNPvgdBL0FGYfi2LLG8roWCGstuKHoE_sSg
+
+
+
+###
+DELETE  http://localhost:3000/home/comment/69
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjksImlhdCI6MTYzMTczODAyNiwiZXhwIjoxNjMxODI0NDI2fQ.NfTHpInj0EWmIJ1ATQAcDyXvf_iknRUfw0RzD7UbcX0
+
+
+
+//PROFIL
+###
+GET  http://localhost:3000/home/1/profil
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTk2MjU0NCwiZXhwIjoxNjMyMDQ4OTQ0fQ.pFL6mAIHjfpc3c_3Bkz8YJzqlhpO0S-zAYZqPLovnTI
+
+###
+GET  http://localhost:3000/home/profil/1
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjEsImlhdCI6MTYzMTk2MjU0NCwiZXhwIjoxNjMyMDQ4OTQ0fQ.pFL6mAIHjfpc3c_3Bkz8YJzqlhpO0S-zAYZqPLovnTI
+
+
+###
+PUT  http://localhost:3000/home/profil/4
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjQsImlhdCI6MTYzMjA0Mzk3OCwiZXhwIjoxNjMyMTMwMzc4fQ.Pn_9Dc9zbEh2EKQN-Nag9MElYFT4gJV5tMavVtp8G30
+
+{
+    "idUser": 4,
+    "email": "xt@mail.it"
+} 
+
+
+###
+DELETE  http://localhost:3000/home/profil/25
+Content-Type: application/json 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOjI0LCJpYXQiOjE2MzE5ODY2MDUsImV4cCI6MTYzMjA3MzAwNX0.roo0sZNgXaiNWMqMGtpdQu1zwisscIwDBcP4pS0ye3w
