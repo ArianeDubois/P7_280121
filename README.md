@@ -1,6 +1,19 @@
-# p7
+# Groupomania. 
+Construction d'un réseau social interne pour les employés de Groupomania leur permettant de poster des messages, des images et de pouvoir réagir aux differents posts.
 
-## Project setup
+# Objectif 
+* Création d'un compte et connection
+* Les employés connectés ont accès aux differents posts et peuvent les commenter
+* Les employés peuvent modifier leur compte et le supprimer.
+* Les administrateurs peuvent supprimer les posts, les commentaires ou les comptes des employés.
+
+# Technologies
+* node.js
+* mySql
+* vue.js
+* css
+
+# Setup
 
 ```
 npm install
@@ -16,10 +29,12 @@ npm run serve
 
 ```
 nodemon server
+```
 
 
 vous pouvet créer un fichier .env comme suit avec vos propre valeurs
 
+```
 DB_NAME=groupomania
 
 DB_USER=root
